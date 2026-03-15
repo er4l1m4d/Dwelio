@@ -21,7 +21,8 @@ export default async function MessagesPage() {
     .or(`sender_id.eq.${user.id},receiver_id.eq.${user.id}`)
     .order("created_at", { ascending: false });
 
-  const conversationMap = new Map<string, typeof messages[0]>();
+  type Message = NonNullable<typeof messages>[number];
+  const conversationMap = new Map<string, Message>();
 
   messages?.forEach((message) => {
     const otherUserId =

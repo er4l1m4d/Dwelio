@@ -348,11 +348,11 @@
 
 ### 3.1 — Build the Search Page
 
-- [ ] **Build the main search/listings page**
+- [x] **Build the main search/listings page**
   > **How:** Prompt your AI tool:
   > *"Build a property search page at `/app/search/page.tsx` in Next.js. Fetch all available properties from Supabase `properties` table. Display as a responsive grid of property cards. Each card shows: main image, title, price, neighbourhood, bedrooms, bathrooms, verified landlord badge, listing type badge (Rent/Sale). Add a search bar at the top and filter sidebar with: Listing Type (Rent/Sale), Property Type (Flat/House/Room/Duplex/Bungalow), Neighbourhood (Ibadan list), Min/Max Price, Bedrooms. Filters should update results in real time. Use Tailwind."*
 
-- [ ] **Build the property card component**
+- [x] **Build the property card component**
   > **How:** Prompt your AI tool:
   > *"Build a reusable `PropertyCard` component in React/Tailwind. Props: image, title, price, pricePeriod, neighbourhood, bedrooms, bathrooms, isVerified (show green verified badge), listingType (Rent/Sale badge). Card should have a hover shadow effect and link to the listing detail page."*
 

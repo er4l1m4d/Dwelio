@@ -274,7 +274,7 @@
 
 ### 1.2 — Build the Onboarding Flow
 
-- [ ] **Build the onboarding page (post sign-up profile completion)**
+- [x] **Build the onboarding page (post sign-up profile completion)**
   > **How:** Prompt your AI tool:
   > *"Build an onboarding page at `/app/onboarding/page.tsx`. After sign up, ask the user to upload a profile photo and confirm their phone number. Save this data to the Supabase `profiles` table. On completion, redirect to `/dashboard`. Use Tailwind."*
 

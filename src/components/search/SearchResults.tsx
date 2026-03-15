@@ -35,7 +35,8 @@ export default function SearchResults({ listings, verifiedMap }: SearchResultsPr
 
     return listings.filter((listing) => {
       if (type && listing.type !== type) return false;
-      if (propertyType && listing.type !== propertyType && listing.type) return false;
+      if (propertyType && listing.property_type !== propertyType)
+        return false;
       if (neighbourhood && listing.neighbourhood !== neighbourhood) return false;
       if (minPrice && (listing.price ?? 0) < minPrice) return false;
       if (maxPrice && (listing.price ?? 0) > maxPrice) return false;

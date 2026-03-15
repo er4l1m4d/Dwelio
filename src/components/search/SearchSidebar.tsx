@@ -37,6 +37,8 @@ export default function SearchSidebar({ neighbourhoods }: SearchSidebarProps) {
     Object.entries(nextFilters).forEach(([key, value]) => {
       if (value) params.set(key, value);
     });
+    const view = searchParams.get("view");
+    if (view) params.set("view", view);
     startTransition(() => {
       router.push(`/search?${params.toString()}`);
     });

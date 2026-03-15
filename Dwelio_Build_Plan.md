@@ -364,13 +364,13 @@
 
 ### 3.2 — Build the Map View
 
-- [ ] **Install and set up Google Maps**
+- [x] **Install and set up Google Maps**
   > **How:** Go to [console.cloud.google.com](https://console.cloud.google.com), create a project, enable the **Maps JavaScript API** and **Geocoding API**. Get your API key. Add it to `.env.local` as `NEXT_PUBLIC_GOOGLE_MAPS_KEY`. Then run:
   > ```bash
   > npm install @react-google-maps/api
   > ```
 
-- [ ] **Build the map view of listings**
+- [x] **Build the map view of listings**
   > **How:** Prompt your AI tool:
   > *"Add a map view toggle to the search page using `@react-google-maps/api`. When the user switches to Map View, show a Google Map centred on Ibadan (lat: 7.3775, lng: 3.9470). Place a custom marker for each property. Clicking a marker shows a small popup card with the property photo, title, price, and a 'View' button. Use the Google Maps API key from `NEXT_PUBLIC_GOOGLE_MAPS_KEY`."*
 
@@ -378,7 +378,7 @@
 
 ### 3.3 — Build the Landing / Home Page
 
-- [ ] **Build the marketing landing page**
+- [x] **Build the marketing landing page**
   > **How:** Prompt your AI tool:
   > *"Build a landing page at `/app/page.tsx` for a Nigerian property marketplace called Dwelio. Sections: (1) Hero — headline 'Find Your Home in Ibadan, Without the Wahala', search bar with location and property type, CTA buttons 'Browse Listings' and 'List Your Property'. (2) How It Works — 3 steps: Search, Verify, Move In. (3) Featured listings — pull 6 latest properties from Supabase. (4) Why Dwelio — cards for: No Agent Fees, Verified Landlords, Monthly Rent Payments, Virtual Tours. (5) Stats bar — properties listed, verified landlords, happy tenants. (6) CTA section. Brand colours: green `#1A6B3A`, gold `#F4A623`. Make it look premium and modern."*
 

@@ -1,5 +1,4 @@
-import SearchResults from "@/components/search/SearchResults";
-import SearchSidebar from "@/components/search/SearchSidebar";
+import SearchView from "@/components/search/SearchView";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 const neighbourhoods = [
@@ -23,7 +22,7 @@ export default async function SearchPage() {
   const { data: listings } = await supabase
     .from("properties")
     .select(
-      "id, title, price, price_period, neighbourhood, bedrooms, bathrooms, images, type, landlord_id",
+      "id, title, price, price_period, neighbourhood, bedrooms, bathrooms, images, type, property_type, landlord_id",
     )
     .eq("is_available", true)
     .order("created_at", { ascending: false });
@@ -52,10 +51,11 @@ export default async function SearchPage() {
           </p>
         </header>
 
-        <div className="grid gap-8 lg:grid-cols-[260px_1fr]">
-          <SearchSidebar neighbourhoods={neighbourhoods} />
-          <SearchResults listings={listings ?? []} verifiedMap={verifiedMap} />
-        </div>
+        <SearchView
+          listings={listings ?? []}
+          verifiedMap={verifiedMap}
+          neighbourhoods={neighbourhoods}
+        />
       </div>
     </div>
   );

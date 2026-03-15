@@ -71,13 +71,13 @@
 
 ### 0.3 — Set Up Supabase (Your Backend)
 
-- [ ] **Create a Supabase account and project**
+- [x] **Create a Supabase account and project**
   > **How:** Go to [supabase.com](https://supabase.com), sign up, click **New Project**. Name it `dwelio`. Choose the **Frankfurt** region (closest to Nigeria). Save your database password somewhere safe.
 
-- [ ] **Copy your Supabase credentials**
+- [x] **Copy your Supabase credentials**
   > **How:** In your Supabase dashboard go to **Settings → API**. Copy the `Project URL` and `anon public` key.
 
-- [ ] **Add credentials to your project as environment variables**
+- [x] **Add credentials to your project as environment variables**
   > **How:** Create a file called `.env.local` in the root of your project and add:
   > ```
   > NEXT_PUBLIC_SUPABASE_URL=your_project_url_here
@@ -282,11 +282,11 @@
 
 ### 1.3 — Build User Profile Pages
 
-- [ ] **Build the public profile page (visible to others)**
+- [x] **Build the public profile page (visible to others)**
   > **How:** Prompt your AI tool:
   > *"Build a public profile page at `/app/profile/[id]/page.tsx` in Next.js. Fetch the user's profile from Supabase `profiles` table by ID. Display: name, photo, role badge (Landlord / Tenant), verified badge if `is_verified` is true, average rating, and their reviews. For landlords, also show their active listings."*
 
-- [ ] **Build the private settings/edit profile page**
+- [x] **Build the private settings/edit profile page**
   > **How:** Prompt your AI tool:
   > *"Build a profile settings page at `/app/settings/page.tsx`. Allow the logged-in user to update: full name, phone number, profile photo. Fetch current values from Supabase and save updates back. Use Tailwind."*
 

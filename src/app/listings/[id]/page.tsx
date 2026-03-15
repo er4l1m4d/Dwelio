@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import ImageGallery from "@/components/ImageGallery";
+import MessageLandlordButton from "@/components/messages/MessageLandlordButton";
 
 type ListingPageProps = {
   params: { id: string };
@@ -110,12 +111,12 @@ export default async function ListingDetailPage({ params }: ListingPageProps) {
               </div>
             </div>
 
-            <button
-              type="button"
-              className="h-12 rounded-full bg-emerald-700 px-4 text-sm font-semibold text-white transition hover:bg-emerald-800"
-            >
-              Message Landlord
-            </button>
+            {landlord?.id && (
+              <MessageLandlordButton
+                landlordId={landlord.id}
+                propertyId={listing.id}
+              />
+            )}
             <button
               type="button"
               className="h-12 rounded-full border border-emerald-200 px-4 text-sm font-semibold text-emerald-800 transition hover:border-emerald-300"

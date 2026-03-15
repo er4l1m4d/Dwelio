@@ -409,11 +409,11 @@
 
 ### 4.2 — Reviews & Ratings
 
-- [ ] **Build the review submission form**
+- [x] **Build the review submission form**
   > **How:** Prompt your AI tool:
   > *"Build a review submission component in React/Tailwind. Props: `reviewedUserId`, `propertyId`. Shows a 5-star rating selector (clickable stars) and a text comment box. On submit, insert a row into the Supabase `reviews` table with `reviewer_id`, `reviewed_id`, `property_id`, `rating`, and `comment`. Only show the form if the logged-in user has an active tenancy agreement with this landlord (check `tenancy_agreements` table)."*
 
-- [ ] **Display reviews on profile pages**
+- [x] **Display reviews on profile pages**
   > **How:** Prompt your AI tool:
   > *"Build a `ReviewsList` component that fetches and displays reviews for a given user ID from the Supabase `reviews` table. Show each review with: star rating (rendered as filled/empty stars), comment, reviewer name and photo, and date. Calculate and display the average rating at the top."*
 
@@ -428,19 +428,19 @@
 
 ### 5.1 — Build the Messaging System
 
-- [ ] **Build the messages inbox page**
+- [x] **Build the messages inbox page**
   > **How:** Prompt your AI tool:
   > *"Build a messages inbox page at `/app/messages/page.tsx` in Next.js. Fetch all conversations for the logged-in user from Supabase `messages` table, grouped by the other user and property. Show a list of conversations with: other user's photo and name, property title, last message preview, timestamp, and an unread indicator dot. Clicking a conversation opens the chat view."*
 
-- [ ] **Build the real-time chat view**
+- [x] **Build the real-time chat view**
   > **How:** Prompt your AI tool:
   > *"Build a real-time chat component at `/app/messages/[conversationId]/page.tsx` using Supabase Realtime. Fetch message history between two users for a specific property. Display messages in a chat bubble UI (sent messages on the right in green, received on the left in grey). New messages appear instantly using Supabase `channel.on('postgres_changes', ...)`. Include a text input and send button at the bottom."*
 
-- [ ] **Add 'Message Landlord' button on listing pages**
+- [x] **Add 'Message Landlord' button on listing pages**
   > **How:** Prompt your AI tool:
   > *"Add a 'Message Landlord' button to the property listing detail page. When a logged-in tenant clicks it, create a new conversation entry if one doesn't exist for this tenant + landlord + property combination, then redirect to `/messages/[conversationId]`. If the user is not logged in, redirect to `/login`."*
 
-- [ ] **Add unread message count badge to nav**
+- [x] **Add unread message count badge to nav**
   > **How:** Prompt your AI tool:
   > *"Add an unread message count badge to the Messages icon in the navigation bar. Fetch the count of messages where `receiver_id` is the current user and `is_read` is false. Update in real time using Supabase Realtime."*
 

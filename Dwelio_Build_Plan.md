@@ -301,15 +301,15 @@
 
 ### 2.1 — Build the Create Listing Form
 
-- [ ] **Build the multi-step listing creation form**
+- [x] **Build the multi-step listing creation form**
   > **How:** Prompt your AI tool:
   > *"Build a multi-step property listing form at `/app/listings/new/page.tsx` in Next.js with Tailwind. Step 1: Basic info (title, description, property type, listing type — rent or sale). Step 2: Details (bedrooms, bathrooms, price, price period). Step 3: Location (address, neighbourhood — include a dropdown of Ibadan neighbourhoods: Bodija, Samonda, Agodi GRA, Mokola, Ring Road, Challenge, Dugbe, Ajibode, Agbowo, UI Campus, Iwo Road, New Bodija). Step 4: Media (upload up to 10 photos and one video). Step 5: Review and submit. Save to Supabase `properties` table. Photos upload to Supabase Storage `property-images` bucket."*
 
-- [ ] **Add image upload with preview**
+- [x] **Add image upload with preview**
   > **How:** Prompt your AI tool:
   > *"Add drag-and-drop image upload to a Next.js form. Images should preview in a grid before uploading. Each image can be removed. On submit, upload all images to Supabase Storage `property-images` bucket and return their public URLs to store in the `properties` table `images` array field."*
 
-- [ ] **Add video upload for virtual tours**
+- [x] **Add video upload for virtual tours**
   > **How:** Prompt your AI tool:
   > *"Add a video file upload input to a Next.js form. Accept MP4 and MOV under 200MB. Show a progress bar during upload. Upload to Supabase Storage `property-videos` bucket. Store the public URL in the `video_url` field of the properties table."*
 
@@ -317,11 +317,11 @@
 
 ### 2.2 — Build the Listing Detail Page
 
-- [ ] **Build the single property listing page**
+- [x] **Build the single property listing page**
   > **How:** Prompt your AI tool:
   > *"Build a property detail page at `/app/listings/[id]/page.tsx` in Next.js. Fetch the property from Supabase by ID. Display: image gallery (swipeable), video player if video_url exists, property title, price, badge (For Rent / For Sale), bedrooms, bathrooms, location, description, landlord card (photo, name, verified badge, rating, link to their profile). Include a 'Message Landlord' button and a 'Save Property' button. Track views by incrementing the `views` column on page load. Use Tailwind."*
 
-- [ ] **Build the image gallery / slideshow component**
+- [x] **Build the image gallery / slideshow component**
   > **How:** Prompt your AI tool:
   > *"Build a full-width image gallery component in React/Tailwind. It should show a large main image with thumbnail strip below. Clicking a thumbnail updates the main image. Add left/right arrow navigation. Show image count (e.g. 1/8)."*
 

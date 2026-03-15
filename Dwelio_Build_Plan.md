@@ -329,11 +329,11 @@
 
 ### 2.3 — Build the Landlord Dashboard
 
-- [ ] **Build the landlord listings management dashboard**
+- [x] **Build the landlord listings management dashboard**
   > **How:** Prompt your AI tool:
   > *"Build a landlord dashboard page at `/app/dashboard/page.tsx`. For users with role `landlord`, show: a list of their properties fetched from Supabase, each with a card showing title, photo, price, status (Available / Rented), views count, and inquiry count. Include buttons to Edit, Mark as Rented, and Delete each listing. Show a prominent 'Add New Listing' button at the top."*
 
-- [ ] **Build the edit listing page**
+- [x] **Build the edit listing page**
   > **How:** Prompt your AI tool:
   > *"Build an edit listing page at `/app/listings/[id]/edit/page.tsx`. Pre-fill a form with existing property data fetched from Supabase. Allow the landlord to update any field. On save, update the record in Supabase. Only the owner of the listing should be able to access this page."*
 

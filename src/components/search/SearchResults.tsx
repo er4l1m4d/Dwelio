@@ -14,6 +14,7 @@ type Listing = {
   bathrooms?: number | null;
   images?: string[] | null;
   type?: string | null;
+  property_type?: string | null;
   landlord_id: string;
 };
 

@@ -237,10 +237,10 @@
   > git push -u origin main
   > ```
 
-- [ ] **Connect to Vercel and deploy**
+- [x] **Connect to Vercel and deploy**
   > **How:** Go to [vercel.com](https://vercel.com), sign in with GitHub, click **New Project**, import your `dwelio` repo. Add your environment variables (`NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`) in the Vercel project settings. Click **Deploy**.
 
-- [ ] **Confirm live deployment works**
+- [x] **Confirm live deployment works**
   > **How:** Visit your `.vercel.app` URL. It should load the app. From now on, every `git push` to `main` automatically redeploys.
 
 ---
@@ -254,19 +254,19 @@
 
 ### 1.1 — Build the Auth Pages
 
-- [ ] **Build the Sign Up page**
+- [x] **Build the Sign Up page**
   > **How:** Prompt your AI tool:
   > *"Build a Next.js Sign Up page at `/app/signup/page.tsx` using Supabase Auth. The form should collect: full name, email, password, phone number, and role (landlord, tenant, or buyer — shown as card options, not a dropdown). Use Tailwind CSS. On success, redirect to `/onboarding`. Brand colours: primary green `#1A6B3A`, accent gold `#F4A623`."*
 
-- [ ] **Build the Login page**
+- [x] **Build the Login page**
   > **How:** Prompt your AI tool:
   > *"Build a Next.js Login page at `/app/login/page.tsx` using Supabase Auth email/password sign-in. Include a 'Forgot password' link. On success redirect to `/dashboard`. Same brand colours."*
 
-- [ ] **Build the Forgot Password + Reset flow**
+- [x] **Build the Forgot Password + Reset flow**
   > **How:** Prompt your AI tool:
   > *"Build a forgot password flow for a Next.js Supabase app. Page 1: user enters email, Supabase sends reset link. Page 2 (at `/reset-password`): user sets new password using the token from the URL. Use Tailwind."*
 
-- [ ] **Protect routes with a middleware auth check**
+- [x] **Protect routes with a middleware auth check**
   > **How:** Prompt your AI tool:
   > *"Create a `middleware.ts` file in the root of a Next.js 14 App Router project using `@supabase/ssr` that protects the following routes: `/dashboard`, `/listings/new`, `/messages`, `/payments`. Unauthenticated users should be redirected to `/login`."*
 

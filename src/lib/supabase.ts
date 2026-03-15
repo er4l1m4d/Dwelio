@@ -13,8 +13,8 @@ if (!supabaseUrl || !supabaseAnonKey) {
 export const createSupabaseBrowserClient = () =>
   createBrowserClient(supabaseUrl, supabaseAnonKey);
 
-export const createSupabaseServerClient = () => {
-  const cookieStore = cookies();
+export const createSupabaseServerClient = async () => {
+  const cookieStore = await cookies();
 
   return createServerClient(supabaseUrl, supabaseAnonKey, {
     cookies: {

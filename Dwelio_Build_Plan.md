@@ -226,7 +226,7 @@
 
 ### 0.7 — Deploy to Vercel
 
-- [ ] **Push your project to GitHub**
+- [x] **Push your project to GitHub**
   > **How:**
   > ```bash
   > git init

@@ -356,7 +356,7 @@
   > **How:** Prompt your AI tool:
   > *"Build a reusable `PropertyCard` component in React/Tailwind. Props: image, title, price, pricePeriod, neighbourhood, bedrooms, bathrooms, isVerified (show green verified badge), listingType (Rent/Sale badge). Card should have a hover shadow effect and link to the listing detail page."*
 
-- [ ] **Add URL-based search params so filters are shareable**
+- [x] **Add URL-based search params so filters are shareable**
   > **How:** Prompt your AI tool:
   > *"Update the search page to store all active filters (type, neighbourhood, minPrice, maxPrice, bedrooms) as URL query parameters using Next.js `useSearchParams` and `useRouter`. When the page loads, read filters from the URL and apply them. This makes filtered searches shareable via link."*
 

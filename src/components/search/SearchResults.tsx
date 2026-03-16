@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import PropertyCard from "@/components/PropertyCard";
+import { Search } from "lucide-react";
 
 type Listing = {
   id: string;
@@ -66,7 +67,7 @@ export default function SearchResults({ listings, verifiedMap }: SearchResultsPr
         ))
       ) : (
         <div className="col-span-full rounded-3xl border border-emerald-100 bg-white/90 p-8 text-sm text-slate-600 shadow-[0_20px_50px_rgba(16,42,24,0.08)] backdrop-blur">
-          <p className="text-2xl">🔍</p>
+          <Search className="h-6 w-6 text-emerald-700" />
           <p className="mt-2 font-semibold text-slate-900">No listings yet</p>
           <p className="mt-1 text-sm text-slate-600">
             Try adjusting your filters or check back soon.

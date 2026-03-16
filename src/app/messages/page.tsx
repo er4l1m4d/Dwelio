@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { MessageSquare } from "lucide-react";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export default async function MessagesPage() {
@@ -104,7 +105,7 @@ export default async function MessagesPage() {
             })
           ) : (
             <div className="rounded-3xl border border-emerald-100 bg-white/90 p-8 text-sm text-slate-600 shadow-[0_20px_50px_rgba(16,42,24,0.08)] backdrop-blur">
-              <p className="text-2xl">💬</p>
+              <MessageSquare className="h-6 w-6 text-emerald-700" />
               <p className="mt-2 font-semibold text-slate-900">
                 No conversations yet
               </p>

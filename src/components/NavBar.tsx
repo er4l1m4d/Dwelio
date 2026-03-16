@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { Bell, MessageSquare } from "lucide-react";
 import UnreadBadge from "@/components/messages/UnreadBadge";
 import NotificationsDropdown from "@/components/notifications/NotificationsDropdown";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
@@ -96,10 +97,13 @@ export default function NavBar() {
         <div className="hidden items-center gap-4 md:flex">
           <Link
             href="/messages"
-            className="flex items-center text-sm font-semibold text-slate-600 hover:text-emerald-800"
+            className="relative flex h-10 w-10 items-center justify-center rounded-full border border-emerald-200 text-emerald-800 hover:border-emerald-300"
+            aria-label="Messages"
           >
-            Messages
-            <UnreadBadge />
+            <MessageSquare className="h-4 w-4" />
+            <span className="absolute -right-1 -top-1">
+              <UnreadBadge />
+            </span>
           </Link>
           <NotificationsDropdown />
           {!isAuthed ? (

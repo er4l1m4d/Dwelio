@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
+import { Bell } from "lucide-react";
 
 type Notification = {
   id: string;
@@ -81,9 +82,10 @@ export default function NotificationsDropdown() {
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
-        className="rounded-full border border-emerald-200 px-4 py-2 text-sm font-semibold text-emerald-800"
+        className="relative flex h-10 w-10 items-center justify-center rounded-full border border-emerald-200 text-emerald-800 hover:border-emerald-300"
+        aria-label="Notifications"
       >
-        Notifications
+        <Bell className="h-4 w-4" />
       </button>
       {open && (
         <div className="absolute right-0 mt-3 w-72 rounded-2xl border border-emerald-100 bg-white p-4 shadow-[0_20px_40px_rgba(16,42,24,0.12)]">

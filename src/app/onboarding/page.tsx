@@ -51,10 +51,11 @@ export default function OnboardingPage() {
       const { error: updateError } = await supabase
         .from("profiles")
         .update({ phone, avatar_url: avatarUrl, full_name: fullName, role })
-        .eq("id", user.id);
+        .eq("id", user.id)
+        .is("role", null);
 
       if (updateError) {
-        setError(updateError.message);
+        setError("Role already set. You can update profile details in Settings.");
         return;
       }
 

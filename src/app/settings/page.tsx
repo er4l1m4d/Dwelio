@@ -13,7 +13,11 @@ export default function SettingsPage() {
     fullName: "",
     phone: "",
     avatarUrl: "",
+    role: "tenant",
   });
+  const [confirmRoleChange, setConfirmRoleChange] = useState(false);
+  const [needsReauth, setNeedsReauth] = useState(true);
+  const [reauthPassword, setReauthPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
@@ -41,6 +45,7 @@ export default function SettingsPage() {
           fullName: data.full_name ?? "",
           phone: data.phone ?? "",
           avatarUrl: data.avatar_url ?? "",
+          role: data.role ?? "tenant",
         });
         setLoading(false);
       }
@@ -71,12 +76,23 @@ export default function SettingsPage() {
         return;
       }
 
+      if (confirmRoleChange === false) {
+        setError("Please confirm before changing your role.");
+        return;
+      }
+
+      if (needsReauth) {
+        setError("Please re-authenticate before changing your role.");
+        return;
+      }
+
       const { error: updateError } = await supabase
         .from("profiles")
         .update({
           full_name: form.fullName,
           phone: form.phone,
           avatar_url: form.avatarUrl,
+          role: form.role,
         })
         .eq("id", user.id);
 
@@ -134,6 +150,84 @@ export default function SettingsPage() {
                 className="h-12 rounded-xl border border-slate-200 bg-white px-4 text-base shadow-sm outline-none ring-emerald-300 transition focus:ring-2"
               />
             </label>
+            <label className="grid gap-2 text-sm font-medium text-slate-700">
+              Role
+              <select
+                value={form.role}
+                onChange={(event) => handleChange("role")(event.target.value)}
+                className="h-12 rounded-xl border border-slate-200 bg-white px-4 text-base shadow-sm outline-none"
+              >
+                <option value="tenant">Tenant</option>
+                <option value="landlord">Landlord</option>
+                <option value="buyer">Buyer</option>
+              </select>
+            </label>
+            <label className="flex items-center gap-2 text-xs text-slate-600">
+              <input
+                type="checkbox"
+                checked={confirmRoleChange}
+                onChange={(event) => setConfirmRoleChange(event.target.checked)}
+              />
+              I understand changing roles affects my dashboard and listing access.
+            </label>
+            <div className="grid gap-2 text-xs text-slate-600">
+              <p className="font-semibold text-slate-900">
+                Re-authenticate to change role
+              </p>
+              <p className="text-xs text-slate-500">
+                If you signed in with Google, log out and sign in again to
+                re-authenticate.
+              </p>
+              <input
+                type="password"
+                value={reauthPassword}
+                onChange={(event) => setReauthPassword(event.target.value)}
+                placeholder="Enter your password"
+                className="h-10 rounded-xl border border-slate-200 px-3"
+              />
+              <button
+                type="button"
+                onClick={async () => {
+                  setError(null);
+                  const {
+                    data: { user },
+                  } = await supabase.auth.getUser();
+
+                  if (!user?.email) {
+                    setError("No email found for re-authentication.");
+                    return;
+                  }
+
+                  const { error: reauthError } =
+                    await supabase.auth.signInWithPassword({
+                      email: user.email,
+                      password: reauthPassword,
+                    });
+
+                  if (reauthError) {
+                    setNeedsReauth(true);
+                    setError("Re-authentication failed. Please try again.");
+                    return;
+                  }
+
+                  setNeedsReauth(false);
+                  setReauthPassword("");
+                }}
+                className="h-10 w-fit rounded-full border border-emerald-200 px-4 text-xs font-semibold text-emerald-800"
+              >
+                Confirm password
+              </button>
+              <button
+                type="button"
+                onClick={async () => {
+                  await supabase.auth.signOut();
+                  router.push("/login");
+                }}
+                className="h-10 w-fit rounded-full border border-emerald-200 px-4 text-xs font-semibold text-emerald-800"
+              >
+                Sign out
+              </button>
+            </div>
             {error && (
               <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
                 {error}

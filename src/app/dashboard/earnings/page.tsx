@@ -20,14 +20,27 @@ export default async function EarningsPage() {
     .eq("user_id", user.id)
     .single();
 
+  type Payment = {
+    id: string;
+    amount: number | null;
+    status: string | null;
+    payment_month: string | null;
+    tenant_id: string;
+    properties: { title: string | null } | null;
+  };
+
   const { data: payments } = await supabase
     .from("payments")
     .select("id, amount, status, payment_month, tenant_id, properties(title)")
     .eq("landlord_id", user.id)
     .order("created_at", { ascending: false });
 
-  const totalEarned =
-    payments?.reduce((sum, payment) => sum + (payment.amount ?? 0), 0) ?? 0;
+  const typedPayments = (payments ?? []) as Payment[];
+
+  const totalEarned = typedPayments.reduce(
+    (sum, payment) => sum + (payment.amount ?? 0),
+    0,
+  );
 
   return (
     <div className="min-h-screen bg-[radial-gradient(circle_at_top,_#f5f0e4,_#ffffff_45%,_#eef8f2)] px-6 py-16">
@@ -67,8 +80,8 @@ export default async function EarningsPage() {
           <h2 className="text-lg font-semibold text-slate-900">
             Incoming payments
           </h2>
-          {payments && payments.length > 0 ? (
-            payments.map((payment) => (
+          {typedPayments.length > 0 ? (
+            typedPayments.map((payment) => (
               <div
                 key={payment.id}
                 className="flex flex-col gap-3 rounded-3xl border border-emerald-100 bg-white/90 p-6 shadow-[0_20px_50px_rgba(16,42,24,0.08)] md:flex-row md:items-center md:justify-between"

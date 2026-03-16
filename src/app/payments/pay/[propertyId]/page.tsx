@@ -67,7 +67,13 @@ export default function PayRentPage() {
       email,
       amount: totalAmount * 100,
       metadata: {
-        propertyId: property?.id,
+        custom_fields: [
+          {
+            display_name: "Property ID",
+            variable_name: "property_id",
+            value: property?.id ?? "",
+          },
+        ],
       },
     }),
     [email, property?.id, totalAmount],

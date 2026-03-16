@@ -563,11 +563,11 @@
 
 ### 9.1 — Navigation & Layout
 
-- [ ] **Build the main navigation bar**
+- [x] **Build the main navigation bar**
   > **How:** Prompt your AI tool:
   > *"Build a responsive navigation bar component for Dwelio. Left: Logo (Dwelio in green). Centre: links — Browse, Neighbourhoods, How It Works. Right: Messages icon with unread badge, Notifications icon, and either 'Log In / Sign Up' buttons or a user avatar dropdown (Profile, Dashboard, Settings, Log Out) if logged in. Mobile: hamburger menu. Brand colours: green `#1A6B3A`, gold `#F4A623`."*
 
-- [ ] **Build the footer**
+- [x] **Build the footer**
   > **How:** Prompt your AI tool:
   > *"Build a site footer for Dwelio with columns: About (About Us, How It Works, Blog), Explore (Browse Listings, Neighbourhoods, Sell a Property), Support (Help Centre, Contact Us, Report a Listing), Legal (Privacy Policy, Terms of Service). Show the Dwelio logo and tagline. Add social media icons. Dark green background with white text."*
 

@@ -503,15 +503,15 @@
 
 ### 7.1 — Build the Tenancy Agreement Generator
 
-- [ ] **Build the agreement generation API route**
+- [x] **Build the agreement generation API route**
   > **How:** Prompt your AI tool:
   > *"Build a Next.js API route at `/app/api/agreements/generate/route.ts`. It receives `tenantId`, `landlordId`, `propertyId`, `startDate`, `monthlyRent`. Fetch the property and both user profiles from Supabase. Generate a tenancy agreement text using a template that includes: landlord name, tenant name, property address, monthly rent, start date, standard Nigerian tenancy terms covering: rent payment schedule, maintenance responsibilities, notice period (1 month), and termination conditions. Insert the agreement into the `tenancy_agreements` table with `tenant_signed` and `landlord_signed` as false. Return the agreement ID."*
 
-- [ ] **Build the agreement review and signing page**
+- [x] **Build the agreement review and signing page**
   > **How:** Prompt your AI tool:
   > *"Build an agreement page at `/app/agreements/[id]/page.tsx`. Fetch the agreement from Supabase. Display the full agreement text in a readable, formatted layout. At the bottom, show two states: (1) If the current user has not signed — show a checkbox 'I have read and agree to this tenancy agreement' and a 'Sign Agreement' button. Clicking it sets `tenant_signed` or `landlord_signed` to true in Supabase. (2) If both have signed — show a green 'Fully Executed' banner and a 'Download PDF' button."*
 
-- [ ] **Add PDF download of the signed agreement**
+- [x] **Add PDF download of the signed agreement**
   > **How:** Run `npm install jspdf` then prompt your AI tool:
   > *"Add a 'Download as PDF' button to the agreement page at `/app/agreements/[id]/page.tsx`. When clicked, use `jspdf` to generate a PDF containing the agreement text, landlord and tenant names, property address, and a 'Digitally Signed on [date]' footer for each party. Trigger a browser download of the PDF."*
 

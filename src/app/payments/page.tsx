@@ -68,7 +68,19 @@ export default async function PaymentsPage() {
             ))
           ) : (
             <div className="rounded-3xl border border-emerald-100 bg-white/90 p-8 text-sm text-slate-600 shadow-[0_20px_50px_rgba(16,42,24,0.08)] backdrop-blur">
-              No payments yet.
+              <p className="text-2xl">💳</p>
+              <p className="mt-2 font-semibold text-slate-900">
+                No payments yet
+              </p>
+              <p className="mt-1 text-sm text-slate-600">
+                Explore listings and start a payment when you’re ready.
+              </p>
+              <Link
+                href="/search"
+                className="mt-4 inline-flex h-10 items-center justify-center rounded-full border border-emerald-200 px-4 text-xs font-semibold text-emerald-800"
+              >
+                Browse listings
+              </Link>
             </div>
           )}
         </div>

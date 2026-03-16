@@ -66,7 +66,11 @@ export default function SearchResults({ listings, verifiedMap }: SearchResultsPr
         ))
       ) : (
         <div className="col-span-full rounded-3xl border border-emerald-100 bg-white/90 p-8 text-sm text-slate-600 shadow-[0_20px_50px_rgba(16,42,24,0.08)] backdrop-blur">
-          No listings yet. Try adjusting your filters or check back soon.
+          <p className="text-2xl">🔍</p>
+          <p className="mt-2 font-semibold text-slate-900">No listings yet</p>
+          <p className="mt-1 text-sm text-slate-600">
+            Try adjusting your filters or check back soon.
+          </p>
         </div>
       )}
     </section>

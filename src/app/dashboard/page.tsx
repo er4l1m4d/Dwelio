@@ -128,7 +128,19 @@ export default async function DashboardPage() {
                 ))
               ) : (
                 <div className="rounded-3xl border border-emerald-100 bg-white/90 p-8 text-sm text-slate-600 shadow-[0_20px_50px_rgba(16,42,24,0.08)] backdrop-blur">
-                  No listings yet. Create your first property to get started.
+                  <p className="text-2xl">🏠</p>
+                  <p className="mt-2 font-semibold text-slate-900">
+                    No listings yet
+                  </p>
+                  <p className="mt-1 text-sm text-slate-600">
+                    Create your first property to start receiving inquiries.
+                  </p>
+                  <Link
+                    href="/listings/new"
+                    className="mt-4 inline-flex h-10 items-center justify-center rounded-full border border-emerald-200 px-4 text-xs font-semibold text-emerald-800"
+                  >
+                    Add a listing
+                  </Link>
                 </div>
               )}
             </div>

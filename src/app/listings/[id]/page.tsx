@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import ImageGallery from "@/components/ImageGallery";
 import MessageLandlordButton from "@/components/messages/MessageLandlordButton";
@@ -7,6 +8,39 @@ import MessageLandlordButton from "@/components/messages/MessageLandlordButton";
 type ListingPageProps = {
   params: { id: string };
 };
+
+export async function generateMetadata({
+  params,
+}: ListingPageProps): Promise<Metadata> {
+  const supabase = await createSupabaseServerClient();
+  const { data: listing } = await supabase
+    .from("properties")
+    .select("title, neighbourhood, price, images")
+    .eq("id", params.id)
+    .single();
+
+  if (!listing) {
+    return {
+      title: "Dwelio | Listing",
+      description: "Property listing not found.",
+    };
+  }
+
+  const description = `${listing.title} in ${listing.neighbourhood ?? "Ibadan"} for ₦${listing.price?.toLocaleString() ?? "0"}.`;
+  const image = listing.images?.[0];
+
+  return {
+    title: `Dwelio | ${listing.title}`,
+    description,
+    openGraph: image
+      ? {
+          title: listing.title,
+          description,
+          images: [{ url: image }],
+        }
+      : undefined,
+  };
+}
 
 export default async function ListingDetailPage({ params }: ListingPageProps) {
   const supabase = await createSupabaseServerClient();

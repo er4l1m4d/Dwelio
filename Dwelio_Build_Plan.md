@@ -579,15 +579,15 @@
 
 ### 9.2 — SEO & Performance
 
-- [ ] **Add metadata to all key pages**
+- [x] **Add metadata to all key pages**
   > **How:** Prompt your AI tool:
   > *"Add Next.js 14 metadata exports to these pages: landing page, search page, and each property listing page (`/listings/[id]`). For listing pages, generate dynamic metadata using the property title, neighbourhood, price, and first image as the OG image. Include title, description, and OpenGraph tags."*
 
-- [ ] **Add a sitemap**
+- [x] **Add a sitemap**
   > **How:** Prompt your AI tool:
   > *"Create a dynamic sitemap at `/app/sitemap.ts` in Next.js 14. Include: static pages (home, search, neighbourhoods, how-it-works). Also include all available property listing URLs fetched from Supabase. This helps Google index your listings."*
 
-- [ ] **Optimise all images with Next.js Image component**
+- [x] **Optimise all images with Next.js Image component**
   > **How:** Prompt your AI tool:
   > *"Audit all `<img>` tags in the codebase and replace them with Next.js `<Image>` components from `next/image`. Add `sizes` and `priority` props appropriately. Configure the `next.config.js` to allow images from the Supabase storage domain."*
 
@@ -595,19 +595,19 @@
 
 ### 9.3 — Error Handling & Edge Cases
 
-- [ ] **Add loading skeletons to all data-fetching pages**
+- [x] **Add loading skeletons to all data-fetching pages**
   > **How:** Prompt your AI tool:
   > *"Create skeleton loading components for: PropertyCard, the search results grid, the listing detail page, and the messages inbox. Use Tailwind's `animate-pulse` class with grey placeholder blocks matching the shape of the real content. Show these while data is being fetched."*
 
-- [ ] **Add empty states to all list views**
+- [x] **Add empty states to all list views**
   > **How:** Prompt your AI tool:
   > *"Add empty state components for: search results (no listings found), messages inbox (no conversations yet), landlord dashboard (no listings yet), payment history (no payments yet). Each empty state should have an illustration (use a simple SVG or emoji), a helpful message, and a clear CTA button."*
 
-- [ ] **Add a 404 page**
+- [x] **Add a 404 page**
   > **How:** Prompt your AI tool:
   > *"Create a custom 404 page at `/app/not-found.tsx` for Dwelio. Show a friendly message, the Dwelio logo, and buttons to go to the homepage or browse listings. Use the brand colours."*
 
-- [ ] **Add error boundaries**
+- [x] **Add error boundaries**
   > **How:** Prompt your AI tool:
   > *"Create an `error.tsx` file in the Next.js App Router at `/app/error.tsx`. Show a friendly error message with a 'Try Again' button that calls the `reset` function. Also add a global `error.tsx` for unhandled errors."*
 

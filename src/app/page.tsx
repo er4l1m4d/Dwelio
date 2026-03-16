@@ -2,6 +2,12 @@ import Link from "next/link";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import PropertyCard from "@/components/PropertyCard";
 
+export const metadata = {
+  title: "Dwelio | Find Your Home in Ibadan",
+  description:
+    "Verified landlords, monthly payments, and digital tenancy agreements for Ibadan renters.",
+};
+
 const stats = [
   { label: "Listings", value: "1,200+" },
   { label: "Verified landlords", value: "340+" },

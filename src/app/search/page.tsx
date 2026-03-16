@@ -1,6 +1,12 @@
 import SearchView from "@/components/search/SearchView";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
+export const metadata = {
+  title: "Dwelio | Search Listings",
+  description:
+    "Browse verified listings in Ibadan with filters for price, bedrooms, and neighbourhood.",
+};
+
 const neighbourhoods = [
   "Bodija",
   "Samonda",

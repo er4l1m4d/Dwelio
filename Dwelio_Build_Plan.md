@@ -545,10 +545,10 @@
 
 ### 8.2 — Neighbourhood Insights
 
-- [ ] **Build the neighbourhood data structure**
+- [x] **Build the neighbourhood data structure**
   > **How:** Create a file `/src/data/ibadan-neighbourhoods.ts` with this data for each of the key Ibadan areas: average rent (1-bed, 2-bed, 3-bed), general description, proximity to key landmarks (UI, Dugbe market, Ring Road), and a vibe tag (Quiet & Residential / Busy & Commercial / Student-Friendly / Premium). Prompt your AI tool to help populate this data.
 
-- [ ] **Build the neighbourhood insights page**
+- [x] **Build the neighbourhood insights page**
   > **How:** Prompt your AI tool:
   > *"Build a neighbourhood guide page at `/app/neighbourhoods/page.tsx`. Show a grid of cards for each key Ibadan neighbourhood (Bodija, Samonda, Agodi GRA, Mokola, Ajibode, Agbowo, Challenge, Dugbe, Iwo Road, New Bodija). Each card shows: neighbourhood name, vibe tag badge, average rent range, short description, and a 'Browse Listings' button that links to search pre-filtered by that neighbourhood."*
 

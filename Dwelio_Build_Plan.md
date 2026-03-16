@@ -455,14 +455,14 @@
 
 ### 6.1 — Set Up Paystack
 
-- [ ] **Create a Paystack account**
+- [x] **Create a Paystack account**
   > **How:** Go to [paystack.com](https://paystack.com) and sign up. Complete the business verification to enable live payments. For now, use **Test Mode**. Go to **Settings → API Keys** and copy your **Secret Key** and **Public Key**. Add them to `.env.local`:
   > ```
   > NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY=pk_test_xxxx
   > PAYSTACK_SECRET_KEY=sk_test_xxxx
   > ```
 
-- [ ] **Install Paystack React library**
+- [x] **Install Paystack React library**
   > **How:** Run:
   > ```bash
   > npm install react-paystack
@@ -472,23 +472,23 @@
 
 ### 6.2 — Build the Payment Flow
 
-- [ ] **Build the rent payment initiation page**
+- [x] **Build the rent payment initiation page**
   > **How:** Prompt your AI tool:
   > *"Build a rent payment page at `/app/payments/pay/[propertyId]/page.tsx`. Show a payment summary: property name, monthly rent amount, Dwelio service fee (3% of rent), total. Include a 'Pay Now' button that opens the Paystack payment modal using `react-paystack`. Use the tenant's email for the Paystack customer. On successful payment, call a Next.js API route to record the payment."*
 
-- [ ] **Build the Paystack webhook API route**
+- [x] **Build the Paystack webhook API route**
   > **How:** Prompt your AI tool:
   > *"Create a Next.js API route at `/app/api/payments/webhook/route.ts` to handle Paystack webhook events. Verify the webhook signature using `PAYSTACK_SECRET_KEY`. On `charge.success` event, update the corresponding payment record in Supabase `payments` table — set status to `paid`. Also update the payment status to `in_escrow` if it's a first month (move-in) payment."*
 
-- [ ] **Build the escrow logic**
+- [x] **Build the escrow logic**
   > **How:** Prompt your AI tool:
   > *"Build an API route at `/app/api/payments/release-escrow/route.ts`. When called with a `paymentId`, check that the payment status is `in_escrow` and that the tenant has confirmed move-in (add a `move_in_confirmed` boolean to the payments table). If both conditions are met, update status to `released` and update the landlord's wallet balance in a `wallets` table. Protect this route so only the tenant on the payment can call it."*
 
-- [ ] **Build the tenant payment history page**
+- [x] **Build the tenant payment history page**
   > **How:** Prompt your AI tool:
   > *"Build a payments page at `/app/payments/page.tsx` for tenants. Show a list of all their payments fetched from Supabase, ordered by date. Each row shows: property name, month, amount, status badge (Pending/Paid/In Escrow/Released), and a download receipt link. For upcoming payments, show a 'Pay Now' button."*
 
-- [ ] **Build the landlord payment/earnings page**
+- [x] **Build the landlord payment/earnings page**
   > **How:** Prompt your AI tool:
   > *"Build a landlord earnings page at `/app/dashboard/earnings/page.tsx`. Show: total earned this month, total earned all time, wallet balance. Below, show a table of all incoming payments for their properties. Each row: tenant name, property, month, amount, status. Include a 'Withdraw to Bank' button (for Phase 3 — can be a placeholder for now)."*
 

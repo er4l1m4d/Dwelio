@@ -66,10 +66,19 @@ create table payments (
   amount integer not null,
   status text check (status in ('pending', 'paid', 'failed', 'in_escrow', 'released')),
   paystack_reference text,
+  move_in_confirmed boolean default false,
   payment_month date,
   created_at timestamp with time zone default now()
 );
 alter table payments enable row level security;
+
+create table wallets (
+  id uuid default gen_random_uuid() primary key,
+  user_id uuid references profiles(id) unique,
+  balance integer default 0,
+  created_at timestamp with time zone default now()
+);
+alter table wallets enable row level security;
 
 create table tenancy_agreements (
   id uuid default gen_random_uuid() primary key,

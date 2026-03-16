@@ -73,6 +73,19 @@ create policy "payments_update_participants"
 on payments for update
 using (auth.uid() = tenant_id or auth.uid() = landlord_id);
 
+-- wallets
+create policy "wallets_select_owner"
+on wallets for select
+using (auth.uid() = user_id);
+
+create policy "wallets_insert_owner"
+on wallets for insert
+with check (auth.uid() = user_id);
+
+create policy "wallets_update_owner"
+on wallets for update
+using (auth.uid() = user_id);
+
 -- tenancy_agreements
 create policy "agreements_select_participants"
 on tenancy_agreements for select

@@ -9,6 +9,8 @@ export default function OnboardingPage() {
   const supabase = createSupabaseBrowserClient();
   const [pending, startTransition] = useTransition();
   const [phone, setPhone] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [role, setRole] = useState("tenant");
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -48,7 +50,7 @@ export default function OnboardingPage() {
 
       const { error: updateError } = await supabase
         .from("profiles")
-        .update({ phone, avatar_url: avatarUrl })
+        .update({ phone, avatar_url: avatarUrl, full_name: fullName, role })
         .eq("id", user.id);
 
       if (updateError) {
@@ -72,6 +74,17 @@ export default function OnboardingPage() {
           </p>
           <form onSubmit={handleSubmit} className="grid gap-4">
             <label className="grid gap-2 text-sm font-medium text-slate-700">
+              Full name
+              <input
+                value={fullName}
+                onChange={(event) => setFullName(event.target.value)}
+                required
+                type="text"
+                placeholder="Your full name"
+                className="h-12 rounded-xl border border-slate-200 bg-white px-4 text-base shadow-sm outline-none ring-emerald-300 transition focus:ring-2"
+              />
+            </label>
+            <label className="grid gap-2 text-sm font-medium text-slate-700">
               Phone number
               <input
                 value={phone}
@@ -81,6 +94,18 @@ export default function OnboardingPage() {
                 placeholder="+234 812 000 0000"
                 className="h-12 rounded-xl border border-slate-200 bg-white px-4 text-base shadow-sm outline-none ring-emerald-300 transition focus:ring-2"
               />
+            </label>
+            <label className="grid gap-2 text-sm font-medium text-slate-700">
+              Role
+              <select
+                value={role}
+                onChange={(event) => setRole(event.target.value)}
+                className="h-12 rounded-xl border border-slate-200 bg-white px-4 text-base shadow-sm outline-none"
+              >
+                <option value="tenant">Tenant</option>
+                <option value="landlord">Landlord</option>
+                <option value="buyer">Buyer</option>
+              </select>
             </label>
             <label className="grid gap-2 text-sm font-medium text-slate-700">
               Profile photo

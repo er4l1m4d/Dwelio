@@ -13,6 +13,23 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
 
+  const handleGoogleSignIn = () => {
+    setError(null);
+    startTransition(async () => {
+      const redirectTo =
+        process.env.NEXT_PUBLIC_SUPABASE_REDIRECT_URL ??
+        `${window.location.origin}/onboarding`;
+      const { error: oauthError } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: { redirectTo },
+      });
+
+      if (oauthError) {
+        setError(oauthError.message);
+      }
+    });
+  };
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError(null);
@@ -94,6 +111,13 @@ export default function LoginPage() {
                 {error}
               </p>
             )}
+            <button
+              type="button"
+              onClick={handleGoogleSignIn}
+              className="h-12 rounded-full border border-emerald-200 bg-white px-6 text-sm font-semibold text-emerald-800 transition hover:border-emerald-300"
+            >
+              Continue with Google
+            </button>
             <button
               type="submit"
               disabled={pending}

@@ -86,6 +86,19 @@ create policy "wallets_update_owner"
 on wallets for update
 using (auth.uid() = user_id);
 
+-- notifications
+create policy "notifications_select_owner"
+on notifications for select
+using (auth.uid() = user_id);
+
+create policy "notifications_insert_owner"
+on notifications for insert
+with check (auth.uid() = user_id);
+
+create policy "notifications_update_owner"
+on notifications for update
+using (auth.uid() = user_id);
+
 -- tenancy_agreements
 create policy "agreements_select_participants"
 on tenancy_agreements for select

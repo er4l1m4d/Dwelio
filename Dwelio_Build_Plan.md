@@ -571,7 +571,7 @@
   > **How:** Prompt your AI tool:
   > *"Build a site footer for Dwelio with columns: About (About Us, How It Works, Blog), Explore (Browse Listings, Neighbourhoods, Sell a Property), Support (Help Centre, Contact Us, Report a Listing), Legal (Privacy Policy, Terms of Service). Show the Dwelio logo and tagline. Add social media icons. Dark green background with white text."*
 
-- [ ] **Add a notifications system**
+- [x] **Add a notifications system**
   > **How:** Prompt your AI tool:
   > *"Build a simple notifications system for Dwelio. Create a `notifications` table in Supabase with: `user_id`, `type` (new_message, payment_due, agreement_signed, listing_inquiry), `message`, `link`, `is_read`, `created_at`. Build a notifications dropdown in the nav that shows the 10 most recent notifications. Mark all as read when opened. Use Supabase Realtime to show new notifications instantly."*
 

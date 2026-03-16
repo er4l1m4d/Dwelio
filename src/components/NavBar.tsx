@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import UnreadBadge from "@/components/messages/UnreadBadge";
+import NotificationsDropdown from "@/components/notifications/NotificationsDropdown";
 
 export default function NavBar() {
   const [open, setOpen] = useState(false);
@@ -34,6 +35,7 @@ export default function NavBar() {
             Messages
             <UnreadBadge />
           </Link>
+          <NotificationsDropdown />
           <Link
             href="/login"
             className="rounded-full border border-emerald-200 px-4 py-2 text-sm font-semibold text-emerald-800"

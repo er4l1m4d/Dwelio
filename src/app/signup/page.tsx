@@ -25,6 +25,23 @@ export default function SignUpPage() {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
+  const handleGoogleSignIn = () => {
+    setError(null);
+    startTransition(async () => {
+      const redirectTo =
+        process.env.NEXT_PUBLIC_SUPABASE_REDIRECT_URL ??
+        `${window.location.origin}/onboarding`;
+      const { error: oauthError } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: { redirectTo },
+      });
+
+      if (oauthError) {
+        setError(oauthError.message);
+      }
+    });
+  };
+
   const handleChange = (field: keyof typeof form) => (value: string) =>
     setForm((prev) => ({ ...prev, [field]: value }));
 
@@ -176,6 +193,13 @@ export default function SignUpPage() {
             </div>
 
             <div className="grid gap-3">
+              <button
+                type="button"
+                onClick={handleGoogleSignIn}
+                className="h-12 rounded-full border border-emerald-200 bg-white px-6 text-sm font-semibold text-emerald-800 transition hover:border-emerald-300"
+              >
+                Continue with Google
+              </button>
               {error && (
                 <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
                   {error}

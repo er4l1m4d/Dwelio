@@ -88,7 +88,7 @@ export default async function EarningsPage() {
               >
                 <div>
                   <p className="text-sm font-semibold text-slate-900">
-                    {payment.properties?.title ?? "Property"}
+                    {payment.properties?.[0]?.title ?? "Property"}
                   </p>
                   <p className="text-xs text-slate-500">
                     Month: {payment.payment_month ?? "Upcoming"}

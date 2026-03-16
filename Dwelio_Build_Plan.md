@@ -526,18 +526,18 @@
 
 ### 8.1 — AI Recommendations
 
-- [ ] **Set up OpenAI API**
+- [x] **Set up OpenAI API**
   > **How:** Go to [platform.openai.com](https://platform.openai.com), create an account, generate an API key. Add to `.env.local`:
   > ```
   > OPENAI_API_KEY=sk-xxxx
   > ```
   > Run: `npm install openai`
 
-- [ ] **Build the recommendation API route**
+- [x] **Build the recommendation API route**
   > **How:** Prompt your AI tool:
   > *"Build a Next.js API route at `/app/api/recommendations/route.ts`. It receives the current user's: budget range, preferred neighbourhoods, bedroom count, and property type preference. Fetch all available properties from Supabase. Use the OpenAI API to rank and recommend the top 5 most suitable properties based on the user's preferences. Return the sorted list of property IDs with a short reason for each recommendation."*
 
-- [ ] **Build the 'Recommended for You' section**
+- [x] **Build the 'Recommended for You' section**
   > **How:** Prompt your AI tool:
   > *"Add a 'Recommended for You' section to the tenant dashboard at `/app/dashboard/page.tsx`. On page load, if the user has preferences saved, call the `/api/recommendations` route. Display the top 5 recommended properties as a horizontal scroll row of PropertyCards. If no preferences are saved, show a 'Tell us what you're looking for' prompt that opens a quick preferences modal."*
 

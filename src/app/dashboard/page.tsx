@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import RecommendationsPanel from "@/components/recommendations/RecommendationsPanel";
 
 export default async function DashboardPage() {
   const supabase = await createSupabaseServerClient();
@@ -29,6 +30,14 @@ export default async function DashboardPage() {
     .eq("landlord_id", user.id)
     .order("created_at", { ascending: false });
 
+  const { data: availableListings } = await supabase
+    .from("properties")
+    .select(
+      "id, title, price, price_period, neighbourhood, bedrooms, bathrooms, images, type",
+    )
+    .eq("is_available", true)
+    .order("created_at", { ascending: false });
+
   const isLandlord = profile?.role === "landlord";
 
   return (
@@ -54,12 +63,7 @@ export default async function DashboardPage() {
         </header>
 
         {!isLandlord && (
-          <div className="rounded-3xl border border-emerald-100 bg-white/90 p-8 shadow-[0_30px_70px_rgba(16,42,24,0.08)] backdrop-blur">
-            <p className="text-sm text-slate-600">
-              This dashboard is currently designed for landlords. Tenant and
-              buyer dashboards are coming next.
-            </p>
-          </div>
+          <RecommendationsPanel listings={availableListings ?? []} />
         )}
 
         {isLandlord && (

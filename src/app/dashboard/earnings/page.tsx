@@ -26,7 +26,7 @@ export default async function EarningsPage() {
     status: string | null;
     payment_month: string | null;
     tenant_id: string;
-    properties: { title: string | null } | null;
+    properties: { title: string | null }[] | null;
   };
 
   const { data: payments } = await supabase
@@ -35,7 +35,7 @@ export default async function EarningsPage() {
     .eq("landlord_id", user.id)
     .order("created_at", { ascending: false });
 
-  const typedPayments = (payments ?? []) as Payment[];
+  const typedPayments = (payments ?? []) as unknown as Payment[];
 
   const totalEarned = typedPayments.reduce(
     (sum, payment) => sum + (payment.amount ?? 0),

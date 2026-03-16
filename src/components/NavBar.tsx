@@ -12,6 +12,7 @@ export default function NavBar() {
   const [isAuthed, setIsAuthed] = useState(false);
   const [profileId, setProfileId] = useState<string | null>(null);
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
+  const [displayName, setDisplayName] = useState<string | null>(null);
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
   const profileMenuRef = useRef<HTMLDivElement | null>(null);
 
@@ -29,11 +30,12 @@ export default function NavBar() {
       if (user) {
         const { data } = await supabase
           .from("profiles")
-          .select("avatar_url")
+          .select("avatar_url, full_name")
           .eq("id", user.id)
           .single();
         if (mounted) {
           setAvatarUrl(data?.avatar_url ?? null);
+          setDisplayName(data?.full_name ?? null);
         }
       }
     };
@@ -130,7 +132,9 @@ export default function NavBar() {
                     className="h-full w-full object-cover"
                   />
                 ) : (
-                  (profileId?.slice(0, 1).toUpperCase() ?? "U")
+                  (displayName?.[0]?.toUpperCase() ??
+                    profileId?.slice(0, 1).toUpperCase() ??
+                    "U")
                 )}
               </button>
               {profileMenuOpen && (

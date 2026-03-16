@@ -36,7 +36,7 @@ export default function SettingsPage() {
 
       const { data } = await supabase
         .from("profiles")
-        .select("full_name, phone, avatar_url")
+        .select("full_name, phone, avatar_url, role")
         .eq("id", user.id)
         .single();
 

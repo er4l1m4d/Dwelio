@@ -13,6 +13,47 @@ export default function OnboardingPage() {
   const [role, setRole] = useState("tenant");
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [checking, setChecking] = useState(true);
+
+  useEffect(() => {
+    let mounted = true;
+
+    const loadProfile = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (!user) {
+        if (mounted) setChecking(false);
+        return;
+      }
+
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("full_name, phone, role, avatar_url")
+        .eq("id", user.id)
+        .single();
+
+      if (profile?.full_name && profile?.phone && profile?.role) {
+        router.push("/dashboard");
+        return;
+      }
+
+      if (mounted && profile) {
+        setFullName(profile.full_name ?? "");
+        setPhone(profile.phone ?? "");
+        setRole(profile.role ?? "tenant");
+      }
+
+      if (mounted) setChecking(false);
+    };
+
+    loadProfile();
+
+    return () => {
+      mounted = false;
+    };
+  }, [router, supabase]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -48,20 +89,46 @@ export default function OnboardingPage() {
         avatarUrl = publicUrlData.publicUrl;
       }
 
-      const { error: updateError } = await supabase
+      const { error: detailsError } = await supabase
         .from("profiles")
-        .update({ phone, avatar_url: avatarUrl, full_name: fullName, role })
-        .eq("id", user.id)
-        .is("role", null);
+        .update({ phone, avatar_url: avatarUrl, full_name: fullName })
+        .eq("id", user.id);
 
-      if (updateError) {
-        setError("Role already set. You can update profile details in Settings.");
+      if (detailsError) {
+        setError(detailsError.message);
         return;
+      }
+
+      const { data: existing } = await supabase
+        .from("profiles")
+        .select("role")
+        .eq("id", user.id)
+        .single();
+
+      if (!existing?.role) {
+        const { error: roleError } = await supabase
+          .from("profiles")
+          .update({ role })
+          .eq("id", user.id)
+          .is("role", null);
+
+        if (roleError) {
+          setError(roleError.message);
+          return;
+        }
       }
 
       router.push("/dashboard");
     });
   };
+
+  if (checking) {
+    return (
+      <div className="min-h-screen px-6 py-16 text-slate-600">
+        Checking your profile...
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[radial-gradient(circle_at_top,_#f5f0e4,_#ffffff_50%,_#eef8f2)] px-6 py-16">

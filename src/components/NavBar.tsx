@@ -143,14 +143,6 @@ export default function NavBar() {
               </button>
               {profileMenuOpen && (
                 <div className="absolute right-0 mt-3 w-44 rounded-2xl border border-emerald-100 bg-white p-2 text-sm shadow-[0_20px_40px_rgba(16,42,24,0.12)]">
-                  {profileId && (
-                    <Link
-                      href={`/profile/${profileId}`}
-                      className="block rounded-xl px-3 py-2 text-slate-700 hover:bg-emerald-50"
-                    >
-                      Profile
-                    </Link>
-                  )}
                   <Link
                     href="/dashboard"
                     className="block rounded-xl px-3 py-2 text-slate-700 hover:bg-emerald-50"

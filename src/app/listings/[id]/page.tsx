@@ -134,14 +134,9 @@ export default async function ListingDetailPage({ params }: ListingPageProps) {
                 {landlord?.is_verified && (
                   <p className="text-xs text-emerald-700">Verified Landlord</p>
                 )}
-                {landlord?.id && (
-                  <Link
-                    href={`/profile/${landlord.id}`}
-                    className="text-xs font-semibold text-emerald-800"
-                  >
-                    View profile
-                  </Link>
-                )}
+                <span className="text-xs font-semibold text-emerald-800">
+                  Verified landlord
+                </span>
               </div>
             </div>
 

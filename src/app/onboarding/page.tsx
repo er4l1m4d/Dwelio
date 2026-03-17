@@ -124,8 +124,19 @@ export default function OnboardingPage() {
 
   if (checking) {
     return (
-      <div className="min-h-screen px-6 py-16 text-slate-600">
-        Checking your profile...
+      <div className="min-h-screen bg-[radial-gradient(circle_at_top,_#f5f0e4,_#ffffff_50%,_#eef8f2)] px-6 py-16">
+        <div className="mx-auto w-full max-w-3xl rounded-3xl border border-emerald-100 bg-white/90 p-10 shadow-[0_30px_70px_rgba(16,42,24,0.08)] backdrop-blur">
+          <div className="grid gap-4">
+            <div className="h-6 w-40 animate-pulse rounded-full bg-emerald-100" />
+            <div className="h-4 w-64 animate-pulse rounded-full bg-slate-200" />
+            <div className="mt-4 grid gap-3">
+              <div className="h-12 animate-pulse rounded-2xl bg-slate-200" />
+              <div className="h-12 animate-pulse rounded-2xl bg-slate-200" />
+              <div className="h-12 animate-pulse rounded-2xl bg-slate-200" />
+            </div>
+            <p className="text-sm text-slate-500">Checking your profile…</p>
+          </div>
+        </div>
       </div>
     );
   }

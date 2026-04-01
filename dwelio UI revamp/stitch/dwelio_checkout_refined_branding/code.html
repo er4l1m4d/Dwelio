@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;800;900&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-container": "#013220",
+              "error-container": "#ffdad6",
+              "on-primary": "#ffffff",
+              "tertiary-fixed": "#ffdfa0",
+              "surface-container-highest": "#e2e3df",
+              "inverse-surface": "#2f312f",
+              "on-secondary-fixed": "#0f1f17",
+              "secondary": "#516258",
+              "secondary-container": "#d1e4d7",
+              "primary": "#001b0f",
+              "on-primary-fixed-variant": "#234f3b",
+              "on-secondary-fixed-variant": "#3a4b41",
+              "on-surface-variant": "#414943",
+              "outline-variant": "#c1c8c2",
+              "on-tertiary-fixed-variant": "#5c4300",
+              "on-primary-fixed": "#002113",
+              "on-tertiary-container": "#ba8a00",
+              "surface-bright": "#f9faf6",
+              "tertiary-fixed-dim": "#fbbc00",
+              "primary-fixed": "#bdedd2",
+              "surface": "#f9faf6",
+              "inverse-primary": "#a2d1b7",
+              "on-secondary": "#ffffff",
+              "surface-container": "#edeeeb",
+              "on-surface": "#1a1c1a",
+              "primary-fixed-dim": "#a2d1b7",
+              "tertiary-container": "#392800",
+              "on-secondary-container": "#55675c",
+              "tertiary": "#1f1500",
+              "surface-container-high": "#e8e8e5",
+              "inverse-on-surface": "#f0f1ed",
+              "on-primary-container": "#6f9c84",
+              "secondary-fixed-dim": "#b8cbbe",
+              "surface-tint": "#3b6751",
+              "surface-variant": "#e2e3df",
+              "outline": "#717973",
+              "background": "#f9faf6",
+              "on-error-container": "#93000a",
+              "on-error": "#ffffff",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary": "#ffffff",
+              "secondary-fixed": "#d4e7da",
+              "surface-dim": "#d9dad7",
+              "on-tertiary-fixed": "#261a00",
+              "on-background": "#1a1c1a",
+              "surface-container-low": "#f3f4f0",
+              "error": "#ba1a1a"
+            },
+            fontFamily: {
+              "headline": ["Epilogue"],
+              "body": ["Manrope"],
+              "label": ["Epilogue"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#f9faf6]/70 backdrop-blur-xl">
+<div class="flex justify-between items-center px-8 py-4 max-w-[1440px] mx-auto">
+<div class="text-2xl font-black text-[#013220] tracking-tighter"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-3xl" style="color: #013220; font-variation-settings: 'FILL' 1;">home</span><span class="font-headline text-2xl font-black tracking-tighter" style="color: #013220;">Dwelio</span></div></div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-[#013220]/70 hover:text-[#fbbc00] transition-colors duration-300 font-headline font-bold tracking-tight text-lg" href="#">Discover</a>
+<a class="text-[#013220]/70 hover:text-[#fbbc00] transition-colors duration-300 font-headline font-bold tracking-tight text-lg" href="#">Verified Homes</a>
+<a class="text-[#013220]/70 hover:text-[#fbbc00] transition-colors duration-300 font-headline font-bold tracking-tight text-lg" href="#">Pricing</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="px-6 py-2 bg-primary-container text-on-primary font-headline font-bold rounded-md hover:scale-95 transition-all duration-200">List Property</button>
+<button class="px-6 py-2 text-[#013220] font-headline font-bold">Sign In</button>
+</div>
+</div>
+</nav>
+<main class="pt-32 pb-20 px-6 md:px-12 max-w-[1440px] mx-auto">
+<!-- Header Section -->
+<header class="mb-12">
+<div class="flex items-center gap-2 mb-4">
+<span class="px-3 py-1 bg-tertiary-fixed-dim text-on-tertiary-fixed font-label text-[10px] tracking-widest uppercase rounded-full">Secure Checkout</span>
+<span class="h-1 w-1 bg-outline-variant rounded-full"></span>
+<span class="text-on-surface-variant text-sm font-medium">Step 3 of 3</span>
+</div>
+<h1 class="font-headline text-5xl md:text-6xl font-black text-primary-container tracking-tighter max-w-3xl leading-[0.95]">
+                Complete Your Secure Tenancy.
+            </h1>
+</header>
+<!-- Main Transaction Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left Column: Summary & Agreement (8 Cols) -->
+<div class="lg:col-span-7 space-y-12">
+<!-- Property & Landlord Summary -->
+<section class="bg-surface-container-low rounded-xl p-8">
+<h2 class="font-headline text-xl font-bold mb-6 text-primary-container">Booking Summary</h2>
+<div class="flex flex-col md:flex-row gap-6">
+<div class="w-full md:w-48 h-32 rounded-lg overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="Modern minimalist architectural villa with large glass windows and clean white concrete walls under bright Nigerian afternoon sun" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKd1fxrs0JFtigFZ3BqSWZnJT_1FGH69Sor8YFdw-Lr-b7SB2mBv5otzh5JxZtJOd1UoWz5lTrM1IZbkPmLlQAfwnx0We2sm6RUEuyw8R3wMZ6QXuObQ0VZE7V8XQz6hz_KnrnEVvBbuoqLQ0nhjaDS5SlDNWdqXqg69wlYI3th3kbweT4PBeEp2fzGlMVYhVoysVYb2q5Q3XzD5IhJd_ylSlqau65-Afk4yvnwLG4j85PvzlhFF5bNX1i1-_VTSP-ileCvkxqOYoT"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-2xl font-headline font-bold text-primary-container">The Bauchi Penthouse</h3>
+<p class="text-on-surface-variant flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-sm">location_on</span>
+                                        Lekki Phase 1, Lagos
+                                    </p>
+</div>
+<div class="text-right">
+<p class="text-on-surface-variant text-sm">Annual Rent</p>
+<p class="text-xl font-bold text-primary-container">₦4,500,000</p>
+</div>
+</div>
+<div class="mt-6 pt-6 border-t border-outline-variant/20 flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="Professional Nigerian man in a tailored suit smiling confidently, high-end portrait lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLi8saP7wOfTk9onrlgTbWB6Pu7AtJ8iWjplYKTEOfsoEAYKAiNB_34L4sR4zwyOMlEBl2Kw7XQsKUQDAEijc90RQjm_5XhBougXwAmz8LQvkd71YqnCRVfOS7XjhOhf4xw1dvKcaIPAryyoMDaeFFYjpHCDDFV8XhWyBYN4XcIQsavSzgsw7zFOYmKJAKNHwL8_BRY6QAXY8O3jtrXQDcODSpn1hupzK4LgA6Kabvp8X92AwglTxFVtFD6YsVhbxF9Rpjlx88xHfU"/>
+</div>
+<div>
+<p class="text-xs uppercase tracking-widest text-on-surface-variant font-bold">Landlord</p>
+<p class="font-headline font-bold text-primary-container">Chief Adeyemi Olatunji</p>
+<div class="flex items-center gap-2 mt-1">
+<span class="flex items-center text-[10px] bg-primary-fixed-dim px-2 py-0.5 rounded text-on-primary-fixed-variant font-bold">VERIFIED</span>
+<span class="text-xs text-on-surface-variant">5-Star Host • 12 Properties</span>
+</div>
+</div>
+<button class="ml-auto flex items-center gap-2 text-primary-container hover:underline font-bold text-sm">
+<span class="material-symbols-outlined text-lg">chat_bubble</span>
+                                    Ask a Question
+                                </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Tenancy Agreement Section -->
+<section>
+<div class="flex items-end justify-between mb-6">
+<div>
+<h2 class="font-headline text-2xl font-bold text-primary-container">Tenancy Agreement</h2>
+<p class="text-on-surface-variant">Auto-generated based on Lagos State Rental Laws.</p>
+</div>
+<button class="text-sm font-bold text-primary-container underline decoration-tertiary-fixed-dim decoration-2 underline-offset-4">Download PDF</button>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-8 h-96 overflow-y-auto border border-outline-variant/20 font-mono text-sm text-on-surface-variant leading-relaxed">
+<h4 class="text-center font-bold text-primary-container mb-4">MEMORANDUM OF LEASE AGREEMENT</h4>
+<p class="mb-4">This Lease Agreement ("Agreement") is made this day between <strong>CHIEF ADEYEMI OLATUNJI</strong> (The Landlord) and the undersigned User (The Tenant).</p>
+<p class="mb-4"><strong>1. PROPERTY DESCRIPTION:</strong> The property is a 3-Bedroom Penthouse located at Plot 14, Admiralty Way, Lekki Phase 1, Lagos, Nigeria.</p>
+<p class="mb-4"><strong>2. TERM:</strong> The lease shall be for a duration of 12 calendar months commencing from the date of final payment confirmation via Dwelio Escrow.</p>
+<p class="mb-4"><strong>3. ESCROW PROTECTION:</strong> All funds are held by Dwelio Heritage Escrow Services. The Landlord shall only receive disbursement upon the Tenant's physical move-in confirmation or within 48 hours of key collection.</p>
+<p class="mb-4"><strong>4. MAINTENANCE:</strong> The Landlord agrees to maintain the structural integrity of the property while the Tenant maintains internal fittings...</p>
+<p class="mb-4"><strong>5. SECURITY DEPOSIT:</strong> A refundable caution deposit of ₦250,000 is included in the final transaction amount.</p>
+<div class="h-24"></div> <!-- Extra space for scrolling feel -->
+</div>
+<div class="mt-6 flex flex-col md:flex-row items-center gap-6 p-6 bg-secondary-container/30 rounded-lg">
+<div class="flex-grow">
+<label class="block text-xs font-bold text-on-surface-variant mb-2 uppercase tracking-widest">Digital Signature</label>
+<input class="w-full bg-surface-container-lowest border-none focus:ring-2 ring-surface-tint/15 p-4 rounded text-lg font-headline italic" placeholder="Type your full legal name to sign" type="text"/>
+</div>
+<div class="shrink-0 pt-6">
+<button class="bg-primary-container text-on-primary px-8 py-4 rounded-md font-bold hover:translate-y-[-2px] transition-all">Sign &amp; Proceed</button>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Payment & Trust (5 Cols) -->
+<div class="lg:col-span-5 space-y-8 sticky top-32">
+<!-- Payment Flow Card -->
+<div class="bg-primary-container text-on-primary rounded-xl p-8 overflow-hidden relative">
+<!-- Subtle Heritage Pattern Background -->
+<div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCDgwbDyAYJ8ZvMj9UKAebwa8R0QZCmyI-dENyL5P4mnon_gIXLVXqeVezQ91_3WeY_OUEXRlhS9MEo2MoaqUNz4tqNoMt1R_nUu0y5HS8B8i2btz22JdWrqm3lzC3VbcYbY3PSi5GES_zTMYwNquV2CEqa7-ylf-iZZNHSLgU-Za0KaW92JZLMHKoYaVdUXRJTiUBHVmcGLl99k5sSZKAJe5in-YqeD7tUp3so_Sisk9MJRu84OXIcRDTUZXxmsbGZSEvg_IYxPsi1');"></div>
+<h2 class="font-headline text-2xl font-bold mb-8 relative z-10">Secure Payment</h2>
+<div class="space-y-4 mb-8 relative z-10">
+<div class="flex justify-between text-on-primary/70">
+<span>First Year Rent</span>
+<span>₦4,500,000.00</span>
+</div>
+<div class="flex justify-between text-on-primary/70">
+<span>Legal &amp; Agency (Dwelio Fixed)</span>
+<span>₦250,000.00</span>
+</div>
+<div class="flex justify-between text-on-primary/70">
+<span>Refundable Caution Fee</span>
+<span>₦150,000.00</span>
+</div>
+<div class="pt-4 border-t border-on-primary/10 flex justify-between items-end">
+<div>
+<span class="text-xs uppercase tracking-widest font-bold text-tertiary-fixed-dim">Total Amount</span>
+<p class="text-3xl font-black">₦4,900,000.00</p>
+</div>
+<span class="material-symbols-outlined text-4xl text-tertiary-fixed-dim">verified_user</span>
+</div>
+</div>
+<div class="space-y-4 relative z-10">
+<p class="text-xs text-on-primary/60 text-center">PAYMENT SECURED BY DWELIO ESCROW</p>
+<div class="grid grid-cols-2 gap-4">
+<button class="bg-surface-container-lowest text-primary-container p-4 rounded-lg flex flex-col items-center justify-center gap-2 hover:bg-white transition-colors group">
+<img alt="Paystack" class="h-6 grayscale group-hover:grayscale-0 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsHV60rzwAz-GeWGZnUep6UhuKApso_gFPssg4uVL4rkG4vRwbfvn7COmpGh7P9emll5tV5dg_Ojp3O6F5y3VvDAlz2W-36ZRxB_UF7EN3d4iG7qWvUxCuDlGUwW698J0fjXg9tfD9SlkyfxYmuzGSuV4jJFwWXd4GPnqILGzsPSzlG6DU85GykYAYrCnPr35qFeekYh-xCyAOYeOD5Fgc1Y0FQf1Zu-Ij_cZ-RKGPr_XtxDQ6d0Wh-eiLi-J6pAhU83yHO9gQEOVb"/>
+<span class="text-[10px] font-bold">Pay with Card/Bank</span>
+</button>
+<button class="bg-surface-container-lowest text-primary-container p-4 rounded-lg flex flex-col items-center justify-center gap-2 hover:bg-white transition-colors group">
+<div class="flex items-center gap-1">
+<span class="text-[#fbbc00] font-bold text-lg leading-none italic">f</span>
+<span class="text-sm font-bold uppercase tracking-tighter">Flutterwave</span>
+</div>
+<span class="text-[10px] font-bold">Pay with Transfer</span>
+</button>
+</div>
+<div class="bg-white/10 p-4 rounded-lg border border-white/10">
+<p class="text-xs leading-relaxed">
+<span class="font-bold text-tertiary-fixed-dim">Escrow Protection:</span> Your funds will be held in a secure heritage account. The landlord is only paid after you verify the property condition upon move-in.
+                            </p>
+</div>
+</div>
+</div>
+<!-- Trust Signals Bento -->
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-low p-6 rounded-xl">
+<span class="material-symbols-outlined text-primary-container mb-3" style="font-variation-settings: 'FILL' 1;">security</span>
+<h4 class="font-headline font-bold text-primary-container text-sm">Military-Grade</h4>
+<p class="text-xs text-on-surface-variant mt-1">256-bit encrypted transactions and identity verification.</p>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl">
+<span class="material-symbols-outlined text-primary-container mb-3" style="font-variation-settings: 'FILL' 1;">visibility</span>
+<h4 class="font-headline font-bold text-primary-container text-sm">Transparent</h4>
+<p class="text-xs text-on-surface-variant mt-1">No hidden agency fees or "agreement" percentages.</p>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl">
+<span class="material-symbols-outlined text-primary-container mb-3" style="font-variation-settings: 'FILL' 1;">group_off</span>
+<h4 class="font-headline font-bold text-primary-container text-sm">Direct-to-Home</h4>
+<p class="text-xs text-on-surface-variant mt-1">Direct contact with landlords, zero middleman markup.</p>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl">
+<span class="material-symbols-outlined text-primary-container mb-3" style="font-variation-settings: 'FILL' 1;">history_edu</span>
+<h4 class="font-headline font-bold text-primary-container text-sm">Legal Legacy</h4>
+<p class="text-xs text-on-surface-variant mt-1">Tenancy laws automatically applied and protected.</p>
+</div>
+</div>
+<!-- Help Center / Messaging -->
+<div class="p-6 border border-outline-variant/20 rounded-xl flex items-center gap-4 bg-surface-container-lowest">
+<div class="bg-tertiary-fixed-dim/20 p-3 rounded-full">
+<span class="material-symbols-outlined text-on-tertiary-container">support_agent</span>
+</div>
+<div>
+<h4 class="font-bold text-sm">Need Help?</h4>
+<p class="text-xs text-on-surface-variant">Our transaction experts are online 24/7.</p>
+</div>
+<button class="ml-auto text-xs font-bold text-primary-container bg-surface-container-high px-4 py-2 rounded">Chat Now</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-20 pt-16 pb-8 bg-[#f3f4f0]">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-12 px-12 max-w-[1440px] mx-auto">
+<div>
+<div class="text-xl font-bold text-[#013220] mb-6">Dwelio</div>
+<p class="text-[#013220]/60 font-body text-sm tracking-wide">© 2024 Dwelio Heritage. Curating Nigerian Living.</p>
+</div>
+<div class="space-y-4">
+<h5 class="font-bold text-[#013220]">Regions</h5>
+<ul class="space-y-2">
+<li><a class="text-[#013220]/60 text-sm hover:translate-x-1 hover:text-[#fbbc00] transition-all inline-block" href="#">Lagos Collection</a></li>
+<li><a class="text-[#013220]/60 text-sm hover:translate-x-1 hover:text-[#fbbc00] transition-all inline-block" href="#">Abuja Estates</a></li>
+<li><a class="text-[#013220]/60 text-sm hover:translate-x-1 hover:text-[#fbbc00] transition-all inline-block" href="#">Ibadan Properties</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h5 class="font-bold text-[#013220]">Safety</h5>
+<ul class="space-y-2">
+<li><a class="text-[#013220]/60 text-sm hover:translate-x-1 hover:text-[#fbbc00] transition-all inline-block" href="#">Escrow Protection</a></li>
+<li><a class="text-[#013220]/60 text-sm hover:translate-x-1 hover:text-[#fbbc00] transition-all inline-block" href="#">Trust &amp; Safety Center</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h5 class="font-bold text-[#013220]">Legal</h5>
+<ul class="space-y-2">
+<li><a class="text-[#013220]/60 text-sm hover:translate-x-1 hover:text-[#fbbc00] transition-all inline-block" href="#">Legal Heritage</a></li>
+<li><a class="text-[#013220]/60 text-sm hover:translate-x-1 hover:text-[#fbbc00] transition-all inline-block" href="#">Privacy Policy</a></li>
+</ul>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,7 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useMemo, useState, useTransition } from "react";
+import { useEffect, useMemo, useRef, useState, useTransition } from "react";
+import { ImagePlus, Trash2, Video } from "lucide-react";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 
 const neighbourhoods = [
@@ -36,6 +38,12 @@ type ListingForm = {
   neighbourhood: string;
 };
 
+type SelectedImage = {
+  id: string;
+  file: File;
+  previewUrl: string;
+};
+
 const defaultForm: ListingForm = {
   title: "",
   description: "",
@@ -55,10 +63,11 @@ export default function NewListingPage() {
   const [step, setStep] = useState(1);
   const [pending, startTransition] = useTransition();
   const [form, setForm] = useState<ListingForm>(defaultForm);
-  const [images, setImages] = useState<File[]>([]);
+  const [images, setImages] = useState<SelectedImage[]>([]);
   const [video, setVideo] = useState<File | null>(null);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [error, setError] = useState<string | null>(null);
+  const imagesRef = useRef<SelectedImage[]>([]);
 
   const canNext = useMemo(() => {
     if (step === 1) return form.title && form.description;
@@ -73,20 +82,67 @@ export default function NewListingPage() {
     (value: ListingForm[T]) =>
       setForm((prev) => ({ ...prev, [field]: value }));
 
+  useEffect(() => {
+    imagesRef.current = images;
+  }, [images]);
+
+  useEffect(() => {
+    return () => {
+      imagesRef.current.forEach((image) => URL.revokeObjectURL(image.previewUrl));
+    };
+  }, []);
+
   const handleImageFiles = (files: FileList | null) => {
     if (!files) return;
-    const next = Array.from(files).slice(0, 10);
-    setImages(next);
+    setError(null);
+
+    const selectedFiles = Array.from(files);
+    const validFiles = selectedFiles.filter((file) =>
+      file.type.startsWith("image/"),
+    );
+
+    if (validFiles.length !== selectedFiles.length) {
+      setError("Only image files can be added to the photo gallery.");
+      return;
+    }
+
+    const nextImages = validFiles.slice(0, Math.max(0, 10 - images.length)).map((file) => ({
+      id: `${file.name}-${file.lastModified}-${Math.random().toString(36).slice(2, 8)}`,
+      file,
+      previewUrl: URL.createObjectURL(file),
+    }));
+
+    if (nextImages.length === 0) {
+      setError("You can upload a maximum of 10 photos per listing.");
+      return;
+    }
+
+    setImages((prev) => [...prev, ...nextImages].slice(0, 10));
   };
 
   const handleVideoFile = (files: FileList | null) => {
     if (!files) return;
+    setError(null);
     const file = files[0];
     if (file && file.size > 200 * 1024 * 1024) {
       setError("Video must be under 200MB.");
       return;
     }
+    if (file && !["video/mp4", "video/quicktime"].includes(file.type)) {
+      setError("Video must be an MP4 or MOV file.");
+      return;
+    }
     setVideo(file);
+  };
+
+  const removeImage = (imageId: string) => {
+    setImages((prev) => {
+      const imageToRemove = prev.find((image) => image.id === imageId);
+      if (imageToRemove) {
+        URL.revokeObjectURL(imageToRemove.previewUrl);
+      }
+      return prev.filter((image) => image.id !== imageId);
+    });
   };
 
   const uploadImages = async (userId: string) => {
@@ -94,8 +150,9 @@ export default function NewListingPage() {
     const urls: string[] = [];
 
     for (let index = 0; index < images.length; index += 1) {
-      const file = images[index];
-      const path = `${userId}/${Date.now()}-${file.name}`;
+      const file = images[index].file;
+      const safeName = file.name.replace(/\s+/g, "-").replace(/[^a-zA-Z0-9._-]/g, "");
+      const path = `${userId}/${Date.now()}-${safeName}`;
       const { error: uploadError } = await supabase.storage
         .from("property-images")
         .upload(path, file, { upsert: true });
@@ -368,13 +425,36 @@ export default function NewListingPage() {
                   className="block w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm shadow-sm file:mr-4 file:rounded-full file:border-0 file:bg-emerald-100 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-emerald-800"
                 />
               </label>
-              <div className="grid gap-3 sm:grid-cols-3">
+              <div className="flex items-center gap-2 text-sm text-slate-600">
+                <ImagePlus className="h-4 w-4 text-emerald-700" />
+                <span>{images.length}/10 photos selected</span>
+              </div>
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 {images.map((image) => (
                   <div
-                    key={image.name}
-                    className="rounded-2xl border border-emerald-100 bg-emerald-50/60 p-3 text-xs text-emerald-800"
+                    key={image.id}
+                    className="overflow-hidden rounded-2xl border border-emerald-100 bg-emerald-50/60"
                   >
-                    {image.name}
+                    <div className="relative h-36 w-full">
+                      <Image
+                        src={image.previewUrl}
+                        alt={image.file.name}
+                        fill
+                        unoptimized
+                        className="object-cover"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => removeImage(image.id)}
+                        className="absolute right-2 top-2 rounded-full bg-white/90 p-2 text-slate-700 shadow-sm"
+                        aria-label={`Remove ${image.file.name}`}
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </button>
+                    </div>
+                    <div className="p-3 text-xs text-emerald-800">
+                      {image.file.name}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -387,6 +467,12 @@ export default function NewListingPage() {
                   className="block w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm shadow-sm file:mr-4 file:rounded-full file:border-0 file:bg-emerald-100 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-emerald-800"
                 />
               </label>
+              {video && (
+                <div className="flex items-center gap-2 rounded-2xl border border-emerald-100 bg-emerald-50/60 p-3 text-sm text-emerald-900">
+                  <Video className="h-4 w-4" />
+                  <span>{video.name}</span>
+                </div>
+              )}
               {uploadProgress > 0 && (
                 <div className="rounded-full bg-emerald-100">
                   <div

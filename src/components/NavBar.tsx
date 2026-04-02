@@ -134,7 +134,7 @@ export default function NavBar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`border-b-2 pb-1 font-headline text-base font-bold tracking-tight transition-colors ${
+                  className={`inline-flex h-11 items-center border-b-2 font-headline text-base font-bold tracking-tight transition-colors ${
                     active
                       ? "border-tertiary-fixed-dim text-primary-container"
                       : "border-transparent text-on-surface-variant hover:text-primary-container"
@@ -170,13 +170,13 @@ export default function NavBar() {
             <>
               <Link
                 href="/login"
-                className="px-4 py-2 font-headline text-sm font-bold text-on-surface-variant transition hover:text-primary-container"
+                className="inline-flex h-11 items-center px-4 font-headline text-sm font-bold text-on-surface-variant transition hover:text-primary-container"
               >
                 Sign In
               </Link>
               <Link
                 href="/listings/new"
-                className="rounded-md bg-primary-container px-6 py-2.5 font-headline text-sm font-bold text-on-primary transition hover:bg-primary"
+                className="inline-flex h-11 items-center rounded-md bg-primary-container px-6 font-headline text-sm font-bold text-on-primary transition hover:bg-primary"
               >
                 List Property
               </Link>
@@ -185,7 +185,7 @@ export default function NavBar() {
             <>
               <Link
                 href="/listings/new"
-                className="rounded-md bg-primary-container px-6 py-2.5 font-headline text-sm font-bold text-on-primary transition hover:bg-primary"
+                className="inline-flex h-11 items-center rounded-md bg-primary-container px-6 font-headline text-sm font-bold text-on-primary transition hover:bg-primary"
               >
                 List Property
               </Link>

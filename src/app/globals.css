@@ -1,26 +1,98 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --surface: #f9faf6;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #f3f4f0;
+  --surface-container: #edeeeb;
+  --surface-container-high: #e8e8e5;
+  --surface-container-highest: #e2e3df;
+  --surface-variant: #e2e3df;
+  --outline: #717973;
+  --outline-variant: #c1c8c2;
+  --primary-container: #013220;
+  --primary: #001b0f;
+  --primary-fixed: #bdedd2;
+  --primary-fixed-dim: #a2d1b7;
+  --on-primary: #ffffff;
+  --on-primary-container: #002113;
+  --secondary: #516258;
+  --secondary-container: #d1e4d7;
+  --secondary-fixed: #d4e7da;
+  --tertiary-fixed: #ffdfa0;
+  --tertiary-fixed-dim: #fbbc00;
+  --tertiary-container: #392800;
+  --on-tertiary-fixed: #261a00;
+  --on-tertiary-container: #ba8a00;
+  --on-surface: #1a1c1a;
+  --on-surface-variant: #414943;
+  --surface-tint: #3b6751;
+  --error: #ba1a1a;
+  --error-container: #ffdad6;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --color-background: var(--surface);
+  --color-foreground: var(--on-surface);
+  --color-surface: var(--surface);
+  --color-surface-container-lowest: var(--surface-container-lowest);
+  --color-surface-container-low: var(--surface-container-low);
+  --color-surface-container: var(--surface-container);
+  --color-surface-container-high: var(--surface-container-high);
+  --color-surface-container-highest: var(--surface-container-highest);
+  --color-surface-variant: var(--surface-variant);
+  --color-outline: var(--outline);
+  --color-outline-variant: var(--outline-variant);
+  --color-primary: var(--primary);
+  --color-primary-container: var(--primary-container);
+  --color-primary-fixed: var(--primary-fixed);
+  --color-primary-fixed-dim: var(--primary-fixed-dim);
+  --color-on-primary: var(--on-primary);
+  --color-on-primary-container: var(--on-primary-container);
+  --color-secondary: var(--secondary);
+  --color-secondary-container: var(--secondary-container);
+  --color-secondary-fixed: var(--secondary-fixed);
+  --color-tertiary-fixed: var(--tertiary-fixed);
+  --color-tertiary-fixed-dim: var(--tertiary-fixed-dim);
+  --color-tertiary-container: var(--tertiary-container);
+  --color-on-tertiary-fixed: var(--on-tertiary-fixed);
+  --color-on-tertiary-container: var(--on-tertiary-container);
+  --color-on-surface: var(--on-surface);
+  --color-on-surface-variant: var(--on-surface-variant);
+  --color-surface-tint: var(--surface-tint);
+  --color-error: var(--error);
+  --color-error-container: var(--error-container);
+  --font-sans: var(--font-manrope);
   --font-mono: var(--font-geist-mono);
+  --font-body: var(--font-manrope);
+  --font-headline: var(--font-epilogue);
+  --font-label: var(--font-epilogue);
+  --radius-card: 1.5rem;
+  --radius-panel: 2rem;
+  --radius-pill: 9999px;
+  --shadow-editorial-card: 0 20px 40px -20px rgba(1, 50, 32, 0.08);
+  --shadow-floating-pane: 0 20px 40px -20px rgba(26, 28, 26, 0.04);
+  --shadow-elevated-panel: 0 30px 70px rgba(16, 42, 24, 0.08);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--surface);
+  color: var(--on-surface);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  background: var(--surface);
+  color: var(--on-surface);
+  font-family: var(--font-manrope), Arial, Helvetica, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-epilogue), var(--font-manrope), Arial, Helvetica, sans-serif;
+  letter-spacing: -0.02em;
 }

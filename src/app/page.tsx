@@ -1,51 +1,75 @@
+import Image from "next/image";
 import Link from "next/link";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
-import PropertyCard from "@/components/PropertyCard";
+import { ibadanNeighbourhoods } from "@/data/ibadan-neighbourhoods";
 
 export const metadata = {
-  title: "Dwelio | Find Your Home in Ibadan",
+  title: "Find Homes in Ibadan",
   description:
-    "Verified landlords, monthly payments, and digital tenancy agreements for Ibadan renters.",
+    "Discover verified homes in Ibadan with direct landlord access, secure payments, and digital tenancy agreements.",
 };
 
-const stats = [
-  { label: "Listings", value: "1,200+" },
+const platformStats = [
   { label: "Verified landlords", value: "340+" },
-  { label: "Happy tenants", value: "900+" },
+  { label: "Homes discovered monthly", value: "1,200+" },
+  { label: "Escrow-first move-ins", value: "900+" },
 ];
 
 const howItWorks = [
   {
-    title: "Search",
-    copy: "Browse verified listings across Ibadan in minutes.",
+    step: "01",
+    title: "Discover verified homes",
+    copy: "Search Ibadan listings by neighbourhood, budget, and property type without chasing agents around town.",
+    icon: "search_insights",
+    tone: "bg-primary-container text-on-primary",
   },
   {
-    title: "Verify",
-    copy: "Landlords are ID-checked and listings are traceable.",
+    step: "02",
+    title: "Trust what you see",
+    copy: "Review landlord verification, listing details, and digital paperwork before you commit a single naira.",
+    icon: "verified_user",
+    tone: "bg-tertiary-fixed-dim text-on-tertiary-fixed",
   },
   {
-    title: "Move In",
-    copy: "Pay monthly, sign digitally, and move in with confidence.",
+    step: "03",
+    title: "Secure with escrow",
+    copy: "Pay through Dwelio, sign digitally, and move in with a clear paper trail and better protection.",
+    icon: "payments",
+    tone: "bg-secondary-container text-primary-container",
+  },
+];
+
+const problemCards = [
+  {
+    title: "Fake listings",
+    copy: "No more driving across town for homes that were never real in the first place.",
+    icon: "warning",
+    tone: "bg-error-container",
+  },
+  {
+    title: "Agent fees everywhere",
+    copy: "We make direct landlord discovery feel normal, not like a privilege you pay extra for.",
+    icon: "group_off",
+    tone: "bg-surface-container",
+  },
+  {
+    title: "Upfront rent pressure",
+    copy: "Monthly payment design gives renters more breathing room than the usual 1 to 2 year demand.",
+    icon: "calendar_month",
+    tone: "bg-surface-container-high",
+  },
+  {
+    title: "No paper trail",
+    copy: "Digital agreements and payment history turn stressful renting into something traceable and fairer.",
+    icon: "history_edu",
+    tone: "bg-primary-fixed",
   },
 ];
 
 const whyDwelio = [
-  {
-    title: "No Agent Fees",
-    copy: "Connect directly to landlords and avoid surprise charges.",
-  },
-  {
-    title: "Verified Landlords",
-    copy: "ID checks and reviews build trust before you visit.",
-  },
-  {
-    title: "Monthly Payments",
-    copy: "Break rent into monthly instalments with escrow protection.",
-  },
-  {
-    title: "Virtual Tours",
-    copy: "Preview homes with photos and walkthrough videos.",
-  },
+  "Verified physical tours and clearer landlord identity",
+  "Direct contact without the usual middleman markup",
+  "Escrow-backed move-in flow and digital tenancy records",
 ];
 
 export default async function HomePage() {
@@ -53,7 +77,7 @@ export default async function HomePage() {
   const { data: listings } = await supabase
     .from("properties")
     .select(
-      "id, title, price, price_period, neighbourhood, bedrooms, bathrooms, images, type, landlord_id",
+      "id, title, price, price_period, neighbourhood, bedrooms, bathrooms, images, type, property_type, landlord_id",
     )
     .eq("is_available", true)
     .order("created_at", { ascending: false })
@@ -71,83 +95,164 @@ export default async function HomePage() {
     landlords?.map((landlord) => [landlord.id, landlord.is_verified]) ?? [],
   );
 
-  return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top,_#f7f3e8,_#ffffff_40%,_#e9f6ef)] text-slate-900">
-      <main className="mx-auto flex w-full max-w-6xl flex-col gap-20 px-6 py-16">
-        <section className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="flex flex-col gap-6">
-            <div className="inline-flex w-fit items-center gap-2 rounded-full bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700">
-              Dwelio
-              <span className="text-emerald-400">•</span>
-              Ibadan launch
-            </div>
-            <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
-              Find your home in Ibadan, without the wahala.
-            </h1>
-            <p className="max-w-xl text-base text-slate-600">
-              Verified landlords, monthly payments, and digital tenancy
-              agreements — all built for Nigeria.
-            </p>
-            <div className="grid gap-3 rounded-3xl border border-emerald-100 bg-white/90 p-4 shadow-[0_20px_50px_rgba(16,42,24,0.08)] backdrop-blur sm:grid-cols-[1fr_1fr_auto]">
-              <input
-                placeholder="Ibadan, Oyo"
-                className="h-12 rounded-2xl border border-slate-200 px-4 text-sm outline-none"
-              />
-              <select className="h-12 rounded-2xl border border-slate-200 px-4 text-sm outline-none">
-                <option>Property type</option>
-                <option>Flat</option>
-                <option>House</option>
-                <option>Room</option>
-                <option>Duplex</option>
-              </select>
-              <Link
-                href="/search"
-                className="flex h-12 items-center justify-center rounded-2xl bg-emerald-700 px-6 text-sm font-semibold text-white transition hover:bg-emerald-800"
-              >
-                Browse listings
-              </Link>
-            </div>
-            <div className="flex flex-wrap gap-3">
-              <Link
-                href="/search"
-                className="inline-flex h-12 items-center justify-center rounded-full bg-emerald-700 px-6 text-sm font-semibold text-white transition hover:bg-emerald-800"
-              >
-                Browse listings
-              </Link>
-              <Link
-                href="/listings/new"
-                className="inline-flex h-12 items-center justify-center rounded-full border border-emerald-200 bg-white px-6 text-sm font-semibold text-emerald-800 transition hover:border-emerald-300"
-              >
-                List your property
-              </Link>
-            </div>
-          </div>
+  const featuredListings = (listings ?? []).slice(0, 3);
+  const featuredNeighbourhoods = ibadanNeighbourhoods.slice(0, 3);
 
-          <div className="relative">
-            <div className="absolute -left-8 top-10 h-52 w-52 rounded-full bg-emerald-200/60 blur-3xl" />
-            <div className="absolute -bottom-10 right-0 h-48 w-48 rounded-full bg-amber-200/70 blur-3xl" />
-            <div className="relative rounded-[32px] border border-emerald-100 bg-white/90 p-6 shadow-[0_30px_70px_rgba(16,42,24,0.12)] backdrop-blur">
-              <p className="text-sm font-semibold text-emerald-700">
-                Dwelio trust layer
-              </p>
-              <h2 className="mt-4 text-2xl font-semibold text-slate-900">
-                No agent fees. No fake listings. No stress.
-              </h2>
-              <p className="mt-3 text-sm text-slate-600">
-                Every listing is verified and every payment is traceable. You
-                see the landlord, the reviews, and the agreement before you pay.
-              </p>
-              <div className="mt-6 grid gap-3">
-                {[
-                  "ID-verified landlords",
-                  "Monthly rent payments",
-                  "Digitally signed agreements",
-                ].map((item) => (
-                  <div
-                    key={item}
-                    className="rounded-2xl border border-emerald-100 bg-emerald-50/70 px-4 py-3 text-sm text-emerald-900"
+  return (
+    <div className="bg-surface text-on-surface">
+      <main>
+        <section className="relative overflow-hidden bg-[linear-gradient(135deg,var(--primary-container),var(--primary)_68%)]">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,191,0,0.18),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(189,237,210,0.16),transparent_30%)]" />
+          <div className="relative mx-auto grid w-full max-w-[1440px] gap-14 px-6 py-20 md:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:py-24">
+            <div className="flex flex-col gap-8 text-on-primary">
+              <div className="inline-flex w-fit items-center gap-3 rounded-full bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-primary-fixed backdrop-blur-md">
+                <span>Nigeria's full-stack property marketplace</span>
+                <span className="h-1.5 w-1.5 rounded-full bg-tertiary-fixed-dim" />
+                <span>Ibadan launch</span>
+              </div>
+
+              <div className="max-w-3xl space-y-5">
+                <h1 className="font-headline text-5xl font-black leading-[0.92] tracking-[-0.05em] text-on-primary sm:text-6xl lg:text-7xl">
+                  Find it.
+                  <br />
+                  Trust it.
+                  <br />
+                  Move in.
+                </h1>
+                <p className="max-w-2xl text-lg leading-8 text-primary-fixed">
+                  Dwelio helps renters discover verified homes in Ibadan, speak
+                  directly to landlords, pay more safely, and keep the entire
+                  tenancy process digital from first search to move-in.
+                </p>
+              </div>
+
+              <form
+                action="/search"
+                method="get"
+                className="grid gap-3 rounded-[2rem] bg-white/12 p-3 shadow-[var(--shadow-elevated-panel)] backdrop-blur-xl sm:grid-cols-2 xl:grid-cols-[1.1fr_1fr_1fr_auto]"
+              >
+                <label className="grid gap-2 rounded-[1.25rem] bg-surface-container-lowest px-4 py-3 text-sm text-on-surface-variant">
+                  <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary-container/70">
+                    Neighbourhood
+                  </span>
+                  <select
+                    name="neighbourhood"
+                    defaultValue=""
+                    className="border-none bg-transparent p-0 text-base font-semibold text-primary-container outline-none focus:ring-0"
                   >
-                    {item}
+                    <option value="">Anywhere in Ibadan</option>
+                    {ibadanNeighbourhoods.map((neighbourhood) => (
+                      <option key={neighbourhood.name} value={neighbourhood.name}>
+                        {neighbourhood.name}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+
+                <label className="grid gap-2 rounded-[1.25rem] bg-surface-container-lowest px-4 py-3 text-sm text-on-surface-variant">
+                  <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary-container/70">
+                    Listing Type
+                  </span>
+                  <select
+                    name="type"
+                    defaultValue="rent"
+                    className="border-none bg-transparent p-0 text-base font-semibold text-primary-container outline-none focus:ring-0"
+                  >
+                    <option value="rent">Rent</option>
+                    <option value="sale">Buy</option>
+                  </select>
+                </label>
+
+                <label className="grid gap-2 rounded-[1.25rem] bg-surface-container-lowest px-4 py-3 text-sm text-on-surface-variant">
+                  <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary-container/70">
+                    Property Type
+                  </span>
+                  <select
+                    name="propertyType"
+                    defaultValue=""
+                    className="border-none bg-transparent p-0 text-base font-semibold text-primary-container outline-none focus:ring-0"
+                  >
+                    <option value="">All homes</option>
+                    <option value="flat">Flat</option>
+                    <option value="house">House</option>
+                    <option value="room">Room</option>
+                    <option value="duplex">Duplex</option>
+                    <option value="bungalow">Bungalow</option>
+                  </select>
+                </label>
+
+                <button
+                  type="submit"
+                  className="inline-flex h-full min-h-14 items-center justify-center rounded-[1.25rem] bg-tertiary-fixed-dim px-8 font-headline text-base font-black text-on-tertiary-fixed transition hover:brightness-95"
+                >
+                  Explore Homes
+                </button>
+              </form>
+
+              <div className="grid gap-3 sm:grid-cols-3">
+                {platformStats.map((stat) => (
+                  <div
+                    key={stat.label}
+                    className="rounded-[1.5rem] bg-white/8 px-5 py-4 backdrop-blur-sm"
+                  >
+                    <p className="font-headline text-2xl font-black text-on-primary">
+                      {stat.value}
+                    </p>
+                    <p className="mt-1 text-sm leading-6 text-primary-fixed">
+                      {stat.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="grid gap-5">
+              <div className="rounded-[2rem] bg-white/10 p-7 text-on-primary shadow-[var(--shadow-elevated-panel)] backdrop-blur-md">
+                <p className="font-headline text-sm font-bold uppercase tracking-[0.22em] text-tertiary-fixed-dim">
+                  Trust Layer
+                </p>
+                <h2 className="mt-4 font-headline text-3xl font-black tracking-[-0.04em]">
+                  Renting should feel secure before the first inspection.
+                </h2>
+                <p className="mt-4 text-base leading-8 text-primary-fixed">
+                  Every strong Dwelio flow starts with clarity: who owns the
+                  listing, what the payment covers, and what happens after you
+                  commit.
+                </p>
+                <div className="mt-6 grid gap-3">
+                  {[
+                    "Verified landlord identity before deeper commitment",
+                    "Digital tenancy records and clearer receipts",
+                    "Escrow-first protection around move-in",
+                  ].map((item) => (
+                    <div
+                      key={item}
+                      className="rounded-[1.25rem] bg-surface-container-lowest/90 px-4 py-3 text-sm font-medium leading-6 text-primary-container"
+                    >
+                      {item}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+                {featuredNeighbourhoods.map((neighbourhood) => (
+                  <div
+                    key={neighbourhood.name}
+                    className="rounded-[1.75rem] bg-surface-container-lowest p-5 text-primary-container shadow-[var(--shadow-editorial-card)]"
+                  >
+                    <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
+                      {neighbourhood.vibe}
+                    </p>
+                    <h3 className="mt-3 font-headline text-xl font-black tracking-[-0.03em]">
+                      {neighbourhood.name}
+                    </h3>
+                    <p className="mt-2 text-sm leading-6 text-on-surface-variant">
+                      {neighbourhood.description}
+                    </p>
+                    <p className="mt-4 text-sm font-bold text-on-tertiary-container">
+                      1 bed {neighbourhood.rent.oneBed}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -155,113 +260,240 @@ export default async function HomePage() {
           </div>
         </section>
 
-        <section className="grid gap-6">
-          <h2 className="text-2xl font-semibold text-slate-900">How it works</h2>
-          <div className="grid gap-4 md:grid-cols-3">
-            {howItWorks.map((item, index) => (
-              <div
-                key={item.title}
-                className="rounded-3xl border border-emerald-100 bg-white/90 p-6 shadow-[0_20px_50px_rgba(16,42,24,0.08)] backdrop-blur"
-              >
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-500">
-                  Step {index + 1}
-                </p>
-                <h3 className="mt-4 text-lg font-semibold text-slate-900">
-                  {item.title}
-                </h3>
-                <p className="mt-2 text-sm text-slate-600">{item.copy}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="grid gap-6">
-          <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-semibold text-slate-900">
-              Featured listings
-            </h2>
+        <section className="mx-auto w-full max-w-[1440px] px-6 py-24 md:px-8">
+          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div className="max-w-2xl">
+              <p className="font-headline text-sm font-bold uppercase tracking-[0.22em] text-on-tertiary-container">
+                Curated Collection
+              </p>
+              <h2 className="mt-4 font-headline text-4xl font-black tracking-[-0.04em] text-primary-container md:text-5xl">
+                Verified homes in Ibadan worth your shortlist.
+              </h2>
+            </div>
             <Link
               href="/search"
-              className="text-sm font-semibold text-emerald-800"
+              className="inline-flex w-fit items-center gap-2 border-b-2 border-tertiary-fixed-dim pb-1 font-headline text-sm font-bold uppercase tracking-[0.16em] text-primary-container transition hover:text-on-tertiary-container"
             >
-              View all
+              View all listings
             </Link>
           </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {listings && listings.length > 0 ? (
-              listings.map((listing) => (
-                <PropertyCard
+
+          <div className="mt-12 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+            {featuredListings.length > 0 ? (
+              featuredListings.map((listing) => (
+                <Link
                   key={listing.id}
-                  id={listing.id}
-                  image={listing.images?.[0]}
-                  title={listing.title}
-                  price={listing.price ?? 0}
-                  pricePeriod={listing.price_period}
-                  neighbourhood={listing.neighbourhood}
-                  bedrooms={listing.bedrooms}
-                  bathrooms={listing.bathrooms}
-                  listingType={listing.type}
-                  isVerified={verifiedMap.get(listing.landlord_id) ?? false}
-                />
+                  href={`/listings/${listing.id}`}
+                  className="group overflow-hidden rounded-[2rem] bg-surface-container-lowest shadow-[var(--shadow-elevated-panel)]"
+                >
+                  <div className="relative aspect-[4/5] overflow-hidden bg-surface-container">
+                    <Image
+                      src={listing.images?.[0] ?? "/vercel.svg"}
+                      alt={listing.title}
+                      fill
+                      className="object-cover transition duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-x-0 top-0 flex items-start justify-between p-4">
+                      <span className="rounded-full bg-primary-container px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-on-primary">
+                        {listing.type ?? "rent"}
+                      </span>
+                      {verifiedMap.get(listing.landlord_id) && (
+                        <span className="rounded-full bg-tertiary-fixed-dim px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-on-tertiary-fixed">
+                          Verified
+                        </span>
+                      )}
+                    </div>
+                    <div className="absolute bottom-4 left-4">
+                      <span className="rounded-full bg-surface-container-lowest/90 px-3 py-1 text-xs font-bold text-primary-container backdrop-blur-md">
+                        {listing.neighbourhood ?? "Ibadan"}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="grid gap-4 p-6">
+                    <div className="flex items-start justify-between gap-4">
+                      <div>
+                        <h3 className="font-headline text-2xl font-black tracking-[-0.03em] text-primary-container">
+                          {listing.title}
+                        </h3>
+                        <p className="mt-2 text-sm text-on-surface-variant">
+                          Built for direct discovery, fewer surprises, and a
+                          clearer move-in process.
+                        </p>
+                      </div>
+                      <p className="shrink-0 text-right font-headline text-xl font-black text-on-tertiary-container">
+                        ₦{listing.price?.toLocaleString() ?? "0"}
+                        <span className="block text-xs font-bold uppercase tracking-[0.18em] text-on-surface-variant">
+                          / {listing.price_period ?? "monthly"}
+                        </span>
+                      </p>
+                    </div>
+                    <div className="flex flex-wrap gap-3 text-sm font-medium text-on-surface-variant">
+                      <span>{listing.bedrooms ?? 0} beds</span>
+                      <span>{listing.bathrooms ?? 0} baths</span>
+                      <span>{listing.property_type ?? "home"}</span>
+                    </div>
+                  </div>
+                </Link>
               ))
             ) : (
-              <div className="col-span-full rounded-3xl border border-emerald-100 bg-white/90 p-8 text-sm text-slate-600 shadow-[0_20px_50px_rgba(16,42,24,0.08)] backdrop-blur">
-                No listings yet. Add your first property to get featured here.
+              <div className="col-span-full rounded-[2rem] bg-surface-container-low p-10 text-on-surface-variant shadow-[var(--shadow-editorial-card)]">
+                No listings are live yet. Add your first property to start
+                shaping the launch collection.
               </div>
             )}
           </div>
         </section>
 
-        <section className="grid gap-6">
-          <h2 className="text-2xl font-semibold text-slate-900">Why Dwelio</h2>
-          <div className="grid gap-4 md:grid-cols-2">
-            {whyDwelio.map((item) => (
+        <section className="bg-surface-container-low py-24">
+          <div className="mx-auto w-full max-w-[1440px] px-6 md:px-8">
+            <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+              <div className="max-w-2xl">
+                <p className="font-headline text-sm font-bold uppercase tracking-[0.22em] text-on-tertiary-container">
+                  How Dwelio Works
+                </p>
+                <h2 className="mt-4 font-headline text-4xl font-black tracking-[-0.04em] text-primary-container md:text-5xl">
+                  Built to feel less chaotic than property hunting usually does.
+                </h2>
+              </div>
+              <p className="max-w-lg text-base leading-8 text-on-surface-variant">
+                The flow is simple on purpose: discover, verify, then secure the
+                home with a clearer digital trail.
+              </p>
+            </div>
+
+            <div className="mt-14 grid gap-6 md:grid-cols-3">
+              {howItWorks.map((item) => (
+                <div
+                  key={item.title}
+                  className="relative overflow-hidden rounded-[2rem] bg-surface-container-lowest p-8 shadow-[var(--shadow-editorial-card)]"
+                >
+                  <p className="absolute right-6 top-5 font-headline text-6xl font-black tracking-[-0.05em] text-surface-container-highest">
+                    {item.step}
+                  </p>
+                  <div
+                    className={`flex h-14 w-14 items-center justify-center rounded-[1rem] ${item.tone}`}
+                  >
+                    <span
+                      className="material-symbols-outlined text-[28px]"
+                      style={{ fontVariationSettings: '"FILL" 1, "wght" 600' }}
+                    >
+                      {item.icon}
+                    </span>
+                  </div>
+                  <h3 className="mt-8 max-w-xs font-headline text-2xl font-black tracking-[-0.03em] text-primary-container">
+                    {item.title}
+                  </h3>
+                  <p className="mt-4 text-base leading-8 text-on-surface-variant">
+                    {item.copy}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="mx-auto grid w-full max-w-[1440px] gap-16 px-6 py-24 md:px-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+          <div className="grid grid-cols-2 gap-4">
+            {problemCards.map((card, index) => (
               <div
-                key={item.title}
-                className="rounded-3xl border border-emerald-100 bg-white/90 p-6 shadow-[0_20px_50px_rgba(16,42,24,0.08)] backdrop-blur"
+                key={card.title}
+                className={`rounded-[1.75rem] p-6 shadow-[var(--shadow-editorial-card)] ${
+                  index % 2 === 1 ? "translate-y-6" : ""
+                } ${card.tone}`}
               >
-                <h3 className="text-lg font-semibold text-slate-900">
-                  {item.title}
+                <span className="material-symbols-outlined text-[28px] text-primary-container">
+                  {card.icon}
+                </span>
+                <h3 className="mt-5 font-headline text-xl font-black tracking-[-0.03em] text-primary-container">
+                  {card.title}
                 </h3>
-                <p className="mt-2 text-sm text-slate-600">{item.copy}</p>
+                <p className="mt-3 text-sm leading-7 text-on-surface-variant">
+                  {card.copy}
+                </p>
               </div>
             ))}
           </div>
-        </section>
 
-        <section className="rounded-3xl border border-emerald-100 bg-emerald-900 px-8 py-10 text-white shadow-[0_30px_70px_rgba(16,42,24,0.18)]">
-          <div className="grid gap-8 md:grid-cols-3">
-            {stats.map((stat) => (
-              <div key={stat.label} className="text-center">
-                <p className="text-3xl font-semibold">{stat.value}</p>
-                <p className="text-sm text-emerald-100">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="flex flex-col items-center justify-between gap-6 rounded-3xl border border-emerald-100 bg-white/90 p-10 shadow-[0_30px_70px_rgba(16,42,24,0.08)] backdrop-blur md:flex-row">
-          <div>
-            <h2 className="text-2xl font-semibold text-slate-900">
-              Ready to find your next home?
-            </h2>
-            <p className="mt-2 text-sm text-slate-600">
-              Dwelio makes renting feel safe, digital, and fair.
+          <div className="max-w-2xl space-y-7">
+            <p className="font-headline text-sm font-bold uppercase tracking-[0.22em] text-on-tertiary-container">
+              Why We Exist
             </p>
+            <h2 className="font-headline text-4xl font-black tracking-[-0.04em] text-primary-container md:text-5xl">
+              Property hunting in Nigeria should not feel like a gamble.
+            </h2>
+            <p className="text-lg leading-8 text-on-surface-variant">
+              Dwelio exists to reduce the parts that make renting exhausting:
+              fake inventory, hidden fees, fragile paperwork, and a process
+              that depends too much on luck and middlemen.
+            </p>
+            <div className="grid gap-3">
+              {whyDwelio.map((item) => (
+                <div
+                  key={item}
+                  className="flex items-start gap-3 rounded-[1.25rem] bg-surface-container-low p-4"
+                >
+                  <span
+                    className="material-symbols-outlined mt-0.5 text-on-tertiary-container"
+                    style={{ fontVariationSettings: '"FILL" 1, "wght" 600' }}
+                  >
+                    check_circle
+                  </span>
+                  <p className="text-base leading-7 text-primary-container">
+                    {item}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="flex flex-wrap gap-3">
-            <Link
-              href="/signup"
-              className="inline-flex h-12 items-center justify-center rounded-full bg-emerald-700 px-6 text-sm font-semibold text-white transition hover:bg-emerald-800"
-            >
-              Create account
-            </Link>
-            <Link
-              href="/search"
-              className="inline-flex h-12 items-center justify-center rounded-full border border-emerald-200 bg-white px-6 text-sm font-semibold text-emerald-800 transition hover:border-emerald-300"
-            >
-              Explore listings
-            </Link>
+        </section>
+
+        <section className="mx-auto w-full max-w-[1440px] px-6 pb-24 md:px-8">
+          <div className="overflow-hidden rounded-[2.5rem] bg-primary-container shadow-[var(--shadow-elevated-panel)]">
+            <div className="grid gap-10 px-8 py-14 md:px-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:px-16 lg:py-16">
+              <div className="max-w-2xl">
+                <p className="font-headline text-sm font-bold uppercase tracking-[0.22em] text-tertiary-fixed-dim">
+                  Landlords
+                </p>
+                <h2 className="mt-4 font-headline text-4xl font-black tracking-[-0.04em] text-on-primary md:text-5xl">
+                  Bring your property to a market built around trust, not noise.
+                </h2>
+                <p className="mt-5 text-lg leading-8 text-primary-fixed">
+                  List for free, attract higher-intent renters, and let Dwelio
+                  carry the trust cues, paperwork, and payment structure that
+                  make serious tenants more comfortable.
+                </p>
+              </div>
+
+              <div className="grid gap-4 rounded-[2rem] bg-white/10 p-6 backdrop-blur-md">
+                <div className="rounded-[1.5rem] bg-surface-container-lowest px-5 py-4 text-primary-container">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
+                    Early mover incentive
+                  </p>
+                  <p className="mt-2 text-base font-bold">
+                    First wave landlords get priority visibility during the
+                    Ibadan launch.
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-3">
+                  <Link
+                    href="/listings/new"
+                    className="inline-flex h-12 items-center justify-center rounded-[1rem] bg-tertiary-fixed-dim px-6 font-headline text-sm font-black uppercase tracking-[0.12em] text-on-tertiary-fixed transition hover:brightness-95"
+                  >
+                    List Property
+                  </Link>
+                  <Link
+                    href="/signup"
+                    className="inline-flex h-12 items-center justify-center rounded-[1rem] bg-surface-container-lowest px-6 font-headline text-sm font-black uppercase tracking-[0.12em] text-primary-container transition hover:bg-surface-container-low"
+                  >
+                    Create Account
+                  </Link>
+                </div>
+                <p className="text-sm leading-7 text-primary-fixed">
+                  No hidden commissions. More clarity for you and better trust
+                  for the tenant from day one.
+                </p>
+              </div>
+            </div>
           </div>
         </section>
       </main>

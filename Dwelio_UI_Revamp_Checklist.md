@@ -168,15 +168,15 @@
 
 ### Checklist
 
-- [ ] Replace the current generic hero with the approved premium editorial hero direction.
-- [ ] Add the stronger tagline hierarchy: `Find it. Trust it. Move in.`
-- [ ] Upgrade the hero search module to match the refined brand treatment.
-- [ ] Rework "featured listings" into the more editorial verified-grid style.
-- [ ] Rebuild "how it works" into the bento-card format from the mockups.
-- [ ] Rework the problem / trust story section to better reflect the product vision.
-- [ ] Rebuild the landlord CTA section with the stronger full-width branded treatment.
-- [ ] Keep the page grounded in Ibadan-first positioning and trust-first messaging.
-- [ ] Remove placeholder-sounding copy that feels generic or template-like.
+- [x] Replace the current generic hero with the approved premium editorial hero direction.
+- [x] Add the stronger tagline hierarchy: `Find it. Trust it. Move in.`
+- [x] Upgrade the hero search module to match the refined brand treatment.
+- [x] Rework "featured listings" into the more editorial verified-grid style.
+- [x] Rebuild "how it works" into the bento-card format from the mockups.
+- [x] Rework the problem / trust story section to better reflect the product vision.
+- [x] Rebuild the landlord CTA section with the stronger full-width branded treatment.
+- [x] Keep the page grounded in Ibadan-first positioning and trust-first messaging.
+- [x] Remove placeholder-sounding copy that feels generic or template-like.
 
 ---
 

@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
-import { Bell } from "lucide-react";
 
 type Notification = {
   id: string;
@@ -82,27 +81,33 @@ export default function NotificationsDropdown() {
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
-        className="relative flex h-10 w-10 items-center justify-center rounded-full border border-emerald-200 text-emerald-800 hover:border-emerald-300"
+        className="relative flex h-11 w-11 items-center justify-center rounded-full bg-surface-container-lowest text-primary-container shadow-[var(--shadow-floating-pane)] transition hover:bg-surface-container-low"
         aria-label="Notifications"
       >
-        <Bell className="h-4 w-4" />
+        <span className="material-symbols-outlined text-[22px]">
+          notifications
+        </span>
       </button>
       {open && (
-        <div className="absolute right-0 mt-3 w-72 rounded-2xl border border-emerald-100 bg-white p-4 shadow-[0_20px_40px_rgba(16,42,24,0.12)]">
-          <p className="text-sm font-semibold text-slate-900">Notifications</p>
+        <div className="absolute right-0 mt-3 w-72 rounded-[1.5rem] bg-surface-container-lowest p-4 shadow-[var(--shadow-elevated-panel)]">
+          <p className="font-headline text-sm font-bold text-primary-container">
+            Notifications
+          </p>
           <div className="mt-3 grid gap-2">
             {items.length > 0 ? (
               items.map((item) => (
                 <Link
                   key={item.id}
                   href={item.link ?? "#"}
-                  className="rounded-xl border border-emerald-50 bg-emerald-50/50 p-3 text-xs text-slate-700"
+                  className="rounded-xl bg-surface-container-low p-3 text-xs leading-relaxed text-on-surface-variant transition hover:bg-surface-container"
                 >
                   {item.message}
                 </Link>
               ))
             ) : (
-              <p className="text-xs text-slate-500">No notifications yet.</p>
+              <p className="text-xs text-on-surface-variant">
+                No notifications yet.
+              </p>
             )}
           </div>
         </div>

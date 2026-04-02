@@ -141,21 +141,22 @@
 
 ### Navigation
 
-- [ ] Restyle `src/components/NavBar.tsx` to match the approved top bar:
+- [x] Restyle `src/components/NavBar.tsx` to match the approved top bar:
   - clean glass / blurred background
   - stronger wordmark presence
   - refined nav labels
   - premium primary CTA
-- [ ] Replace placeholder / inconsistent nav links with the real intended IA.
-- [ ] Add active state styling for the current route.
-- [ ] Keep authentication, notifications, and messages behavior intact after the visual update.
-- [ ] Make sure desktop and mobile nav variants feel like the same product.
+- [x] Replace placeholder / inconsistent nav links with the real intended IA.
+- [x] Add active state styling for the current route.
+- [x] Keep authentication, notifications, and messages behavior intact after the visual update.
+- [x] Make sure desktop and mobile nav variants feel like the same product.
 
 ### Footer
 
-- [ ] Restyle `src/components/Footer.tsx` to match the new editorial brand language.
-- [ ] Align footer sections with current product IA and remove dead or fake links where possible.
-- [ ] Decide whether the footer should be hidden on specific app-heavy screens like search.
+- [x] Restyle `src/components/Footer.tsx` to match the new editorial brand language.
+- [x] Align footer sections with current product IA and remove dead or fake links where possible.
+- [x] Decide whether the footer should be hidden on specific app-heavy screens like search.
+  - Decision: hide the footer on `/search` in phase 1 to preserve the focused discovery layout.
 
 ---
 

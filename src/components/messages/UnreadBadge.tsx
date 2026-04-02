@@ -48,7 +48,7 @@ export default function UnreadBadge() {
   if (!count) return null;
 
   return (
-    <span className="ml-2 inline-flex h-5 min-w-[20px] items-center justify-center rounded-full bg-emerald-600 px-2 text-xs font-semibold text-white">
+    <span className="ml-2 inline-flex h-5 min-w-[20px] items-center justify-center rounded-full bg-tertiary-fixed-dim px-2 text-xs font-bold text-on-tertiary-fixed shadow-[var(--shadow-editorial-card)]">
       {count}
     </span>
   );

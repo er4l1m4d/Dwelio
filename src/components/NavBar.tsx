@@ -1,13 +1,34 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { Bell, MessageSquare } from "lucide-react";
 import UnreadBadge from "@/components/messages/UnreadBadge";
 import NotificationsDropdown from "@/components/notifications/NotificationsDropdown";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 
+const navLinks = [
+  {
+    href: "/search",
+    label: "Discover",
+    matches: (pathname: string) =>
+      pathname === "/search" || pathname.startsWith("/listings/"),
+  },
+  {
+    href: "/neighbourhoods",
+    label: "Neighbourhoods",
+    matches: (pathname: string) => pathname.startsWith("/neighbourhoods"),
+  },
+  {
+    href: "/payments",
+    label: "Payments",
+    matches: (pathname: string) =>
+      pathname.startsWith("/payments") || pathname.startsWith("/agreements/"),
+  },
+];
+
 export default function NavBar() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const supabase = createSupabaseBrowserClient();
   const [isAuthed, setIsAuthed] = useState(false);
@@ -24,16 +45,19 @@ export default function NavBar() {
       const {
         data: { user },
       } = await supabase.auth.getUser();
+
       if (mounted) {
         setIsAuthed(Boolean(user));
         setProfileId(user?.id ?? null);
       }
+
       if (user) {
         const { data } = await supabase
           .from("profiles")
           .select("avatar_url, full_name")
           .eq("id", user.id)
           .single();
+
         if (mounted) {
           setAvatarUrl(data?.avatar_url ?? null);
           setDisplayName(data?.full_name ?? null);
@@ -75,85 +99,229 @@ export default function NavBar() {
     };
   }, [profileMenuOpen]);
 
+  useEffect(() => {
+    setOpen(false);
+    setProfileMenuOpen(false);
+  }, [pathname]);
+
   return (
-    <nav className="sticky top-0 z-50 border-b border-emerald-100 bg-white/90 backdrop-blur">
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
-        <Link href="/" className="text-lg font-semibold text-emerald-800">
-          Dwelio
-        </Link>
-
-        <div className="hidden items-center gap-6 text-sm font-semibold text-slate-600 md:flex">
-          <Link href="/search" className="hover:text-emerald-800">
-            Browse
-          </Link>
-          <Link href="/neighbourhoods" className="hover:text-emerald-800">
-            Neighbourhoods
-          </Link>
-          <Link href="/page" className="hover:text-emerald-800">
-            How it works
-          </Link>
-        </div>
-
-        <div className="hidden items-center gap-4 md:flex">
+    <nav className="sticky top-0 z-50 border-b border-outline-variant/40 bg-surface/80 backdrop-blur-xl">
+      <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between px-6 py-4 md:px-8">
+        <div className="flex items-center gap-10">
           <Link
-            href="/messages"
-            className="relative flex h-10 w-10 items-center justify-center rounded-full border border-emerald-200 text-emerald-800 hover:border-emerald-300"
-            aria-label="Messages"
+            href="/"
+            className="flex items-center gap-3 text-primary-container"
+            aria-label="Dwelio home"
           >
-            <MessageSquare className="h-4 w-4" />
-            <span className="absolute -right-1 -top-1">
-              <UnreadBadge />
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-container text-tertiary-fixed-dim shadow-[var(--shadow-editorial-card)]">
+              <span
+                className="material-symbols-outlined text-[22px]"
+                style={{ fontVariationSettings: '"FILL" 1, "wght" 600' }}
+              >
+                home_work
+              </span>
+            </span>
+            <span className="font-headline text-2xl font-black tracking-[-0.04em]">
+              Dwelio
             </span>
           </Link>
-          <NotificationsDropdown />
+
+          <div className="hidden items-center gap-8 md:flex">
+            {navLinks.map((link) => {
+              const active = link.matches(pathname);
+
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`border-b-2 pb-1 font-headline text-base font-bold tracking-tight transition-colors ${
+                    active
+                      ? "border-tertiary-fixed-dim text-primary-container"
+                      : "border-transparent text-on-surface-variant hover:text-primary-container"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="hidden items-center gap-3 md:flex">
+          {isAuthed && (
+            <>
+              <Link
+                href="/messages"
+                className="relative flex h-11 w-11 items-center justify-center rounded-full bg-surface-container-lowest text-primary-container shadow-[var(--shadow-floating-pane)] transition hover:bg-surface-container-low"
+                aria-label="Messages"
+              >
+                <span className="material-symbols-outlined text-[22px]">
+                  chat_bubble
+                </span>
+                <span className="absolute -right-1 -top-1">
+                  <UnreadBadge />
+                </span>
+              </Link>
+              <NotificationsDropdown />
+            </>
+          )}
+
           {!isAuthed ? (
             <>
               <Link
                 href="/login"
-                className="rounded-full border border-emerald-200 px-4 py-2 text-sm font-semibold text-emerald-800"
+                className="px-4 py-2 font-headline text-sm font-bold text-on-surface-variant transition hover:text-primary-container"
               >
-                Log in
+                Sign In
               </Link>
               <Link
-                href="/signup"
-                className="rounded-full bg-emerald-700 px-4 py-2 text-sm font-semibold text-white"
+                href="/listings/new"
+                className="rounded-md bg-primary-container px-6 py-2.5 font-headline text-sm font-bold text-on-primary transition hover:bg-primary"
               >
-                Sign up
+                List Property
               </Link>
             </>
           ) : (
-            <div className="relative" ref={profileMenuRef}>
-              <button
-                type="button"
-                onClick={() => setProfileMenuOpen((prev) => !prev)}
-                className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-emerald-200 bg-emerald-50 text-sm font-semibold text-emerald-800"
+            <>
+              <Link
+                href="/listings/new"
+                className="rounded-md bg-primary-container px-6 py-2.5 font-headline text-sm font-bold text-on-primary transition hover:bg-primary"
               >
-                {avatarUrl ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={avatarUrl}
-                    alt="Avatar"
-                    className="h-full w-full object-cover"
-                  />
-                ) : (
-                  (displayName?.[0]?.toUpperCase() ??
-                    profileId?.slice(0, 1).toUpperCase() ??
-                    "U")
+                List Property
+              </Link>
+              <div className="relative" ref={profileMenuRef}>
+                <button
+                  type="button"
+                  onClick={() => setProfileMenuOpen((prev) => !prev)}
+                  className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full bg-surface-container-lowest text-sm font-bold text-primary-container shadow-[var(--shadow-floating-pane)] transition hover:bg-surface-container-low"
+                  aria-label="Account menu"
+                >
+                  {avatarUrl ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={avatarUrl}
+                      alt="Avatar"
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    (displayName?.[0]?.toUpperCase() ??
+                      profileId?.slice(0, 1).toUpperCase() ??
+                      "U")
+                  )}
+                </button>
+                {profileMenuOpen && (
+                  <div className="absolute right-0 mt-3 w-52 rounded-[1.5rem] bg-surface-container-lowest p-2 text-sm shadow-[var(--shadow-elevated-panel)]">
+                    <Link
+                      href="/dashboard"
+                      className="block rounded-xl px-4 py-3 text-on-surface-variant transition hover:bg-surface-container-low hover:text-primary-container"
+                    >
+                      Dashboard
+                    </Link>
+                    <Link
+                      href="/settings"
+                      className="block rounded-xl px-4 py-3 text-on-surface-variant transition hover:bg-surface-container-low hover:text-primary-container"
+                    >
+                      Settings
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={async () => {
+                        await supabase.auth.signOut();
+                        window.location.href = "/login";
+                      }}
+                      className="mt-1 w-full rounded-xl px-4 py-3 text-left text-on-surface-variant transition hover:bg-surface-container-low hover:text-primary-container"
+                    >
+                      Sign out
+                    </button>
+                  </div>
                 )}
-              </button>
-              {profileMenuOpen && (
-                <div className="absolute right-0 mt-3 w-44 rounded-2xl border border-emerald-100 bg-white p-2 text-sm shadow-[0_20px_40px_rgba(16,42,24,0.12)]">
+              </div>
+            </>
+          )}
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setOpen((prev) => !prev)}
+          className="flex h-11 w-11 items-center justify-center rounded-full bg-surface-container-lowest text-primary-container shadow-[var(--shadow-floating-pane)] md:hidden"
+          aria-label="Open menu"
+        >
+          <span className="material-symbols-outlined">
+            {open ? "close" : "menu"}
+          </span>
+        </button>
+      </div>
+
+      {open && (
+        <div className="border-t border-outline-variant/30 bg-surface-container-low px-6 py-5 md:hidden">
+          <div className="mx-auto flex max-w-[1440px] flex-col gap-5">
+            <div className="flex flex-col gap-3">
+              {navLinks.map((link) => {
+                const active = link.matches(pathname);
+
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`rounded-2xl px-4 py-3 font-headline text-base font-bold transition ${
+                      active
+                        ? "bg-primary-container text-on-primary"
+                        : "bg-surface-container-lowest text-primary-container"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
+              <Link
+                href="/messages"
+                className="rounded-2xl bg-surface-container-lowest px-4 py-3 font-headline text-base font-bold text-primary-container"
+              >
+                Messages
+              </Link>
+            </div>
+
+            <div className="flex flex-col gap-3 border-t border-outline-variant/30 pt-4">
+              {!isAuthed ? (
+                <>
+                  <Link
+                    href="/login"
+                    className="rounded-2xl bg-surface-container-lowest px-4 py-3 font-headline text-base font-bold text-primary-container"
+                  >
+                    Sign In
+                  </Link>
+                  <Link
+                    href="/signup"
+                    className="rounded-2xl bg-secondary-container px-4 py-3 font-headline text-base font-bold text-primary-container"
+                  >
+                    Create Account
+                  </Link>
+                  <Link
+                    href="/listings/new"
+                    className="rounded-2xl bg-primary-container px-4 py-3 font-headline text-base font-bold text-on-primary"
+                  >
+                    List Property
+                  </Link>
+                </>
+              ) : (
+                <>
                   <Link
                     href="/dashboard"
-                    className="block rounded-xl px-3 py-2 text-slate-700 hover:bg-emerald-50"
+                    className="rounded-2xl bg-surface-container-lowest px-4 py-3 font-headline text-base font-bold text-primary-container"
                   >
                     Dashboard
                   </Link>
                   <Link
                     href="/settings"
-                    className="block rounded-xl px-3 py-2 text-slate-700 hover:bg-emerald-50"
+                    className="rounded-2xl bg-surface-container-lowest px-4 py-3 font-headline text-base font-bold text-primary-container"
                   >
                     Settings
+                  </Link>
+                  <Link
+                    href="/listings/new"
+                    className="rounded-2xl bg-primary-container px-4 py-3 font-headline text-base font-bold text-on-primary"
+                  >
+                    List Property
                   </Link>
                   <button
                     type="button"
@@ -161,61 +329,13 @@ export default function NavBar() {
                       await supabase.auth.signOut();
                       window.location.href = "/login";
                     }}
-                    className="mt-1 w-full rounded-xl px-3 py-2 text-left text-slate-700 hover:bg-emerald-50"
+                    className="rounded-2xl bg-surface-container-lowest px-4 py-3 text-left font-headline text-base font-bold text-primary-container"
                   >
                     Sign out
                   </button>
-                </div>
+                </>
               )}
             </div>
-          )}
-        </div>
-
-        <button
-          type="button"
-          onClick={() => setOpen((prev) => !prev)}
-          className="rounded-full border border-emerald-200 px-3 py-2 text-sm text-emerald-800 md:hidden"
-        >
-          Menu
-        </button>
-      </div>
-
-      {open && (
-        <div className="border-t border-emerald-100 bg-white px-6 py-4 md:hidden">
-          <div className="flex flex-col gap-3 text-sm font-semibold text-slate-600">
-            <Link href="/search" className="hover:text-emerald-800">
-              Browse
-            </Link>
-            <Link href="/neighbourhoods" className="hover:text-emerald-800">
-              Neighbourhoods
-            </Link>
-            <Link href="/page" className="hover:text-emerald-800">
-              How it works
-            </Link>
-            <Link href="/messages" className="hover:text-emerald-800">
-              Messages
-            </Link>
-            {!isAuthed ? (
-              <>
-                <Link href="/login" className="hover:text-emerald-800">
-                  Log in
-                </Link>
-                <Link href="/signup" className="hover:text-emerald-800">
-                  Sign up
-                </Link>
-              </>
-            ) : (
-              <button
-                type="button"
-                onClick={async () => {
-                  await supabase.auth.signOut();
-                  window.location.href = "/login";
-                }}
-                className="text-left hover:text-emerald-800"
-              >
-                Sign out
-              </button>
-            )}
           </div>
         </div>
       )}

@@ -99,16 +99,16 @@ export default function HeroSlideshow({ slides }: HeroSlideshowProps) {
                 </div>
                 <Link
                   href="/search"
-                  className="group inline-flex items-center gap-4 rounded-[1.25rem] px-1 py-1 text-primary-container"
+                  className="group inline-flex h-[72px] w-[220px] shrink-0 items-center justify-between rounded-[1.25rem] px-3 py-2 text-primary-container"
                 >
-                  <div className="min-w-[138px]">
+                  <div className="min-w-0">
                     <span className="block text-[10px] font-bold uppercase tracking-[0.22em] text-on-tertiary-container">
                       Curated next
                     </span>
                     <span className="mt-1 block font-headline text-sm font-black uppercase tracking-[0.16em]">
                       Explore Homes
                     </span>
-                    <span className="mt-2 block h-0.5 w-16 bg-tertiary-fixed-dim transition-all duration-300 group-hover:w-24" />
+                    <span className="mt-2 block h-0.5 w-20 bg-tertiary-fixed-dim" />
                   </div>
                   <span className="flex h-11 w-11 items-center justify-center rounded-full border border-outline-variant/60 bg-surface-container-lowest text-primary-container shadow-[var(--shadow-editorial-card)] transition duration-300 group-hover:-translate-y-0.5 group-hover:border-primary-container/20 group-hover:bg-surface-container-low">
                     <span className="material-symbols-outlined text-[18px] transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5">

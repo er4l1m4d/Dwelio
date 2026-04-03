@@ -278,20 +278,20 @@
 
 ## 9. Copy And Content Consistency
 
-- [ ] Audit all updated screens for one consistent tone: warm, trustworthy, modern, proudly Nigerian.
-- [ ] Use one consistent terminology set for actions and labels:
+- [x] Audit all updated screens for one consistent tone: warm, trustworthy, modern, proudly Nigerian.
+- [x] Use one consistent terminology set for actions and labels:
   - Discover vs Browse
   - Verified Homes vs Verified Listings
   - Secure with Escrow vs Pay Now
   - List Property vs List Your Property
-- [ ] Remove leftover placeholder brand names, cities, and fake links that conflict with Dwelio's Ibadan-first focus.
-- [ ] Make sure pricing labels reflect real product logic:
+- [x] Remove leftover placeholder brand names, cities, and fake links that conflict with Dwelio's Ibadan-first focus.
+- [x] Make sure pricing labels reflect real product logic:
   - monthly
   - yearly
   - service charge
   - caution fee
   - escrow
-- [ ] Make sure all static examples feel Nigerian and match the product vision.
+- [x] Make sure all static examples feel Nigerian and match the product vision.
 
 ---
 

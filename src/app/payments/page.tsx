@@ -2,6 +2,11 @@ import Link from "next/link";
 import { CreditCard } from "lucide-react";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
+const NAIRA_SYMBOL = "\u20A6";
+
+const formatMoney = (value: number | null | undefined) =>
+  `${NAIRA_SYMBOL}${new Intl.NumberFormat("en-NG").format(value ?? 0)}`;
+
 export default async function PaymentsPage() {
   const supabase = await createSupabaseServerClient();
   const {
@@ -52,7 +57,7 @@ export default async function PaymentsPage() {
                   </p>
                 </div>
                 <div className="text-sm text-slate-600">
-                  ₦{payment.amount?.toLocaleString()}
+                  {formatMoney(payment.amount)}
                 </div>
                 <div className="flex items-center gap-3">
                   <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
@@ -62,7 +67,7 @@ export default async function PaymentsPage() {
                     href={`/payments/pay/${payment.property_id}`}
                     className="rounded-full border border-emerald-200 px-4 py-2 text-xs font-semibold text-emerald-800 transition hover:border-emerald-300"
                   >
-                    Pay now
+                    Secure with Escrow
                   </Link>
                 </div>
               </div>
@@ -74,13 +79,13 @@ export default async function PaymentsPage() {
                 No payments yet
               </p>
               <p className="mt-1 text-sm text-slate-600">
-                Explore listings and start a payment when you’re ready.
+                Discover homes and begin checkout when you're ready.
               </p>
               <Link
                 href="/search"
                 className="mt-4 inline-flex h-10 items-center justify-center rounded-full border border-emerald-200 px-4 text-xs font-semibold text-emerald-800"
               >
-                Browse listings
+                Discover homes
               </Link>
             </div>
           )}

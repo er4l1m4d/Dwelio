@@ -7,7 +7,7 @@ const footerSections = [
   {
     title: "Explore",
     items: [
-      { label: "Discover Homes", href: "/search" },
+      { label: "Discover", href: "/search" },
       { label: "Neighbourhoods", href: "/neighbourhoods" },
       { label: "List Property", href: "/listings/new" },
     ],
@@ -96,7 +96,7 @@ export default function Footer() {
 
       <div className="border-t border-outline-variant/30">
         <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-3 px-6 py-6 text-sm text-on-surface-variant md:flex-row md:items-center md:justify-between md:px-8">
-          <p>© 2026 Dwelio. Built for trusted renting in Nigeria.</p>
+          <p>&copy; 2026 Dwelio. Built for trusted renting in Nigeria.</p>
           <p className="font-headline text-xs font-bold uppercase tracking-[0.2em] text-primary-container/60">
             Ibadan first. National next.
           </p>

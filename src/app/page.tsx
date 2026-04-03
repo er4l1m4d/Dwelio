@@ -10,6 +10,8 @@ export const metadata = {
     "Discover verified homes in Ibadan with direct landlord access, secure payments, and digital tenancy agreements.",
 };
 
+const NAIRA_SYMBOL = "\u20A6";
+
 const platformStats = [
   { label: "Verified landlords", value: "340+" },
   { label: "Homes discovered monthly", value: "1,200+" },
@@ -79,7 +81,7 @@ const heroSlides = [
     image:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuD-RNP_DSeR7qK-69Lt7KhKRYcT3S3nTv419JbXGVjMy00Ro9HRWS_hozfpVa7LzQKYVjSKkwCZ62JlmrhfdLvccMWiD6d2UQnLsx3Z0jor1eC6quDekHsT9HNFBcYa2trM7aeUWg1-QKqDaTJRvcZ55irtVX9VuSnZGaHY52O1H73GrcFzCo5d5cNRTKa0OtFto2W76oHsBoWS7stzxPhndPOUga_qp_qJIJMKhoy92RBEVFA0CjfR3WQ2v9cCYLIhcySuZXrXs6zp",
     location: "Akobo, Ibadan",
-    price: "From ₦4.5M / year",
+    price: `From ${NAIRA_SYMBOL}4.5M / year`,
     title: "The Heritage Estate",
   },
   {
@@ -87,7 +89,7 @@ const heroSlides = [
     image:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuD5ykNcXqadDOyyAo5V2kPk-5O1gACTifq617zKwQ7949quzMAzy6ORmECcRmhoylPs9xqcvPZwALdpE7I8FoBq5D0I4WMbqXkV4M9FGn8cMl8XV-8oy1vLMhYkkCaltV8MzYoMNM_x0mzy_ZoMPAk4HQpX0G_aPtix0DGFEV4BRUHc5QaUA1yuWiEYCsZ_62xyfnb3gGQMWWF8oO9a5amv6DTeqoMXGynz5YEWIhiXOjRslYk0_tgNQgBlY-BUtKHCI0xHQ-oVFxdf",
     location: "Samonda, Ibadan",
-    price: "From ₦2.2M / year",
+    price: `From ${NAIRA_SYMBOL}2.2M / year`,
     title: "Samonda Heights Terrace",
   },
   {
@@ -95,7 +97,7 @@ const heroSlides = [
     image:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuAOHecTH1vNeJwg6WJkNy6qI_HUJJ5HAsI-j5lAooLTyXvJbFbEUXRb9bYS4T_nH3wFe3BajgIlSJyFv20iuDqG4d74NaJDLfndZbSmx47FqR6Wfk51-bXINa3RIx2jOXq4pStpqobZVPg4hBj-6ZEkx48t9LSALM3-1pvoLWjI9B5dEB_l4w9HFpd9WULRr6DFBk1xR1-_Lx83NLGnGItL2qDbPRsp-KnGdkBT6XAxJCMzv4nfZtg4MYKKd92l77G8N9WmxlVrIPS_",
     location: "Bodija, Ibadan",
-    price: "From ₦4.5M / year",
+    price: `From ${NAIRA_SYMBOL}4.5M / year`,
     title: "Onyx Garden Duplex",
   },
 ];
@@ -288,7 +290,7 @@ export default async function HomePage() {
               href="/search"
               className="inline-flex w-fit items-center gap-2 border-b-2 border-tertiary-fixed-dim pb-1 font-headline text-sm font-bold uppercase tracking-[0.16em] text-primary-container transition hover:text-on-tertiary-container"
             >
-              View all listings
+              View all homes
             </Link>
           </div>
 
@@ -335,7 +337,8 @@ export default async function HomePage() {
                         </p>
                       </div>
                       <p className="shrink-0 text-right font-headline text-xl font-black text-on-tertiary-container">
-                        ₦{listing.price?.toLocaleString() ?? "0"}
+                        {NAIRA_SYMBOL}
+                        {listing.price?.toLocaleString() ?? "0"}
                         <span className="block text-xs font-bold uppercase tracking-[0.18em] text-on-surface-variant">
                           / {listing.price_period ?? "monthly"}
                         </span>

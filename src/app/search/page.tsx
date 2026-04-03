@@ -4,7 +4,7 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 export const metadata = {
   title: "Discovery",
   description:
-    "Browse verified listings in Ibadan with filters for neighbourhood, price, and home type.",
+    "Discover verified homes in Ibadan with filters for neighbourhood, price, and home type.",
 };
 
 const neighbourhoods = [

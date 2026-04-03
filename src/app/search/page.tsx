@@ -2,9 +2,9 @@ import SearchView from "@/components/search/SearchView";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export const metadata = {
-  title: "Dwelio | Search Listings",
+  title: "Discovery",
   description:
-    "Browse verified listings in Ibadan with filters for price, bedrooms, and neighbourhood.",
+    "Browse verified listings in Ibadan with filters for neighbourhood, price, and home type.",
 };
 
 const neighbourhoods = [
@@ -46,17 +46,8 @@ export default async function SearchPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top,_#f5f0e4,_#ffffff_45%,_#eef8f2)] px-6 py-16">
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-10">
-        <header className="flex flex-col gap-4">
-          <h1 className="text-3xl font-semibold text-slate-900">
-            Search homes in Ibadan
-          </h1>
-          <p className="text-base text-slate-600">
-            Filter by location, price, bedrooms, and property type.
-          </p>
-        </header>
-
+    <div className="min-h-screen bg-surface px-6 py-10 md:px-8">
+      <div className="mx-auto w-full max-w-[1440px]">
         <SearchView
           listings={listings ?? []}
           verifiedMap={verifiedMap}

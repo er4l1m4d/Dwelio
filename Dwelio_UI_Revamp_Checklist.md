@@ -193,20 +193,21 @@
 
 ### Checklist
 
-- [ ] Move the search screen closer to the approved split-pane discovery layout.
-- [ ] Rework the page header into the branded "Discovery" experience.
-- [ ] Introduce the horizontal filter-chip row from the design where it improves usability.
-- [ ] Refine the filter sidebar styling without breaking current query-param behavior.
-- [ ] Make the list / map view switch feel native to the screen instead of bolted on.
-- [ ] Restyle map markers to reflect listing prices and active state more clearly.
-- [ ] Restyle listing cards to match the visual direction:
+- [x] Move the search screen closer to the approved split-pane discovery layout.
+- [x] Rework the page header into the branded "Discovery" experience.
+- [x] Introduce the horizontal filter-chip row from the design where it improves usability.
+- [x] Refine the filter sidebar styling without breaking current query-param behavior.
+- [x] Make the list / map view switch feel native to the screen instead of bolted on.
+- [x] Restyle map markers to reflect listing prices and active state more clearly.
+- [x] Restyle listing cards to match the visual direction:
   - large image first
   - stronger title / price hierarchy
   - verified badge
   - favorite action
   - richer metadata row
-- [ ] Decide whether "AI Match" appears now or only when recommendation logic is real.
-- [ ] Add an intentional empty state that matches the new design system.
+- [x] Decide whether "AI Match" appears now or only when recommendation logic is real.
+  - Decision: omit AI Match in phase 1 until recommendation logic is real enough to justify the UI.
+- [x] Add an intentional empty state that matches the new design system.
 - [ ] Make sure the mobile search experience does not become cramped or over-layered.
 
 ---

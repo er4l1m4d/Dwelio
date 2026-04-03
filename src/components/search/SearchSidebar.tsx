@@ -1,134 +1,172 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState, useTransition } from "react";
+import type { SearchFilters } from "@/components/search/SearchView";
 
 type SearchSidebarProps = {
+  filters: SearchFilters;
   neighbourhoods: string[];
+  pending: boolean;
+  onFieldChange: (field: keyof SearchFilters) => (value: string) => void;
+  onReset: () => void;
 };
 
-export default function SearchSidebar({ neighbourhoods }: SearchSidebarProps) {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const [pending, startTransition] = useTransition();
+const bedroomOptions = ["", "1", "2", "3", "4"];
 
-  const [filters, setFilters] = useState({
-    type: "",
-    propertyType: "",
-    neighbourhood: "",
-    minPrice: "",
-    maxPrice: "",
-    bedrooms: "",
-  });
-
-  useEffect(() => {
-    setFilters({
-      type: searchParams.get("type") ?? "",
-      propertyType: searchParams.get("propertyType") ?? "",
-      neighbourhood: searchParams.get("neighbourhood") ?? "",
-      minPrice: searchParams.get("minPrice") ?? "",
-      maxPrice: searchParams.get("maxPrice") ?? "",
-      bedrooms: searchParams.get("bedrooms") ?? "",
-    });
-  }, [searchParams]);
-
-  const updateQuery = (nextFilters: typeof filters) => {
-    const params = new URLSearchParams();
-    Object.entries(nextFilters).forEach(([key, value]) => {
-      if (value) params.set(key, value);
-    });
-    const view = searchParams.get("view");
-    if (view) params.set("view", view);
-    startTransition(() => {
-      router.push(`/search?${params.toString()}`);
-    });
-  };
-
-  const updateField = (field: keyof typeof filters) => (value: string) => {
-    const next = { ...filters, [field]: value };
-    setFilters(next);
-    updateQuery(next);
-  };
-
+export default function SearchSidebar({
+  filters,
+  neighbourhoods,
+  pending,
+  onFieldChange,
+  onReset,
+}: SearchSidebarProps) {
   return (
-    <aside className="rounded-3xl border border-emerald-100 bg-white/90 p-6 shadow-[0_20px_50px_rgba(16,42,24,0.08)] backdrop-blur">
-      <h2 className="text-lg font-semibold text-slate-900">Filters</h2>
-      <div className="mt-4 grid gap-4 text-sm text-slate-600">
-        <label className="grid gap-2">
-          Listing type
-          <select
-            value={filters.type}
-            onChange={(event) => updateField("type")(event.target.value)}
-            disabled={pending}
-            className="h-11 rounded-xl border border-slate-200 bg-white px-3"
+    <aside className="grid gap-5">
+      <div className="rounded-[2rem] bg-surface-container-low p-6 shadow-[var(--shadow-editorial-card)]">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <p className="font-headline text-sm font-bold uppercase tracking-[0.22em] text-on-tertiary-container">
+              Refine Search
+            </p>
+            <h2 className="mt-3 font-headline text-2xl font-black tracking-[-0.03em] text-primary-container">
+              Filters
+            </h2>
+          </div>
+          <button
+            type="button"
+            onClick={onReset}
+            className="rounded-full bg-surface-container-lowest px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-primary-container shadow-[var(--shadow-floating-pane)] transition hover:bg-surface-container"
           >
-            <option value="">All</option>
-            <option value="rent">Rent</option>
-            <option value="sale">Sale</option>
-          </select>
-        </label>
-        <label className="grid gap-2">
-          Property type
-          <select
-            value={filters.propertyType}
-            onChange={(event) => updateField("propertyType")(event.target.value)}
-            disabled={pending}
-            className="h-11 rounded-xl border border-slate-200 bg-white px-3"
-          >
-            <option value="">All</option>
-            <option value="flat">Flat</option>
-            <option value="house">House</option>
-            <option value="room">Room</option>
-            <option value="duplex">Duplex</option>
-            <option value="bungalow">Bungalow</option>
-          </select>
-        </label>
-        <label className="grid gap-2">
-          Neighbourhood
-          <select
-            value={filters.neighbourhood}
-            onChange={(event) => updateField("neighbourhood")(event.target.value)}
-            disabled={pending}
-            className="h-11 rounded-xl border border-slate-200 bg-white px-3"
-          >
-            <option value="">Any</option>
-            {neighbourhoods.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label className="grid gap-2">
-          Min price
-          <input
-            value={filters.minPrice}
-            onChange={(event) => updateField("minPrice")(event.target.value)}
-            disabled={pending}
-            type="number"
-            className="h-11 rounded-xl border border-slate-200 bg-white px-3"
-          />
-        </label>
-        <label className="grid gap-2">
-          Max price
-          <input
-            value={filters.maxPrice}
-            onChange={(event) => updateField("maxPrice")(event.target.value)}
-            disabled={pending}
-            type="number"
-            className="h-11 rounded-xl border border-slate-200 bg-white px-3"
-          />
-        </label>
-        <label className="grid gap-2">
-          Bedrooms
-          <input
-            value={filters.bedrooms}
-            onChange={(event) => updateField("bedrooms")(event.target.value)}
-            disabled={pending}
-            type="number"
-            className="h-11 rounded-xl border border-slate-200 bg-white px-3"
-          />
-        </label>
+            Clear all
+          </button>
+        </div>
+
+        <div className="mt-6 grid gap-5 text-sm">
+          <label className="grid gap-2">
+            <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
+              Listing Type
+            </span>
+            <select
+              value={filters.type}
+              onChange={(event) => onFieldChange("type")(event.target.value)}
+              disabled={pending}
+              className="h-12 rounded-[1rem] border border-outline-variant/40 bg-surface-container-lowest px-4 font-medium text-primary-container outline-none transition focus:border-primary-container/20 focus:ring-4 focus:ring-surface-tint/10"
+            >
+              <option value="">All listings</option>
+              <option value="rent">Rent</option>
+              <option value="sale">Sale</option>
+            </select>
+          </label>
+
+          <label className="grid gap-2">
+            <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
+              Property Type
+            </span>
+            <select
+              value={filters.propertyType}
+              onChange={(event) =>
+                onFieldChange("propertyType")(event.target.value)
+              }
+              disabled={pending}
+              className="h-12 rounded-[1rem] border border-outline-variant/40 bg-surface-container-lowest px-4 font-medium text-primary-container outline-none transition focus:border-primary-container/20 focus:ring-4 focus:ring-surface-tint/10"
+            >
+              <option value="">All homes</option>
+              <option value="flat">Flat</option>
+              <option value="house">House</option>
+              <option value="room">Room</option>
+              <option value="duplex">Duplex</option>
+              <option value="bungalow">Bungalow</option>
+            </select>
+          </label>
+
+          <label className="grid gap-2">
+            <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
+              Neighbourhood
+            </span>
+            <select
+              value={filters.neighbourhood}
+              onChange={(event) =>
+                onFieldChange("neighbourhood")(event.target.value)
+              }
+              disabled={pending}
+              className="h-12 rounded-[1rem] border border-outline-variant/40 bg-surface-container-lowest px-4 font-medium text-primary-container outline-none transition focus:border-primary-container/20 focus:ring-4 focus:ring-surface-tint/10"
+            >
+              <option value="">Anywhere in Ibadan</option>
+              {neighbourhoods.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-1 2xl:grid-cols-2">
+            <label className="grid gap-2">
+              <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
+                Min Price
+              </span>
+              <input
+                value={filters.minPrice}
+                onChange={(event) =>
+                  onFieldChange("minPrice")(event.target.value)
+                }
+                disabled={pending}
+                type="number"
+                placeholder="₦0"
+                className="h-12 rounded-[1rem] border border-outline-variant/40 bg-surface-container-lowest px-4 font-medium text-primary-container outline-none transition focus:border-primary-container/20 focus:ring-4 focus:ring-surface-tint/10"
+              />
+            </label>
+
+            <label className="grid gap-2">
+              <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
+                Max Price
+              </span>
+              <input
+                value={filters.maxPrice}
+                onChange={(event) =>
+                  onFieldChange("maxPrice")(event.target.value)
+                }
+                disabled={pending}
+                type="number"
+                placeholder="₦1,500,000"
+                className="h-12 rounded-[1rem] border border-outline-variant/40 bg-surface-container-lowest px-4 font-medium text-primary-container outline-none transition focus:border-primary-container/20 focus:ring-4 focus:ring-surface-tint/10"
+              />
+            </label>
+          </div>
+
+          <label className="grid gap-2">
+            <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
+              Bedrooms
+            </span>
+            <select
+              value={filters.bedrooms}
+              onChange={(event) => onFieldChange("bedrooms")(event.target.value)}
+              disabled={pending}
+              className="h-12 rounded-[1rem] border border-outline-variant/40 bg-surface-container-lowest px-4 font-medium text-primary-container outline-none transition focus:border-primary-container/20 focus:ring-4 focus:ring-surface-tint/10"
+            >
+              <option value="">Any size</option>
+              {bedroomOptions
+                .filter((option) => option !== "")
+                .map((option) => (
+                  <option key={option} value={option}>
+                    {option}+ bedrooms
+                  </option>
+                ))}
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div className="rounded-[2rem] bg-primary-container p-6 text-on-primary shadow-[var(--shadow-editorial-card)]">
+        <p className="font-headline text-sm font-bold uppercase tracking-[0.22em] text-tertiary-fixed-dim">
+          Trust Check
+        </p>
+        <h3 className="mt-3 font-headline text-2xl font-black tracking-[-0.03em]">
+          Search with more clarity than the usual market run.
+        </h3>
+        <p className="mt-4 text-sm leading-7 text-primary-fixed">
+          Discovery is strongest when the listing, the landlord, and the move-in
+          process are all easier to trust.
+        </p>
       </div>
     </aside>
   );

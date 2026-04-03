@@ -36,23 +36,18 @@ export default function HeroSlideshow({ slides }: HeroSlideshowProps) {
   return (
     <div className="overflow-hidden rounded-[2.25rem] bg-white/10 shadow-[var(--shadow-elevated-panel)] backdrop-blur-md">
       <div className="relative min-h-[360px] sm:min-h-[420px]">
-        {slides.map((slide, index) => (
-          <div
-            key={slide.title}
-            className={`absolute inset-0 transition-opacity duration-700 ${
-              index === activeIndex ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            <Image
-              src={slide.image}
-              alt={slide.alt}
-              fill
-              priority={index === 0}
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,27,15,0.08)_0%,rgba(0,27,15,0.22)_35%,rgba(0,27,15,0.82)_100%)]" />
-          </div>
-        ))}
+        <div className="absolute inset-0 transition-opacity duration-700">
+          <Image
+            src={activeSlide.image}
+            alt={activeSlide.alt}
+            fill
+            priority={activeIndex === 0}
+            sizes="(min-width: 1280px) 520px, (min-width: 1024px) 42vw, 100vw"
+            quality={78}
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,27,15,0.08)_0%,rgba(0,27,15,0.22)_35%,rgba(0,27,15,0.82)_100%)]" />
+        </div>
 
         <div className="absolute left-6 top-6">
           <div className="inline-flex items-center gap-2 rounded-full bg-surface-container-lowest/90 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-container backdrop-blur-md">

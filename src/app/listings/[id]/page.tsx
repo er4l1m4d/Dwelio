@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { cache } from "react";
 import ImageGallery from "@/components/ImageGallery";
 import MessageLandlordButton from "@/components/messages/MessageLandlordButton";
+import { createSupabasePublicClient } from "@/lib/supabase/public";
 
 type ListingPageProps = {
   params: { id: string };
@@ -11,6 +12,11 @@ type ListingPageProps = {
 
 const formatMoney = (value: number | null | undefined) =>
   `₦${new Intl.NumberFormat("en-NG").format(value ?? 0)}`;
+
+const NAIRA_SYMBOL = "\u20A6";
+
+const formatMoneyNaira = (value: number | null | undefined) =>
+  `${NAIRA_SYMBOL}${new Intl.NumberFormat("en-NG").format(value ?? 0)}`;
 
 const toTitleCase = (value?: string | null) =>
   value
@@ -45,15 +51,23 @@ const getMonthlyEquivalent = (value: number | null | undefined, period?: string 
   return value ?? 0;
 };
 
+const getListingDetail = cache(async (id: string) => {
+  const supabase = createSupabasePublicClient();
+  const { data } = await supabase
+    .from("properties")
+    .select(
+      "id, title, description, type, property_type, price, price_period, bedrooms, bathrooms, address, neighbourhood, images, video_url, landlord_id, views",
+    )
+    .eq("id", id)
+    .single();
+
+  return data;
+});
+
 export async function generateMetadata({
   params,
 }: ListingPageProps): Promise<Metadata> {
-  const supabase = await createSupabaseServerClient();
-  const { data: listing } = await supabase
-    .from("properties")
-    .select("title, neighbourhood, price, images")
-    .eq("id", params.id)
-    .single();
+  const listing = await getListingDetail(params.id);
 
   if (!listing) {
     return {
@@ -62,7 +76,7 @@ export async function generateMetadata({
     };
   }
 
-  const description = `${listing.title} in ${listing.neighbourhood ?? "Ibadan"} for ${formatMoney(listing.price)}.`;
+  const description = `${listing.title} in ${listing.neighbourhood ?? "Ibadan"} for ${formatMoneyNaira(listing.price)}.`;
   const image = listing.images?.[0];
 
   return {
@@ -79,15 +93,7 @@ export async function generateMetadata({
 }
 
 export default async function ListingDetailPage({ params }: ListingPageProps) {
-  const supabase = await createSupabaseServerClient();
-
-  const { data: listing } = await supabase
-    .from("properties")
-    .select(
-      "id, title, description, type, property_type, price, price_period, bedrooms, bathrooms, address, neighbourhood, images, video_url, landlord_id, views",
-    )
-    .eq("id", params.id)
-    .single();
+  const listing = await getListingDetail(params.id);
 
   if (!listing) {
     return (
@@ -99,16 +105,18 @@ export default async function ListingDetailPage({ params }: ListingPageProps) {
     );
   }
 
-  await supabase
-    .from("properties")
-    .update({ views: (listing.views ?? 0) + 1 })
-    .eq("id", listing.id);
-
-  const { data: landlord } = await supabase
-    .from("profiles")
-    .select("id, full_name, avatar_url, is_verified")
-    .eq("id", listing.landlord_id)
-    .single();
+  const supabase = createSupabasePublicClient();
+  const [{ data: landlord }] = await Promise.all([
+    supabase
+      .from("profiles")
+      .select("id, full_name, avatar_url, is_verified")
+      .eq("id", listing.landlord_id)
+      .single(),
+    supabase
+      .from("properties")
+      .update({ views: (listing.views ?? 0) + 1 })
+      .eq("id", listing.id),
+  ]);
 
   const periodLabel = getPeriodLabel(listing.price_period);
   const monthlyEquivalent = getMonthlyEquivalent(listing.price, listing.price_period);
@@ -135,7 +143,7 @@ export default async function ListingDetailPage({ params }: ListingPageProps) {
     {
       icon: "payments",
       title: "Pricing cadence",
-      copy: `Structured as ${formatMoney(listing.price)} per ${periodLabel}.`,
+      copy: `Structured as ${formatMoneyNaira(listing.price)} per ${periodLabel}.`,
       accent: "bg-tertiary-fixed-dim/15",
     },
     {
@@ -414,7 +422,7 @@ export default async function ListingDetailPage({ params }: ListingPageProps) {
               </p>
               <div className="mt-4 flex flex-wrap items-end gap-2">
                 <span className="font-headline text-4xl font-black tracking-[-0.04em] text-primary-container">
-                  {formatMoney(listing.price)}
+                  {formatMoneyNaira(listing.price)}
                 </span>
                 <span className="pb-1 text-base font-semibold text-on-surface-variant">
                   / {periodLabel}
@@ -425,7 +433,7 @@ export default async function ListingDetailPage({ params }: ListingPageProps) {
                 <div className="flex items-center justify-between gap-4 border-b border-outline-variant/30 pb-4">
                   <span className="text-on-surface-variant">Monthly equivalent</span>
                   <span className="font-bold text-primary-container">
-                    {formatMoney(monthlyEquivalent)}
+                    {formatMoneyNaira(monthlyEquivalent)}
                   </span>
                 </div>
                 <div className="flex items-center justify-between gap-4 border-b border-outline-variant/30 pb-4">

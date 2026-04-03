@@ -1,11 +1,13 @@
 import SearchView from "@/components/search/SearchView";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { createSupabasePublicClient } from "@/lib/supabase/public";
 
 export const metadata = {
   title: "Discovery",
   description:
     "Discover verified homes in Ibadan with filters for neighbourhood, price, and home type.",
 };
+
+export const revalidate = 300;
 
 const neighbourhoods = [
   "Bodija",
@@ -23,7 +25,7 @@ const neighbourhoods = [
 ];
 
 export default async function SearchPage() {
-  const supabase = await createSupabaseServerClient();
+  const supabase = createSupabasePublicClient();
 
   const { data: listings } = await supabase
     .from("properties")
@@ -33,13 +35,16 @@ export default async function SearchPage() {
     .eq("is_available", true)
     .order("created_at", { ascending: false });
 
-  const { data: landlords } = await supabase
-    .from("profiles")
-    .select("id, is_verified")
-    .in(
-      "id",
-      listings?.map((listing) => listing.landlord_id) ?? [],
-    );
+  const landlordIds = Array.from(
+    new Set((listings ?? []).map((listing) => listing.landlord_id).filter(Boolean)),
+  );
+
+  const { data: landlords } = landlordIds.length
+    ? await supabase
+        .from("profiles")
+        .select("id, is_verified")
+        .in("id", landlordIds)
+    : { data: null };
 
   const verifiedMap = new Map(
     landlords?.map((landlord) => [landlord.id, landlord.is_verified]) ?? [],

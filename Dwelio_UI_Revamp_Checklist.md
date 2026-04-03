@@ -341,8 +341,8 @@
 ## 13. Performance And Implementation Safety
 
 - [ ] Avoid importing unnecessary font weights.
-- [ ] Prefer Next.js image optimization where practical.
-- [ ] Avoid shipping huge background images without optimization.
+- [x] Prefer Next.js image optimization where practical.
+- [x] Avoid shipping huge background images without optimization.
 - [x] Keep the map view from blocking first meaningful paint for list-first users.
 - [x] Ensure skeletons and loading states match the new UI instead of flashing the old style.
 - [ ] Check that the global redesign does not accidentally regress auth or messaging flows.

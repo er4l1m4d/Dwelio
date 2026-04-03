@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import HeroSlideshow from "@/components/home/HeroSlideshow";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { createSupabasePublicClient } from "@/lib/supabase/public";
 import { ibadanNeighbourhoods } from "@/data/ibadan-neighbourhoods";
 
 export const metadata = {
@@ -9,6 +9,8 @@ export const metadata = {
   description:
     "Discover verified homes in Ibadan with direct landlord access, secure payments, and digital tenancy agreements.",
 };
+
+export const revalidate = 300;
 
 const NAIRA_SYMBOL = "\u20A6";
 
@@ -103,7 +105,7 @@ const heroSlides = [
 ];
 
 export default async function HomePage() {
-  const supabase = await createSupabaseServerClient();
+  const supabase = createSupabasePublicClient();
   const { data: listings } = await supabase
     .from("properties")
     .select(
@@ -111,21 +113,24 @@ export default async function HomePage() {
     )
     .eq("is_available", true)
     .order("created_at", { ascending: false })
-    .limit(6);
+    .limit(3);
 
-  const { data: landlords } = await supabase
-    .from("profiles")
-    .select("id, is_verified")
-    .in(
-      "id",
-      listings?.map((listing) => listing.landlord_id) ?? [],
-    );
+  const landlordIds = Array.from(
+    new Set((listings ?? []).map((listing) => listing.landlord_id).filter(Boolean)),
+  );
+
+  const { data: landlords } = landlordIds.length
+    ? await supabase
+        .from("profiles")
+        .select("id, is_verified")
+        .in("id", landlordIds)
+    : { data: null };
 
   const verifiedMap = new Map(
     landlords?.map((landlord) => [landlord.id, landlord.is_verified]) ?? [],
   );
 
-  const featuredListings = (listings ?? []).slice(0, 3);
+  const featuredListings = listings ?? [];
   const featuredNeighbourhoods = ibadanNeighbourhoods.slice(0, 3);
 
   return (

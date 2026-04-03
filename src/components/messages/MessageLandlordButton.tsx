@@ -42,11 +42,11 @@ export default function MessageLandlordButton({
         type="button"
         disabled={pending}
         onClick={handleClick}
-        className="h-12 rounded-full bg-emerald-700 px-4 text-sm font-semibold text-white transition hover:bg-emerald-800 disabled:cursor-not-allowed disabled:opacity-70"
+        className="inline-flex h-14 items-center justify-center rounded-[1rem] bg-primary-container px-5 font-headline text-sm font-black uppercase tracking-[0.14em] text-on-primary transition hover:bg-primary disabled:cursor-not-allowed disabled:opacity-70"
       >
         {pending ? "Opening..." : "Message Landlord"}
       </button>
-      {error && <p className="text-xs text-red-600">{error}</p>}
+      {error && <p className="text-xs text-error">{error}</p>}
     </div>
   );
 }

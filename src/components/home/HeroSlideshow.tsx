@@ -81,7 +81,7 @@ export default function HeroSlideshow({ slides }: HeroSlideshowProps) {
                 </p>
               </div>
 
-              <div className="flex items-center gap-3">
+              <div className="flex flex-wrap items-center gap-3 md:justify-end">
                 <div className="flex items-center gap-2">
                   {slides.map((slide, index) => (
                     <button
@@ -99,9 +99,22 @@ export default function HeroSlideshow({ slides }: HeroSlideshowProps) {
                 </div>
                 <Link
                   href="/search"
-                  className="inline-flex h-11 items-center justify-center rounded-[1rem] bg-primary-container px-5 font-headline text-sm font-bold uppercase tracking-[0.12em] text-on-primary transition hover:bg-primary"
+                  className="group inline-flex items-center gap-4 rounded-[1.25rem] px-1 py-1 text-primary-container"
                 >
-                  Explore Homes
+                  <div className="min-w-[138px]">
+                    <span className="block text-[10px] font-bold uppercase tracking-[0.22em] text-on-tertiary-container">
+                      Curated next
+                    </span>
+                    <span className="mt-1 block font-headline text-sm font-black uppercase tracking-[0.16em]">
+                      Explore Homes
+                    </span>
+                    <span className="mt-2 block h-0.5 w-16 bg-tertiary-fixed-dim transition-all duration-300 group-hover:w-24" />
+                  </div>
+                  <span className="flex h-11 w-11 items-center justify-center rounded-full border border-outline-variant/60 bg-surface-container-lowest text-primary-container shadow-[var(--shadow-editorial-card)] transition duration-300 group-hover:-translate-y-0.5 group-hover:border-primary-container/20 group-hover:bg-surface-container-low">
+                    <span className="material-symbols-outlined text-[18px] transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+                      north_east
+                    </span>
+                  </span>
                 </Link>
               </div>
             </div>

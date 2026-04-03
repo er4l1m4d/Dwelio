@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import HeroSlideshow from "@/components/home/HeroSlideshow";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { ibadanNeighbourhoods } from "@/data/ibadan-neighbourhoods";
 
@@ -70,6 +71,33 @@ const whyDwelio = [
   "Verified physical tours and clearer landlord identity",
   "Direct contact without the usual middleman markup",
   "Escrow-backed move-in flow and digital tenancy records",
+];
+
+const heroSlides = [
+  {
+    alt: "Contemporary Nigerian villa with warm lighting, tropical landscaping, and a calm premium residential feel.",
+    image:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuD-RNP_DSeR7qK-69Lt7KhKRYcT3S3nTv419JbXGVjMy00Ro9HRWS_hozfpVa7LzQKYVjSKkwCZ62JlmrhfdLvccMWiD6d2UQnLsx3Z0jor1eC6quDekHsT9HNFBcYa2trM7aeUWg1-QKqDaTJRvcZ55irtVX9VuSnZGaHY52O1H73GrcFzCo5d5cNRTKa0OtFto2W76oHsBoWS7stzxPhndPOUga_qp_qJIJMKhoy92RBEVFA0CjfR3WQ2v9cCYLIhcySuZXrXs6zp",
+    location: "Akobo, Ibadan",
+    price: "From ₦4.5M / year",
+    title: "The Heritage Estate",
+  },
+  {
+    alt: "Modern terrace home in Samonda with clean lines, layered balconies, and a bright Ibadan morning atmosphere.",
+    image:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuD5ykNcXqadDOyyAo5V2kPk-5O1gACTifq617zKwQ7949quzMAzy6ORmECcRmhoylPs9xqcvPZwALdpE7I8FoBq5D0I4WMbqXkV4M9FGn8cMl8XV-8oy1vLMhYkkCaltV8MzYoMNM_x0mzy_ZoMPAk4HQpX0G_aPtix0DGFEV4BRUHc5QaUA1yuWiEYCsZ_62xyfnb3gGQMWWF8oO9a5amv6DTeqoMXGynz5YEWIhiXOjRslYk0_tgNQgBlY-BUtKHCI0xHQ-oVFxdf",
+    location: "Samonda, Ibadan",
+    price: "From ₦2.2M / year",
+    title: "Samonda Heights Terrace",
+  },
+  {
+    alt: "Premium duplex with refined architecture and greenery in a secure residential part of Ibadan.",
+    image:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuAOHecTH1vNeJwg6WJkNy6qI_HUJJ5HAsI-j5lAooLTyXvJbFbEUXRb9bYS4T_nH3wFe3BajgIlSJyFv20iuDqG4d74NaJDLfndZbSmx47FqR6Wfk51-bXINa3RIx2jOXq4pStpqobZVPg4hBj-6ZEkx48t9LSALM3-1pvoLWjI9B5dEB_l4w9HFpd9WULRr6DFBk1xR1-_Lx83NLGnGItL2qDbPRsp-KnGdkBT6XAxJCMzv4nfZtg4MYKKd92l77G8N9WmxlVrIPS_",
+    location: "Bodija, Ibadan",
+    price: "From ₦4.5M / year",
+    title: "Onyx Garden Duplex",
+  },
 ];
 
 export default async function HomePage() {
@@ -207,36 +235,22 @@ export default async function HomePage() {
             </div>
 
             <div className="grid gap-5">
-              <div className="rounded-[2rem] bg-white/10 p-7 text-on-primary shadow-[var(--shadow-elevated-panel)] backdrop-blur-md">
-                <p className="font-headline text-sm font-bold uppercase tracking-[0.22em] text-tertiary-fixed-dim">
-                  Trust Layer
-                </p>
-                <h2 className="mt-4 font-headline text-3xl font-black tracking-[-0.04em]">
-                  Renting should feel secure before the first inspection.
-                </h2>
-                <p className="mt-4 text-base leading-8 text-primary-fixed">
-                  Every strong Dwelio flow starts with clarity: who owns the
-                  listing, what the payment covers, and what happens after you
-                  commit.
-                </p>
-                <div className="mt-6 grid gap-3">
-                  {[
-                    "Verified landlord identity before deeper commitment",
-                    "Digital tenancy records and clearer receipts",
-                    "Escrow-first protection around move-in",
-                  ].map((item) => (
-                    <div
-                      key={item}
-                      className="rounded-[1.25rem] bg-surface-container-lowest/90 px-4 py-3 text-sm font-medium leading-6 text-primary-container"
-                    >
-                      {item}
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <HeroSlideshow slides={heroSlides} />
 
               <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
-                {featuredNeighbourhoods.map((neighbourhood) => (
+                <div className="rounded-[1.75rem] bg-white/10 p-5 text-on-primary shadow-[var(--shadow-editorial-card)] backdrop-blur-md">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-tertiary-fixed-dim">
+                    Trust Layer
+                  </p>
+                  <h3 className="mt-3 font-headline text-xl font-black tracking-[-0.03em]">
+                    Escrow-first move-ins
+                  </h3>
+                  <p className="mt-2 text-sm leading-6 text-primary-fixed">
+                    Better payment clarity, digital agreements, and a stronger
+                    record of what was promised before keys change hands.
+                  </p>
+                </div>
+                {featuredNeighbourhoods.slice(0, 2).map((neighbourhood) => (
                   <div
                     key={neighbourhood.name}
                     className="rounded-[1.75rem] bg-surface-container-lowest p-5 text-primary-container shadow-[var(--shadow-editorial-card)]"

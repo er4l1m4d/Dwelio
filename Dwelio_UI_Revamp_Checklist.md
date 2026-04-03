@@ -222,21 +222,21 @@
 
 ### Checklist
 
-- [ ] Rework the listing detail page to match the approved visual hierarchy.
-- [ ] Add or refine the breadcrumb row if it helps orientation.
-- [ ] Replace the current gallery with the more premium collage-style presentation.
-- [ ] Preserve video support while making it visually consistent with the gallery.
-- [ ] Upgrade the title, location, and stat row hierarchy.
-- [ ] Split content into clearer sections:
+- [x] Rework the listing detail page to match the approved visual hierarchy.
+- [x] Add or refine the breadcrumb row if it helps orientation.
+- [x] Replace the current gallery with the more premium collage-style presentation.
+- [x] Preserve video support while making it visually consistent with the gallery.
+- [x] Upgrade the title, location, and stat row hierarchy.
+- [x] Split content into clearer sections:
   - narrative / description
   - property highlights
   - trust indicators
   - landlord profile
-- [ ] Introduce the trust block for verified listing / legal readiness if supported by real data.
-- [ ] Rebuild the sidebar into a sticky pricing / action card.
-- [ ] Include pricing breakdown, escrow framing, and direct messaging CTA.
-- [ ] Add a mini-map or location summary treatment if the data is available.
-- [ ] Keep all existing behavior working:
+- [x] Introduce the trust block for verified listing / legal readiness if supported by real data.
+- [x] Rebuild the sidebar into a sticky pricing / action card.
+- [x] Include pricing breakdown, escrow framing, and direct messaging CTA.
+- [x] Add a mini-map or location summary treatment if the data is available.
+- [x] Keep all existing behavior working:
   - listing fetch
   - view count update
   - landlord lookup
@@ -252,25 +252,27 @@
 
 ### Checklist
 
-- [ ] Reframe the page as a secure checkout / tenancy completion experience.
-- [ ] Replace the simple payment card with the approved two-column summary + payment layout.
-- [ ] Add a richer booking summary with:
+- [x] Reframe the page as a secure checkout / tenancy completion experience.
+- [x] Replace the simple payment card with the approved two-column summary + payment layout.
+- [x] Add a richer booking summary with:
   - property snapshot
   - landlord summary
   - rent breakdown
-- [ ] Add a tenancy agreement presentation area.
-- [ ] Decide whether digital signature is visual-only for now or tied to real agreement flow.
-- [ ] Keep Paystack integration intact while upgrading the payment option UI.
-- [ ] Clearly separate:
+- [x] Add a tenancy agreement presentation area.
+- [x] Decide whether digital signature is visual-only for now or tied to real agreement flow.
+  - Decision: keep the signature area visible in phase 1 as a visual preview only.
+  - Rule: final agreement execution still continues in the dedicated agreement flow after payment confirmation.
+- [x] Keep Paystack integration intact while upgrading the payment option UI.
+- [x] Clearly separate:
   - rent amount
   - service fee
   - caution / escrow fees
   - total payable
-- [ ] Add trust-supporting UI:
+- [x] Add trust-supporting UI:
   - escrow explanation
   - support contact module
   - no-hidden-fees reassurance
-- [ ] Ensure loading, error, and missing-key states still look deliberate after the redesign.
+- [x] Ensure loading, error, and missing-key states still look deliberate after the redesign.
 
 ---
 

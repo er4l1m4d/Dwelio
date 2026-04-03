@@ -87,6 +87,12 @@ body {
   font-family: var(--font-manrope), Arial, Helvetica, sans-serif;
 }
 
+:where(a, button, input, select, textarea, summary, [role="button"]):focus-visible {
+  outline: 3px solid var(--tertiary-fixed-dim);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px rgb(251 188 0 / 18%);
+}
+
 .material-symbols-outlined {
   font-variation-settings:
     "FILL" 0,
@@ -104,4 +110,18 @@ h5,
 h6 {
   font-family: var(--font-epilogue), var(--font-manrope), Arial, Helvetica, sans-serif;
   letter-spacing: -0.02em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -208,7 +208,7 @@
 - [x] Decide whether "AI Match" appears now or only when recommendation logic is real.
   - Decision: omit AI Match in phase 1 until recommendation logic is real enough to justify the UI.
 - [x] Add an intentional empty state that matches the new design system.
-- [ ] Make sure the mobile search experience does not become cramped or over-layered.
+- [x] Make sure the mobile search experience does not become cramped or over-layered.
 
 ---
 
@@ -331,7 +331,7 @@
 - [ ] Check color contrast for green, amber, and muted text combinations.
 - [ ] Ensure all icon-only buttons have accessible labels.
 - [ ] Ensure keyboard navigation works for nav, filters, gallery controls, and payment actions.
-- [ ] Ensure focus states are visible and consistent.
+- [x] Ensure focus states are visible and consistent.
 - [ ] Ensure headings follow a logical hierarchy on each page.
 - [ ] Ensure links and buttons are visually distinct.
 - [ ] Ensure form controls have labels and helpful error states.

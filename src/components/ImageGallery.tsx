@@ -52,7 +52,9 @@ export default function ImageGallery({
       >
         <div
           className={`relative overflow-hidden rounded-[2rem] bg-surface-container shadow-[var(--shadow-elevated-panel)] ${
-            showSupportingGrid ? "md:col-span-8 min-h-[420px]" : "min-h-[440px]"
+            showSupportingGrid
+              ? "min-h-[320px] sm:min-h-[380px] md:col-span-8 md:min-h-[420px]"
+              : "min-h-[320px] sm:min-h-[420px] md:min-h-[440px]"
           }`}
         >
           <Image
@@ -115,7 +117,7 @@ export default function ImageGallery({
                   key={`${images[index]}-${position}`}
                   type="button"
                   onClick={() => setActiveIndex(index)}
-                  className="group relative min-h-[202px] overflow-hidden rounded-[1.75rem] bg-surface-container shadow-[var(--shadow-editorial-card)]"
+                  className="group relative min-h-[140px] overflow-hidden rounded-[1.75rem] bg-surface-container shadow-[var(--shadow-editorial-card)] sm:min-h-[180px] md:min-h-[202px]"
                 >
                   <Image
                     src={images[index]}
@@ -155,7 +157,7 @@ export default function ImageGallery({
               key={`${image}-${index}`}
               type="button"
               onClick={() => setActiveIndex(index)}
-              className={`relative h-20 w-28 shrink-0 overflow-hidden rounded-[1.25rem] shadow-[var(--shadow-floating-pane)] transition ${
+              className={`relative h-16 w-24 shrink-0 overflow-hidden rounded-[1.25rem] shadow-[var(--shadow-floating-pane)] transition sm:h-20 sm:w-28 ${
                 index === activeIndex
                   ? "ring-2 ring-primary-container"
                   : "opacity-80 hover:opacity-100"

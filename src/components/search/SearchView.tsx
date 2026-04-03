@@ -38,6 +38,8 @@ const defaultFilters: SearchFilters = {
   bedrooms: "",
 };
 
+const NAIRA_SYMBOL = "\u20A6";
+
 type SearchViewProps = {
   listings: SearchListing[];
   verifiedMap: Map<string, boolean | null | undefined>;
@@ -62,7 +64,7 @@ const quickFilterDefinitions = [
     nextFilters: (filters: SearchFilters) => ({ ...filters, type: "sale" }),
   },
   {
-    label: "Under ₦1.5M",
+    label: `Under ${NAIRA_SYMBOL}1.5M`,
     isActive: (filters: SearchFilters) => filters.maxPrice === "1500000",
     nextFilters: (filters: SearchFilters) => ({
       ...filters,
@@ -225,12 +227,12 @@ export default function SearchView({
                 </span>{" "}
                 active filters
               </div>
-              <div className="inline-flex rounded-full bg-surface-container-lowest p-1 shadow-[var(--shadow-floating-pane)]">
+              <div className="inline-flex w-full rounded-full bg-surface-container-lowest p-1 shadow-[var(--shadow-floating-pane)] sm:w-auto">
                 <button
                   type="button"
                   onClick={() => updateView("list")}
                   disabled={pending}
-                  className={`inline-flex h-10 items-center rounded-full px-4 font-headline text-sm font-bold transition ${
+                  className={`inline-flex h-10 flex-1 items-center justify-center rounded-full px-4 font-headline text-sm font-bold transition sm:flex-none ${
                     view === "list"
                       ? "bg-primary-container text-on-primary"
                       : "text-on-surface-variant hover:text-primary-container"
@@ -242,7 +244,7 @@ export default function SearchView({
                   type="button"
                   onClick={() => updateView("map")}
                   disabled={pending}
-                  className={`inline-flex h-10 items-center rounded-full px-4 font-headline text-sm font-bold transition ${
+                  className={`inline-flex h-10 flex-1 items-center justify-center rounded-full px-4 font-headline text-sm font-bold transition sm:flex-none ${
                     view === "map"
                       ? "bg-primary-container text-on-primary"
                       : "text-on-surface-variant hover:text-primary-container"

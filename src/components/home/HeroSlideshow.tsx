@@ -35,7 +35,7 @@ export default function HeroSlideshow({ slides }: HeroSlideshowProps) {
 
   return (
     <div className="overflow-hidden rounded-[2.25rem] bg-white/10 shadow-[var(--shadow-elevated-panel)] backdrop-blur-md">
-      <div className="relative min-h-[420px]">
+      <div className="relative min-h-[360px] sm:min-h-[420px]">
         {slides.map((slide, index) => (
           <div
             key={slide.title}
@@ -66,8 +66,8 @@ export default function HeroSlideshow({ slides }: HeroSlideshowProps) {
           </div>
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0 p-6">
-          <div className="rounded-[1.75rem] bg-surface-container-lowest/88 p-5 text-primary-container backdrop-blur-xl">
+        <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
+          <div className="rounded-[1.75rem] bg-surface-container-lowest/88 p-4 text-primary-container backdrop-blur-xl sm:p-5">
             <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
               <div className="space-y-2">
                 <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
@@ -99,7 +99,7 @@ export default function HeroSlideshow({ slides }: HeroSlideshowProps) {
                 </div>
                 <Link
                   href="/search"
-                  className="group inline-flex h-[72px] w-[220px] shrink-0 items-center justify-between rounded-[1.25rem] px-3 py-2 text-primary-container"
+                  className="group inline-flex h-[68px] w-full shrink-0 items-center justify-between rounded-[1.25rem] px-3 py-2 text-primary-container sm:h-[72px] sm:w-[220px]"
                 >
                   <div className="min-w-0">
                     <span className="block text-[10px] font-bold uppercase tracking-[0.22em] text-on-tertiary-container">

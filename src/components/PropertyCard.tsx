@@ -70,7 +70,7 @@ export default function PropertyCard({
       </div>
 
       <div className="flex flex-1 flex-col gap-5 p-6">
-        <div className="flex items-start justify-between gap-4">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div className="min-w-0">
             <h3 className="font-headline text-2xl font-black tracking-[-0.03em] text-primary-container">
               {title}
@@ -81,7 +81,7 @@ export default function PropertyCard({
             </p>
           </div>
 
-          <div className="shrink-0 text-right">
+          <div className="shrink-0 text-left sm:text-right">
             <p className="font-headline text-2xl font-black text-on-tertiary-container">
               {formatCompactPrice(price)}
             </p>

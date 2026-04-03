@@ -13,7 +13,7 @@ const ibadanCenter = { lat: 7.3775, lng: 3.947 };
 
 const containerStyle = {
   width: "100%",
-  height: "640px",
+  height: "clamp(420px, 70vh, 640px)",
 };
 
 const getOffset = (value: string, divisor: number) => {

@@ -349,7 +349,7 @@ export default function PayRentPage() {
               Step 3 of 3
             </span>
           </div>
-          <h1 className="mt-5 max-w-4xl font-headline text-5xl font-black tracking-[-0.05em] text-primary-container md:text-6xl">
+          <h1 className="mt-5 max-w-4xl font-headline text-4xl font-black tracking-[-0.05em] text-primary-container sm:text-5xl md:text-6xl">
             Complete your secure tenancy.
           </h1>
           <p className="mt-4 max-w-3xl text-lg leading-8 text-on-surface-variant">
@@ -366,7 +366,7 @@ export default function PayRentPage() {
 
         <div className="grid items-start gap-8 lg:grid-cols-12">
           <div className="space-y-8 lg:col-span-7">
-            <section className="rounded-[2rem] bg-surface-container-low p-8 shadow-[var(--shadow-editorial-card)]">
+            <section className="rounded-[2rem] bg-surface-container-low p-6 shadow-[var(--shadow-editorial-card)] md:p-8">
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <div>
                   <p className="font-headline text-sm font-bold uppercase tracking-[0.22em] text-on-tertiary-container">
@@ -513,7 +513,7 @@ export default function PayRentPage() {
                 </span>
               </div>
 
-              <div className="mt-6 rounded-[2rem] bg-surface-container-lowest p-8 shadow-[var(--shadow-editorial-card)]">
+              <div className="mt-6 rounded-[2rem] bg-surface-container-lowest p-6 shadow-[var(--shadow-editorial-card)] md:p-8">
                 <div className="h-[24rem] overflow-y-auto rounded-[1.5rem] border border-outline-variant/40 bg-surface-container-low px-6 py-6">
                   <h3 className="text-center font-headline text-xl font-black tracking-[-0.03em] text-primary-container">
                     MEMORANDUM OF TENANCY PREVIEW
@@ -556,7 +556,7 @@ export default function PayRentPage() {
             </section>
           </div>
           <aside className="space-y-6 lg:sticky lg:top-28 lg:col-span-5">
-            <div className="relative overflow-hidden rounded-[2.25rem] bg-primary-container p-8 text-on-primary shadow-[var(--shadow-elevated-panel)]">
+            <div className="relative overflow-hidden rounded-[2.25rem] bg-primary-container p-6 text-on-primary shadow-[var(--shadow-elevated-panel)] md:p-8">
               <div className="pointer-events-none absolute inset-0">
                 <div className="absolute left-[-10%] top-[-15%] h-56 w-56 rounded-full bg-primary-fixed/10 blur-3xl" />
                 <div className="absolute bottom-[-20%] right-[-10%] h-48 w-48 rounded-full bg-tertiary-fixed-dim/10 blur-3xl" />
@@ -635,7 +635,7 @@ export default function PayRentPage() {
             </div>
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <div className="rounded-[1.5rem] bg-surface-container-low p-5 shadow-[var(--shadow-editorial-card)]">
+              <div className="rounded-[1.5rem] bg-surface-container-low p-4 shadow-[var(--shadow-editorial-card)] md:p-5">
                 <span
                   className="material-symbols-outlined text-primary-container"
                   style={{ fontVariationSettings: '"FILL" 1, "wght" 500' }}
@@ -651,7 +651,7 @@ export default function PayRentPage() {
                 </p>
               </div>
 
-              <div className="rounded-[1.5rem] bg-surface-container-low p-5 shadow-[var(--shadow-editorial-card)]">
+              <div className="rounded-[1.5rem] bg-surface-container-low p-4 shadow-[var(--shadow-editorial-card)] md:p-5">
                 <span
                   className="material-symbols-outlined text-primary-container"
                   style={{ fontVariationSettings: '"FILL" 1, "wght" 500' }}
@@ -667,7 +667,7 @@ export default function PayRentPage() {
                 </p>
               </div>
 
-              <div className="rounded-[1.5rem] bg-surface-container-low p-5 shadow-[var(--shadow-editorial-card)]">
+              <div className="rounded-[1.5rem] bg-surface-container-low p-4 shadow-[var(--shadow-editorial-card)] md:p-5">
                 <span
                   className="material-symbols-outlined text-primary-container"
                   style={{ fontVariationSettings: '"FILL" 1, "wght" 500' }}
@@ -683,7 +683,7 @@ export default function PayRentPage() {
                 </p>
               </div>
 
-              <div className="rounded-[1.5rem] bg-surface-container-low p-5 shadow-[var(--shadow-editorial-card)]">
+              <div className="rounded-[1.5rem] bg-surface-container-low p-4 shadow-[var(--shadow-editorial-card)] md:p-5">
                 <span
                   className="material-symbols-outlined text-primary-container"
                   style={{ fontVariationSettings: '"FILL" 1, "wght" 500' }}

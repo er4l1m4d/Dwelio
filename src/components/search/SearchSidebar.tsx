@@ -11,6 +11,7 @@ type SearchSidebarProps = {
 };
 
 const bedroomOptions = ["", "1", "2", "3", "4"];
+const NAIRA_SYMBOL = "\u20A6";
 
 export default function SearchSidebar({
   filters,
@@ -111,7 +112,7 @@ export default function SearchSidebar({
                 }
                 disabled={pending}
                 type="number"
-                placeholder="₦0"
+                placeholder={`${NAIRA_SYMBOL}0`}
                 className="h-12 w-full min-w-0 rounded-[1rem] border border-outline-variant/40 bg-surface-container-lowest px-4 font-medium text-primary-container outline-none transition focus:border-primary-container/20 focus:ring-4 focus:ring-surface-tint/10"
               />
             </label>
@@ -127,7 +128,7 @@ export default function SearchSidebar({
                 }
                 disabled={pending}
                 type="number"
-                placeholder="₦1,500,000"
+                placeholder={`${NAIRA_SYMBOL}1,500,000`}
                 className="h-12 w-full min-w-0 rounded-[1rem] border border-outline-variant/40 bg-surface-container-lowest px-4 font-medium text-primary-container outline-none transition focus:border-primary-container/20 focus:ring-4 focus:ring-surface-tint/10"
               />
             </label>

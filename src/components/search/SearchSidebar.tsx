@@ -41,7 +41,7 @@ export default function SearchSidebar({
         </div>
 
         <div className="mt-6 grid gap-5 text-sm">
-          <label className="grid gap-2">
+          <label className="grid min-w-0 gap-2">
             <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
               Listing Type
             </span>
@@ -49,7 +49,7 @@ export default function SearchSidebar({
               value={filters.type}
               onChange={(event) => onFieldChange("type")(event.target.value)}
               disabled={pending}
-              className="h-12 rounded-[1rem] border border-outline-variant/40 bg-surface-container-lowest px-4 font-medium text-primary-container outline-none transition focus:border-primary-container/20 focus:ring-4 focus:ring-surface-tint/10"
+              className="h-12 w-full min-w-0 rounded-[1rem] border border-outline-variant/40 bg-surface-container-lowest px-4 font-medium text-primary-container outline-none transition focus:border-primary-container/20 focus:ring-4 focus:ring-surface-tint/10"
             >
               <option value="">All listings</option>
               <option value="rent">Rent</option>
@@ -57,7 +57,7 @@ export default function SearchSidebar({
             </select>
           </label>
 
-          <label className="grid gap-2">
+          <label className="grid min-w-0 gap-2">
             <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
               Property Type
             </span>
@@ -67,7 +67,7 @@ export default function SearchSidebar({
                 onFieldChange("propertyType")(event.target.value)
               }
               disabled={pending}
-              className="h-12 rounded-[1rem] border border-outline-variant/40 bg-surface-container-lowest px-4 font-medium text-primary-container outline-none transition focus:border-primary-container/20 focus:ring-4 focus:ring-surface-tint/10"
+              className="h-12 w-full min-w-0 rounded-[1rem] border border-outline-variant/40 bg-surface-container-lowest px-4 font-medium text-primary-container outline-none transition focus:border-primary-container/20 focus:ring-4 focus:ring-surface-tint/10"
             >
               <option value="">All homes</option>
               <option value="flat">Flat</option>
@@ -78,7 +78,7 @@ export default function SearchSidebar({
             </select>
           </label>
 
-          <label className="grid gap-2">
+          <label className="grid min-w-0 gap-2">
             <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
               Neighbourhood
             </span>
@@ -88,7 +88,7 @@ export default function SearchSidebar({
                 onFieldChange("neighbourhood")(event.target.value)
               }
               disabled={pending}
-              className="h-12 rounded-[1rem] border border-outline-variant/40 bg-surface-container-lowest px-4 font-medium text-primary-container outline-none transition focus:border-primary-container/20 focus:ring-4 focus:ring-surface-tint/10"
+              className="h-12 w-full min-w-0 rounded-[1rem] border border-outline-variant/40 bg-surface-container-lowest px-4 font-medium text-primary-container outline-none transition focus:border-primary-container/20 focus:ring-4 focus:ring-surface-tint/10"
             >
               <option value="">Anywhere in Ibadan</option>
               {neighbourhoods.map((option) => (
@@ -99,8 +99,8 @@ export default function SearchSidebar({
             </select>
           </label>
 
-          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-1 2xl:grid-cols-2">
-            <label className="grid gap-2">
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-1">
+            <label className="grid min-w-0 gap-2">
               <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
                 Min Price
               </span>
@@ -112,11 +112,11 @@ export default function SearchSidebar({
                 disabled={pending}
                 type="number"
                 placeholder="₦0"
-                className="h-12 rounded-[1rem] border border-outline-variant/40 bg-surface-container-lowest px-4 font-medium text-primary-container outline-none transition focus:border-primary-container/20 focus:ring-4 focus:ring-surface-tint/10"
+                className="h-12 w-full min-w-0 rounded-[1rem] border border-outline-variant/40 bg-surface-container-lowest px-4 font-medium text-primary-container outline-none transition focus:border-primary-container/20 focus:ring-4 focus:ring-surface-tint/10"
               />
             </label>
 
-            <label className="grid gap-2">
+            <label className="grid min-w-0 gap-2">
               <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
                 Max Price
               </span>
@@ -128,12 +128,12 @@ export default function SearchSidebar({
                 disabled={pending}
                 type="number"
                 placeholder="₦1,500,000"
-                className="h-12 rounded-[1rem] border border-outline-variant/40 bg-surface-container-lowest px-4 font-medium text-primary-container outline-none transition focus:border-primary-container/20 focus:ring-4 focus:ring-surface-tint/10"
+                className="h-12 w-full min-w-0 rounded-[1rem] border border-outline-variant/40 bg-surface-container-lowest px-4 font-medium text-primary-container outline-none transition focus:border-primary-container/20 focus:ring-4 focus:ring-surface-tint/10"
               />
             </label>
           </div>
 
-          <label className="grid gap-2">
+          <label className="grid min-w-0 gap-2">
             <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
               Bedrooms
             </span>
@@ -141,7 +141,7 @@ export default function SearchSidebar({
               value={filters.bedrooms}
               onChange={(event) => onFieldChange("bedrooms")(event.target.value)}
               disabled={pending}
-              className="h-12 rounded-[1rem] border border-outline-variant/40 bg-surface-container-lowest px-4 font-medium text-primary-container outline-none transition focus:border-primary-container/20 focus:ring-4 focus:ring-surface-tint/10"
+              className="h-12 w-full min-w-0 rounded-[1rem] border border-outline-variant/40 bg-surface-container-lowest px-4 font-medium text-primary-container outline-none transition focus:border-primary-container/20 focus:ring-4 focus:ring-surface-tint/10"
             >
               <option value="">Any size</option>
               {bedroomOptions

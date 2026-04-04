@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
+import { buildConversationId } from "@/lib/messages/conversation";
 
 type MessageLandlordButtonProps = {
   landlordId: string;
@@ -21,16 +22,16 @@ export default function MessageLandlordButton({
   const handleClick = () => {
     setError(null);
     startTransition(async () => {
+      const conversationId = buildConversationId(landlordId, propertyId);
+
       const {
         data: { user },
       } = await supabase.auth.getUser();
 
       if (!user) {
-        router.push("/login");
+        router.push(`/login?redirect=${encodeURIComponent(`/messages/${conversationId}`)}`);
         return;
       }
-
-      const conversationId = `${landlordId}-${propertyId}`;
 
       router.push(`/messages/${conversationId}`);
     });

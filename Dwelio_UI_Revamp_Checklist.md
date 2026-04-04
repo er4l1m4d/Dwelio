@@ -297,18 +297,23 @@
 
 ## 10. Interaction And Motion
 
-- [ ] Add subtle, intentional hover states instead of generic scaling everywhere.
-- [ ] Use motion sparingly on:
+- [x] Add subtle, intentional hover states instead of generic scaling everywhere.
+- [x] Use motion sparingly on:
   - cards
   - image zoom
   - CTA emphasis
   - sticky panels
-- [ ] Keep blur, glass, and shadow effects performant on lower-end devices.
-- [ ] Ensure transitions do not interfere with keyboard focus or touch interactions.
+- [x] Keep blur, glass, and shadow effects performant on lower-end devices.
+- [x] Ensure transitions do not interfere with keyboard focus or touch interactions.
 
 ---
 
 ## 11. Responsive Review
+
+Code pass note:
+- Hero badges now wrap more safely on narrow widths.
+- Homepage problem-card mosaic now stacks on mobile before shifting to two columns.
+- Search map status pills now stack on small screens instead of competing for the same top row.
 
 - [ ] Review all updated screens at:
   - 360px
@@ -328,13 +333,17 @@
 
 ## 12. Accessibility Checklist
 
-- [ ] Check color contrast for green, amber, and muted text combinations.
-- [ ] Ensure all icon-only buttons have accessible labels.
-- [ ] Ensure keyboard navigation works for nav, filters, gallery controls, and payment actions.
+Code pass note:
+- Contrast was tightened for amber-on-light usage by darkening `on-tertiary-container`.
+- Nav menus, notifications, search toggles, slide indicators, and payment error states now expose clearer accessibility semantics.
+
+- [x] Check color contrast for green, amber, and muted text combinations.
+- [x] Ensure all icon-only buttons have accessible labels.
+- [x] Ensure keyboard navigation works for nav, filters, gallery controls, and payment actions.
 - [x] Ensure focus states are visible and consistent.
-- [ ] Ensure headings follow a logical hierarchy on each page.
-- [ ] Ensure links and buttons are visually distinct.
-- [ ] Ensure form controls have labels and helpful error states.
+- [x] Ensure headings follow a logical hierarchy on each page.
+- [x] Ensure links and buttons are visually distinct.
+- [x] Ensure form controls have labels and helpful error states.
 
 ---
 
@@ -345,7 +354,7 @@
 - [x] Avoid shipping huge background images without optimization.
 - [x] Keep the map view from blocking first meaningful paint for list-first users.
 - [x] Ensure skeletons and loading states match the new UI instead of flashing the old style.
-- [ ] Check that the global redesign does not accidentally regress auth or messaging flows.
+- [x] Check that the global redesign does not accidentally regress auth or messaging flows.
 
 ---
 

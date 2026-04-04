@@ -49,8 +49,8 @@ export default function HeroSlideshow({ slides }: HeroSlideshowProps) {
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,27,15,0.08)_0%,rgba(0,27,15,0.22)_35%,rgba(0,27,15,0.82)_100%)]" />
         </div>
 
-        <div className="absolute left-6 top-6">
-          <div className="inline-flex items-center gap-2 rounded-full bg-surface-container-lowest/90 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-container backdrop-blur-md">
+        <div className="absolute left-4 top-4 right-4 sm:left-6 sm:right-auto sm:top-6">
+          <div className="inline-flex max-w-full flex-wrap items-center gap-2 rounded-full bg-surface-container-lowest/90 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-container backdrop-blur-md">
             <span
               className="material-symbols-outlined text-[18px]"
               style={{ fontVariationSettings: '"FILL" 1, "wght" 600' }}
@@ -83,18 +83,19 @@ export default function HeroSlideshow({ slides }: HeroSlideshowProps) {
                       key={slide.title}
                       type="button"
                       onClick={() => setActiveIndex(index)}
-                      className={`h-2.5 rounded-full transition-all ${
+                      className={`motion-indicator h-2.5 rounded-full ${
                         index === activeIndex
                           ? "w-8 bg-primary-container"
                           : "w-2.5 bg-outline-variant"
                       }`}
                       aria-label={`Show slide ${index + 1}`}
+                      aria-pressed={index === activeIndex}
                     />
                   ))}
                 </div>
                 <Link
                   href="/search"
-                  className="group inline-flex h-[68px] w-full shrink-0 items-center justify-between rounded-[1.25rem] px-3 py-2 text-primary-container sm:h-[72px] sm:w-[220px]"
+                  className="group motion-card-subtle motion-icon-group inline-flex h-[68px] w-full shrink-0 items-center justify-between rounded-[1.25rem] px-3 py-2 text-primary-container sm:h-[72px] sm:w-[220px]"
                 >
                   <div className="min-w-0">
                     <span className="block text-[10px] font-bold uppercase tracking-[0.22em] text-on-tertiary-container">
@@ -105,8 +106,8 @@ export default function HeroSlideshow({ slides }: HeroSlideshowProps) {
                     </span>
                     <span className="mt-2 block h-0.5 w-20 bg-tertiary-fixed-dim" />
                   </div>
-                  <span className="flex h-11 w-11 items-center justify-center rounded-full border border-outline-variant/60 bg-surface-container-lowest text-primary-container shadow-[var(--shadow-editorial-card)] transition duration-300 group-hover:-translate-y-0.5 group-hover:border-primary-container/20 group-hover:bg-surface-container-low">
-                    <span className="material-symbols-outlined text-[18px] transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+                  <span className="motion-icon flex h-11 w-11 items-center justify-center rounded-full border border-outline-variant/60 bg-surface-container-lowest text-primary-container shadow-[var(--shadow-editorial-card)]">
+                    <span className="material-symbols-outlined text-[18px]">
                       north_east
                     </span>
                   </span>

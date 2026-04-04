@@ -16,6 +16,7 @@ export default function NotificationsDropdown() {
   const supabase = createSupabaseBrowserClient();
   const [open, setOpen] = useState(false);
   const [items, setItems] = useState<Notification[]>([]);
+  const panelId = "notifications-panel";
 
   useEffect(() => {
     let mounted = true;
@@ -83,13 +84,20 @@ export default function NotificationsDropdown() {
         onClick={() => setOpen((prev) => !prev)}
         className="relative flex h-11 w-11 items-center justify-center rounded-full bg-surface-container-lowest text-primary-container shadow-[var(--shadow-floating-pane)] transition hover:bg-surface-container-low"
         aria-label="Notifications"
+        aria-controls={panelId}
+        aria-expanded={open}
       >
         <span className="material-symbols-outlined text-[22px]">
           notifications
         </span>
       </button>
       {open && (
-        <div className="absolute right-0 mt-3 w-72 rounded-[1.5rem] bg-surface-container-lowest p-4 shadow-[var(--shadow-elevated-panel)]">
+        <div
+          id={panelId}
+          role="region"
+          aria-label="Notifications panel"
+          className="absolute right-0 mt-3 w-72 rounded-[1.5rem] bg-surface-container-lowest p-4 shadow-[var(--shadow-elevated-panel)]"
+        >
           <p className="font-headline text-sm font-bold text-primary-container">
             Notifications
           </p>

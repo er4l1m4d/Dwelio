@@ -23,7 +23,7 @@
   --tertiary-fixed-dim: #fbbc00;
   --tertiary-container: #392800;
   --on-tertiary-fixed: #261a00;
-  --on-tertiary-container: #ba8a00;
+  --on-tertiary-container: #7a5200;
   --on-surface: #1a1c1a;
   --on-surface-variant: #414943;
   --surface-tint: #3b6751;
@@ -87,6 +87,42 @@ body {
   font-family: var(--font-manrope), Arial, Helvetica, sans-serif;
 }
 
+.motion-card,
+.motion-card-subtle,
+.motion-icon,
+.motion-indicator,
+.motion-image,
+.motion-opacity {
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.motion-card,
+.motion-card-subtle {
+  transition-property: transform, box-shadow, border-color, background-color, opacity;
+  transition-duration: 220ms;
+}
+
+.motion-icon {
+  transition-property: transform, border-color, background-color, color;
+  transition-duration: 220ms;
+}
+
+.motion-indicator {
+  transition-property: width, background-color, opacity;
+  transition-duration: 220ms;
+}
+
+.motion-image {
+  transform-origin: center;
+  transition-property: transform, filter;
+  transition-duration: 700ms;
+}
+
+.motion-opacity {
+  transition-property: opacity, border-color, background-color, color;
+  transition-duration: 220ms;
+}
+
 :where(a, button, input, select, textarea, summary, [role="button"]):focus-visible {
   outline: 3px solid var(--tertiary-fixed-dim);
   outline-offset: 3px;
@@ -112,6 +148,37 @@ h6 {
   letter-spacing: -0.02em;
 }
 
+@media (hover: hover) and (pointer: fine) {
+  .motion-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 28px 64px -32px rgb(1 50 32 / 20%);
+  }
+
+  .motion-card-subtle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 24px 44px -28px rgb(1 50 32 / 16%);
+  }
+
+  .motion-image-frame:hover .motion-image {
+    transform: scale(1.04);
+  }
+
+  .motion-icon-group:hover .motion-icon {
+    transform: translate3d(2px, -2px, 0);
+  }
+
+  .motion-icon-button:hover .motion-icon {
+    transform: translate3d(0, -1px, 0);
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  [class*="backdrop-blur"] {
+    -webkit-backdrop-filter: blur(10px) !important;
+    backdrop-filter: blur(10px) !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -123,5 +190,13 @@ h6 {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .motion-card:hover,
+  .motion-card-subtle:hover,
+  .motion-image-frame:hover .motion-image,
+  .motion-icon-group:hover .motion-icon,
+  .motion-icon-button:hover .motion-icon {
+    transform: none !important;
   }
 }

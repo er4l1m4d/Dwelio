@@ -80,7 +80,7 @@ export default function ImageGallery({
                   prev === 0 ? images.length - 1 : prev - 1,
                 )
               }
-              className="flex h-11 w-11 items-center justify-center rounded-full bg-surface-container-lowest/92 text-primary-container shadow-[var(--shadow-floating-pane)] backdrop-blur-md transition hover:bg-surface-container-low"
+              className="motion-card-subtle flex h-11 w-11 items-center justify-center rounded-full bg-surface-container-lowest/92 text-primary-container shadow-[var(--shadow-floating-pane)] backdrop-blur-md"
               aria-label="Show previous image"
             >
               <span className="material-symbols-outlined text-[20px]">
@@ -94,7 +94,7 @@ export default function ImageGallery({
                   prev === images.length - 1 ? 0 : prev + 1,
                 )
               }
-              className="flex h-11 w-11 items-center justify-center rounded-full bg-surface-container-lowest/92 text-primary-container shadow-[var(--shadow-floating-pane)] backdrop-blur-md transition hover:bg-surface-container-low"
+              className="motion-card-subtle flex h-11 w-11 items-center justify-center rounded-full bg-surface-container-lowest/92 text-primary-container shadow-[var(--shadow-floating-pane)] backdrop-blur-md"
               aria-label="Show next image"
             >
               <span className="material-symbols-outlined text-[20px]">
@@ -117,14 +117,14 @@ export default function ImageGallery({
                   key={`${images[index]}-${position}`}
                   type="button"
                   onClick={() => setActiveIndex(index)}
-                  className="group relative min-h-[140px] overflow-hidden rounded-[1.75rem] bg-surface-container shadow-[var(--shadow-editorial-card)] sm:min-h-[180px] md:min-h-[202px]"
+                  className="group motion-card-subtle motion-image-frame relative min-h-[140px] overflow-hidden rounded-[1.75rem] bg-surface-container shadow-[var(--shadow-editorial-card)] sm:min-h-[180px] md:min-h-[202px]"
                 >
                   <Image
                     src={images[index]}
                     alt={`${title} image ${index + 1}`}
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover transition duration-500 group-hover:scale-105"
+                    className="motion-image object-cover"
                   />
                   <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,27,15,0.04)_0%,rgba(0,27,15,0.42)_100%)]" />
 
@@ -157,7 +157,7 @@ export default function ImageGallery({
               key={`${image}-${index}`}
               type="button"
               onClick={() => setActiveIndex(index)}
-              className={`relative h-16 w-24 shrink-0 overflow-hidden rounded-[1.25rem] shadow-[var(--shadow-floating-pane)] transition sm:h-20 sm:w-28 ${
+              className={`motion-card-subtle motion-image-frame relative h-16 w-24 shrink-0 overflow-hidden rounded-[1.25rem] shadow-[var(--shadow-floating-pane)] sm:h-20 sm:w-28 ${
                 index === activeIndex
                   ? "ring-2 ring-primary-container"
                   : "opacity-80 hover:opacity-100"
@@ -169,7 +169,7 @@ export default function ImageGallery({
                 alt=""
                 fill
                 sizes="112px"
-                className="object-cover"
+                className="motion-image object-cover"
               />
             </button>
           ))}

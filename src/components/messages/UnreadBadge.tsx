@@ -15,16 +15,21 @@ export default function UnreadBadge() {
         data: { user },
       } = await supabase.auth.getUser();
 
-      if (!user) return;
+      if (!user) {
+        if (mounted) {
+          setCount(0);
+        }
+        return;
+      }
 
-      const { data } = await supabase
+      const { count } = await supabase
         .from("messages")
         .select("id", { count: "exact", head: true })
         .eq("receiver_id", user.id)
         .eq("is_read", false);
 
       if (mounted) {
-        setCount(data?.length ?? 0);
+        setCount(count ?? 0);
       }
     };
 

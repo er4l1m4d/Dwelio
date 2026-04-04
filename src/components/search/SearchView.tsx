@@ -232,6 +232,8 @@ export default function SearchView({
                   type="button"
                   onClick={() => updateView("list")}
                   disabled={pending}
+                  aria-pressed={view === "list"}
+                  aria-label="Show results in list view"
                   className={`inline-flex h-10 flex-1 items-center justify-center rounded-full px-4 font-headline text-sm font-bold transition sm:flex-none ${
                     view === "list"
                       ? "bg-primary-container text-on-primary"
@@ -244,6 +246,8 @@ export default function SearchView({
                   type="button"
                   onClick={() => updateView("map")}
                   disabled={pending}
+                  aria-pressed={view === "map"}
+                  aria-label="Show results on the map"
                   className={`inline-flex h-10 flex-1 items-center justify-center rounded-full px-4 font-headline text-sm font-bold transition sm:flex-none ${
                     view === "map"
                       ? "bg-primary-container text-on-primary"
@@ -265,6 +269,7 @@ export default function SearchView({
                   key={chip.label}
                   type="button"
                   onClick={() => applyQuickFilter(chip.nextFilters(filters))}
+                  aria-pressed={active}
                   className={`shrink-0 rounded-full px-5 py-2.5 text-sm font-semibold transition ${
                     active
                       ? "bg-primary-container text-on-primary"

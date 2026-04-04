@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState, useTransition } from "react";
 import { useParams } from "next/navigation";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
+import { parseConversationId } from "@/lib/messages/conversation";
 
 type Message = {
   id: string;
@@ -24,12 +25,17 @@ export default function ConversationPage() {
   const conversationId = Array.isArray(params.conversationId)
     ? params.conversationId[0]
     : params.conversationId;
-  const [otherUserId, propertyId] = useMemo(
-    () => (conversationId ? conversationId.split("-") : ["", ""]),
+  const { otherUserId, propertyId } = useMemo(
+    () => parseConversationId(conversationId),
     [conversationId],
   );
 
   useEffect(() => {
+    if (!otherUserId || !propertyId) {
+      setMessages([]);
+      return;
+    }
+
     const loadConversation = async () => {
       const {
         data: { user },
@@ -42,7 +48,9 @@ export default function ConversationPage() {
         .from("messages")
         .select("id, sender_id, receiver_id, property_id, content, created_at")
         .eq("property_id", propertyId)
-        .or(`sender_id.eq.${user.id},receiver_id.eq.${user.id}`)
+        .or(
+          `and(sender_id.eq.${user.id},receiver_id.eq.${otherUserId}),and(sender_id.eq.${otherUserId},receiver_id.eq.${user.id})`,
+        )
         .order("created_at", { ascending: true });
 
       setMessages((data as Message[]) ?? []);
@@ -73,7 +81,22 @@ export default function ConversationPage() {
         },
         (payload) => {
           const newMessage = payload.new as Message;
-          setMessages((prev) => [...prev, newMessage]);
+          const belongsToConversation =
+            newMessage.property_id === propertyId &&
+            ((newMessage.sender_id === userId &&
+              newMessage.receiver_id === otherUserId) ||
+              (newMessage.sender_id === otherUserId &&
+                newMessage.receiver_id === userId));
+
+          if (!belongsToConversation) {
+            return;
+          }
+
+          setMessages((prev) =>
+            prev.some((message) => message.id === newMessage.id)
+              ? prev
+              : [...prev, newMessage],
+          );
         },
       )
       .subscribe();
@@ -81,10 +104,10 @@ export default function ConversationPage() {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [propertyId, supabase, userId]);
+  }, [otherUserId, propertyId, supabase, userId]);
 
   const handleSend = () => {
-    if (!text.trim() || !userId) return;
+    if (!text.trim() || !userId || !otherUserId || !propertyId) return;
 
     startTransition(async () => {
       await supabase.from("messages").insert({
@@ -106,42 +129,49 @@ export default function ConversationPage() {
           <p className="text-sm text-slate-600">Stay in sync with tenants and landlords.</p>
         </header>
 
-        <div className="flex flex-1 flex-col gap-4 rounded-3xl border border-emerald-100 bg-white/90 p-6 shadow-[0_20px_50px_rgba(16,42,24,0.08)] backdrop-blur">
-          <div className="flex max-h-[420px] flex-col gap-3 overflow-y-auto">
-            {messages.map((message) => {
-              const isSender = message.sender_id === userId;
-              return (
-                <div
-                  key={message.id}
-                  className={`max-w-[70%] rounded-2xl px-4 py-3 text-sm ${
-                    isSender
-                      ? "ml-auto bg-emerald-600 text-white"
-                      : "bg-slate-100 text-slate-700"
-                  }`}
-                >
-                  {message.content}
-                </div>
-              );
-            })}
+        {!otherUserId || !propertyId ? (
+          <div className="rounded-3xl border border-red-100 bg-white/90 p-6 text-sm text-slate-600 shadow-[0_20px_50px_rgba(16,42,24,0.08)] backdrop-blur">
+            This conversation link is invalid.
           </div>
+        ) : (
 
-          <div className="mt-auto flex gap-3">
-            <input
-              value={text}
-              onChange={(event) => setText(event.target.value)}
-              placeholder="Write a message..."
-              className="h-12 flex-1 rounded-full border border-slate-200 px-4 text-sm outline-none"
-            />
-            <button
-              type="button"
-              disabled={pending}
-              onClick={handleSend}
-              className="h-12 rounded-full bg-emerald-700 px-6 text-sm font-semibold text-white transition hover:bg-emerald-800 disabled:cursor-not-allowed disabled:opacity-70"
-            >
-              Send
-            </button>
+          <div className="flex flex-1 flex-col gap-4 rounded-3xl border border-emerald-100 bg-white/90 p-6 shadow-[0_20px_50px_rgba(16,42,24,0.08)] backdrop-blur">
+            <div className="flex max-h-[420px] flex-col gap-3 overflow-y-auto">
+              {messages.map((message) => {
+                const isSender = message.sender_id === userId;
+                return (
+                  <div
+                    key={message.id}
+                    className={`max-w-[70%] rounded-2xl px-4 py-3 text-sm ${
+                      isSender
+                        ? "ml-auto bg-emerald-600 text-white"
+                        : "bg-slate-100 text-slate-700"
+                    }`}
+                  >
+                    {message.content}
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="mt-auto flex gap-3">
+              <input
+                value={text}
+                onChange={(event) => setText(event.target.value)}
+                placeholder="Write a message..."
+                className="h-12 flex-1 rounded-full border border-slate-200 px-4 text-sm outline-none"
+              />
+              <button
+                type="button"
+                disabled={pending}
+                onClick={handleSend}
+                className="h-12 rounded-full bg-emerald-700 px-6 text-sm font-semibold text-white transition hover:bg-emerald-800 disabled:cursor-not-allowed disabled:opacity-70"
+              >
+                Send
+              </button>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

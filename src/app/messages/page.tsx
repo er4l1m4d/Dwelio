@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { MessageSquare } from "lucide-react";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { buildConversationId } from "@/lib/messages/conversation";
 
 export default async function MessagesPage() {
   const supabase = await createSupabaseServerClient();
@@ -78,7 +79,10 @@ export default async function MessagesPage() {
               const profile = profileMap.get(otherUserId);
               const property = propertyMap.get(message.property_id);
               const isUnread = !message.is_read && message.receiver_id === user.id;
-              const conversationId = `${otherUserId}-${message.property_id}`;
+              const conversationId = buildConversationId(
+                otherUserId,
+                message.property_id,
+              );
 
               return (
                 <Link

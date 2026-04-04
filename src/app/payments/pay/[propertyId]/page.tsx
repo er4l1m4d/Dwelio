@@ -359,7 +359,10 @@ export default function PayRentPage() {
         </header>
 
         {error && (
-          <div className="mb-8 rounded-[1.5rem] border border-error/20 bg-error-container px-5 py-4 text-sm text-on-error-container">
+          <div
+            role="alert"
+            className="mb-8 rounded-[1.5rem] border border-error/20 bg-error-container px-5 py-4 text-sm text-on-error-container"
+          >
             {error}
           </div>
         )}
@@ -556,7 +559,7 @@ export default function PayRentPage() {
             </section>
           </div>
           <aside className="space-y-6 lg:sticky lg:top-28 lg:col-span-5">
-            <div className="relative overflow-hidden rounded-[2.25rem] bg-primary-container p-6 text-on-primary shadow-[var(--shadow-elevated-panel)] md:p-8">
+            <div className="motion-card-subtle relative overflow-hidden rounded-[2.25rem] bg-primary-container p-6 text-on-primary shadow-[var(--shadow-elevated-panel)] md:p-8">
               <div className="pointer-events-none absolute inset-0">
                 <div className="absolute left-[-10%] top-[-15%] h-56 w-56 rounded-full bg-primary-fixed/10 blur-3xl" />
                 <div className="absolute bottom-[-20%] right-[-10%] h-48 w-48 rounded-full bg-tertiary-fixed-dim/10 blur-3xl" />
@@ -610,7 +613,7 @@ export default function PayRentPage() {
                     {...paystackConfig}
                     onSuccess={handleSuccess}
                     onClose={() => undefined}
-                    className="inline-flex h-16 w-full items-center justify-center rounded-[1.25rem] bg-surface-container-lowest px-6 font-headline text-sm font-black uppercase tracking-[0.14em] text-primary-container transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-70"
+                    className="motion-card-subtle inline-flex h-16 w-full items-center justify-center rounded-[1.25rem] bg-surface-container-lowest px-6 font-headline text-sm font-black uppercase tracking-[0.14em] text-primary-container disabled:cursor-not-allowed disabled:opacity-70"
                     disabled={pending || !paystackConfig.publicKey}
                   >
                     {pending ? "Processing payment..." : "Secure with Paystack"}
@@ -635,7 +638,7 @@ export default function PayRentPage() {
             </div>
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <div className="rounded-[1.5rem] bg-surface-container-low p-4 shadow-[var(--shadow-editorial-card)] md:p-5">
+              <div className="motion-card-subtle rounded-[1.5rem] bg-surface-container-low p-4 shadow-[var(--shadow-editorial-card)] md:p-5">
                 <span
                   className="material-symbols-outlined text-primary-container"
                   style={{ fontVariationSettings: '"FILL" 1, "wght" 500' }}
@@ -651,7 +654,7 @@ export default function PayRentPage() {
                 </p>
               </div>
 
-              <div className="rounded-[1.5rem] bg-surface-container-low p-4 shadow-[var(--shadow-editorial-card)] md:p-5">
+              <div className="motion-card-subtle rounded-[1.5rem] bg-surface-container-low p-4 shadow-[var(--shadow-editorial-card)] md:p-5">
                 <span
                   className="material-symbols-outlined text-primary-container"
                   style={{ fontVariationSettings: '"FILL" 1, "wght" 500' }}
@@ -667,7 +670,7 @@ export default function PayRentPage() {
                 </p>
               </div>
 
-              <div className="rounded-[1.5rem] bg-surface-container-low p-4 shadow-[var(--shadow-editorial-card)] md:p-5">
+              <div className="motion-card-subtle rounded-[1.5rem] bg-surface-container-low p-4 shadow-[var(--shadow-editorial-card)] md:p-5">
                 <span
                   className="material-symbols-outlined text-primary-container"
                   style={{ fontVariationSettings: '"FILL" 1, "wght" 500' }}
@@ -683,7 +686,7 @@ export default function PayRentPage() {
                 </p>
               </div>
 
-              <div className="rounded-[1.5rem] bg-surface-container-low p-4 shadow-[var(--shadow-editorial-card)] md:p-5">
+              <div className="motion-card-subtle rounded-[1.5rem] bg-surface-container-low p-4 shadow-[var(--shadow-editorial-card)] md:p-5">
                 <span
                   className="material-symbols-outlined text-primary-container"
                   style={{ fontVariationSettings: '"FILL" 1, "wght" 500' }}
@@ -700,7 +703,7 @@ export default function PayRentPage() {
               </div>
             </div>
 
-            <div className="flex items-center gap-4 rounded-[1.5rem] bg-surface-container-lowest p-5 shadow-[var(--shadow-editorial-card)]">
+            <div className="motion-card-subtle flex items-center gap-4 rounded-[1.5rem] bg-surface-container-lowest p-5 shadow-[var(--shadow-editorial-card)]">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-tertiary-fixed-dim/20 text-on-tertiary-container">
                 <span className="material-symbols-outlined">support_agent</span>
               </div>

@@ -140,7 +140,7 @@ export default async function HomePage() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,191,0,0.18),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(189,237,210,0.16),transparent_30%)]" />
           <div className="relative mx-auto grid w-full max-w-[1440px] gap-14 px-6 py-20 md:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:py-24">
             <div className="flex flex-col gap-8 text-on-primary">
-              <div className="inline-flex w-fit items-center gap-3 rounded-full bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-primary-fixed backdrop-blur-md">
+              <div className="inline-flex max-w-full flex-wrap items-center gap-3 rounded-full bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-primary-fixed backdrop-blur-md">
                 <span>Nigeria's full-stack property marketplace</span>
                 <span className="h-1.5 w-1.5 rounded-full bg-tertiary-fixed-dim" />
                 <span>Ibadan launch</span>
@@ -305,14 +305,14 @@ export default async function HomePage() {
                 <Link
                   key={listing.id}
                   href={`/listings/${listing.id}`}
-                  className="group overflow-hidden rounded-[2rem] bg-surface-container-lowest shadow-[var(--shadow-elevated-panel)]"
+                  className="group motion-card motion-image-frame overflow-hidden rounded-[2rem] bg-surface-container-lowest shadow-[var(--shadow-elevated-panel)]"
                 >
                   <div className="relative aspect-[4/5] overflow-hidden bg-surface-container">
                     <Image
                       src={listing.images?.[0] ?? "/vercel.svg"}
                       alt={listing.title}
                       fill
-                      className="object-cover transition duration-700 group-hover:scale-105"
+                      className="motion-image object-cover"
                     />
                     <div className="absolute inset-x-0 top-0 flex items-start justify-between p-4">
                       <span className="rounded-full bg-primary-container px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-on-primary">
@@ -415,12 +415,12 @@ export default async function HomePage() {
         </section>
 
         <section className="mx-auto grid w-full max-w-[1440px] gap-16 px-6 py-24 md:px-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {problemCards.map((card, index) => (
               <div
                 key={card.title}
                 className={`rounded-[1.75rem] p-6 shadow-[var(--shadow-editorial-card)] ${
-                  index % 2 === 1 ? "translate-y-6" : ""
+                  index % 2 === 1 ? "sm:translate-y-6" : ""
                 } ${card.tone}`}
               >
                 <span className="material-symbols-outlined text-[28px] text-primary-container">

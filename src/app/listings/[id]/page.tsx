@@ -416,7 +416,7 @@ export default async function ListingDetailPage({ params }: ListingPageProps) {
           </div>
 
           <aside className="grid gap-6 lg:sticky lg:top-28 lg:self-start">
-            <div className="rounded-[2.25rem] bg-surface-container-lowest p-7 shadow-[var(--shadow-elevated-panel)]">
+            <div className="motion-card-subtle rounded-[2.25rem] bg-surface-container-lowest p-7 shadow-[var(--shadow-elevated-panel)]">
               <p className="text-xs font-bold uppercase tracking-[0.24em] text-on-surface-variant">
                 Pricing
               </p>
@@ -486,7 +486,7 @@ export default async function ListingDetailPage({ params }: ListingPageProps) {
               </div>
             </div>
 
-            <div className="rounded-[2rem] bg-surface-container-low p-6 shadow-[var(--shadow-editorial-card)]">
+            <div className="motion-card-subtle rounded-[2rem] bg-surface-container-low p-6 shadow-[var(--shadow-editorial-card)]">
               <p className="text-xs font-bold uppercase tracking-[0.24em] text-on-surface-variant">
                 Location
               </p>

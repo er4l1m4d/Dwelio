@@ -28,6 +28,8 @@ const formatCompactPrice = (price: number | null) =>
     maximumFractionDigits: 1,
   }).format(price ?? 0)}`;
 
+const NAIRA_SYMBOL = "\u20A6";
+
 const buildMarkerSvg = (priceLabel: string, active: boolean) => {
   const fill = active ? "#013220" : "#ffffff";
   const stroke = active ? "#013220" : "rgba(1, 50, 32, 0.18)";
@@ -62,6 +64,13 @@ export default function SearchMapView({ listings }: SearchMapViewProps) {
 
   const selectedListing =
     markers.find((listing) => listing.id === selectedId) ?? markers[0] ?? null;
+
+  const formatPriceLabel = (price: number | null) =>
+    `${NAIRA_SYMBOL}${new Intl.NumberFormat("en-NG", {
+      notation: "compact",
+      compactDisplay: "short",
+      maximumFractionDigits: 1,
+    }).format(price ?? 0)}`;
 
   if (!listings.length) {
     return (
@@ -106,10 +115,10 @@ export default function SearchMapView({ listings }: SearchMapViewProps) {
 
   return (
     <section className="relative overflow-hidden rounded-[2rem] bg-surface-container-lowest shadow-[var(--shadow-elevated-panel)]">
-      <div className="absolute left-6 top-6 z-10 rounded-full bg-surface-container-lowest/92 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-primary-container shadow-[var(--shadow-floating-pane)] backdrop-blur-md">
+      <div className="absolute left-4 top-4 z-10 rounded-full bg-surface-container-lowest/92 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-primary-container shadow-[var(--shadow-floating-pane)] backdrop-blur-md sm:left-6 sm:top-6">
         Ibadan Live Map
       </div>
-      <div className="absolute right-6 top-6 z-10 rounded-full bg-surface-container-lowest/92 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-primary-container shadow-[var(--shadow-floating-pane)] backdrop-blur-md">
+      <div className="absolute left-4 top-16 z-10 rounded-full bg-surface-container-lowest/92 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-primary-container shadow-[var(--shadow-floating-pane)] backdrop-blur-md sm:left-auto sm:right-6 sm:top-6">
         {listings.length} Homes
       </div>
 
@@ -126,7 +135,7 @@ export default function SearchMapView({ listings }: SearchMapViewProps) {
       >
         {markers.map((listing) => {
           const active = listing.id === selectedListing?.id;
-          const iconSvg = buildMarkerSvg(formatCompactPrice(listing.price), active);
+          const iconSvg = buildMarkerSvg(formatPriceLabel(listing.price), active);
 
           return (
             <MarkerF
@@ -154,7 +163,7 @@ export default function SearchMapView({ listings }: SearchMapViewProps) {
               {selectedListing.title}
             </h3>
             <p className="mt-3 text-sm font-semibold text-on-tertiary-container">
-              {formatCompactPrice(selectedListing.price)} /{" "}
+              {formatPriceLabel(selectedListing.price)} /{" "}
               {selectedListing.price_period ?? "monthly"}
             </p>
             <div className="mt-4 flex flex-wrap gap-3 text-sm text-on-surface-variant">
@@ -166,10 +175,10 @@ export default function SearchMapView({ listings }: SearchMapViewProps) {
             </div>
             <Link
               href={`/listings/${selectedListing.id}`}
-              className="mt-5 inline-flex items-center gap-3 rounded-full bg-primary-container px-5 py-3 font-headline text-xs font-black uppercase tracking-[0.14em] text-on-primary"
+              className="group motion-card-subtle motion-icon-group mt-5 inline-flex items-center gap-3 rounded-full bg-primary-container px-5 py-3 font-headline text-xs font-black uppercase tracking-[0.14em] text-on-primary"
             >
               View Home
-              <span className="material-symbols-outlined text-[18px]">
+              <span className="motion-icon material-symbols-outlined text-[18px]">
                 north_east
               </span>
             </Link>

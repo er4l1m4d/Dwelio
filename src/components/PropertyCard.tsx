@@ -22,6 +22,8 @@ const formatCompactPrice = (price: number) =>
     maximumFractionDigits: 1,
   }).format(price)}`;
 
+const NAIRA_SYMBOL = "\u20A6";
+
 export default function PropertyCard({
   id,
   image,
@@ -35,10 +37,16 @@ export default function PropertyCard({
   listingType,
   propertyType,
 }: PropertyCardProps) {
+  const formattedPrice = `${NAIRA_SYMBOL}${new Intl.NumberFormat("en-NG", {
+    notation: "compact",
+    compactDisplay: "short",
+    maximumFractionDigits: 1,
+  }).format(price)}`;
+
   return (
     <Link
       href={`/listings/${id}`}
-      className="group flex h-full flex-col overflow-hidden rounded-[2rem] bg-surface-container-lowest shadow-[var(--shadow-elevated-panel)] transition duration-300 hover:-translate-y-1"
+      className="group motion-card motion-image-frame flex h-full flex-col overflow-hidden rounded-[2rem] bg-surface-container-lowest shadow-[var(--shadow-elevated-panel)]"
     >
       <div className="relative aspect-[4/5] overflow-hidden bg-surface-container">
         <Image
@@ -46,7 +54,7 @@ export default function PropertyCard({
           alt={title}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1536px) 50vw, 33vw"
-          className="object-cover transition duration-700 group-hover:scale-105"
+          className="motion-image object-cover"
         />
 
         <div className="absolute inset-x-0 top-0 flex items-start justify-between p-4">
@@ -83,7 +91,7 @@ export default function PropertyCard({
 
           <div className="shrink-0 text-left sm:text-right">
             <p className="font-headline text-2xl font-black text-on-tertiary-container">
-              {formatCompactPrice(price)}
+              {formattedPrice}
             </p>
             <p className="mt-1 text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
               / {pricePeriod ?? "monthly"}

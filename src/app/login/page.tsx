@@ -13,12 +13,29 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
 
+  const redirectParam =
+    typeof window === "undefined"
+      ? null
+      : new URLSearchParams(window.location.search).get("redirect");
+  const redirectPath =
+    redirectParam && redirectParam.startsWith("/") ? redirectParam : "/dashboard";
+
   const handleGoogleSignIn = () => {
     setError(null);
     startTransition(async () => {
-      const redirectTo =
-        process.env.NEXT_PUBLIC_SUPABASE_REDIRECT_URL ??
-        `${window.location.origin}/onboarding`;
+      let redirectTo = `${window.location.origin}${redirectPath}`;
+
+      if (process.env.NEXT_PUBLIC_SUPABASE_REDIRECT_URL) {
+        try {
+          const configuredUrl = new URL(
+            process.env.NEXT_PUBLIC_SUPABASE_REDIRECT_URL,
+          );
+          redirectTo = new URL(redirectPath, configuredUrl.origin).toString();
+        } catch {
+          redirectTo = `${window.location.origin}${redirectPath}`;
+        }
+      }
+
       const { error: oauthError } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: { redirectTo },
@@ -43,7 +60,7 @@ export default function LoginPage() {
         return;
       }
 
-      router.push("/dashboard");
+      router.push(redirectPath);
     });
   };
 

@@ -37,6 +37,8 @@ export default function NavBar() {
   const [displayName, setDisplayName] = useState<string | null>(null);
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
   const profileMenuRef = useRef<HTMLDivElement | null>(null);
+  const mobileMenuId = "mobile-navigation-menu";
+  const profileMenuId = "profile-navigation-menu";
 
   useEffect(() => {
     let mounted = true;
@@ -134,6 +136,7 @@ export default function NavBar() {
                 <Link
                   key={link.href}
                   href={link.href}
+                  aria-current={active ? "page" : undefined}
                   className={`inline-flex h-11 items-center border-b-2 font-headline text-base font-bold tracking-tight transition-colors ${
                     active
                       ? "border-tertiary-fixed-dim text-primary-container"
@@ -154,6 +157,7 @@ export default function NavBar() {
                 href="/messages"
                 className="relative flex h-11 w-11 items-center justify-center rounded-full bg-surface-container-lowest text-primary-container shadow-[var(--shadow-floating-pane)] transition hover:bg-surface-container-low"
                 aria-label="Messages"
+                aria-current={pathname.startsWith("/messages") ? "page" : undefined}
               >
                 <span className="material-symbols-outlined text-[22px]">
                   chat_bubble
@@ -195,6 +199,8 @@ export default function NavBar() {
                   onClick={() => setProfileMenuOpen((prev) => !prev)}
                   className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full bg-surface-container-lowest text-sm font-bold text-primary-container shadow-[var(--shadow-floating-pane)] transition hover:bg-surface-container-low"
                   aria-label="Account menu"
+                  aria-controls={profileMenuId}
+                  aria-expanded={profileMenuOpen}
                 >
                   {avatarUrl ? (
                     // eslint-disable-next-line @next/next/no-img-element
@@ -210,7 +216,12 @@ export default function NavBar() {
                   )}
                 </button>
                 {profileMenuOpen && (
-                  <div className="absolute right-0 mt-3 w-52 rounded-[1.5rem] bg-surface-container-lowest p-2 text-sm shadow-[var(--shadow-elevated-panel)]">
+                  <div
+                    id={profileMenuId}
+                    role="region"
+                    aria-label="Account menu"
+                    className="absolute right-0 mt-3 w-52 rounded-[1.5rem] bg-surface-container-lowest p-2 text-sm shadow-[var(--shadow-elevated-panel)]"
+                  >
                     <Link
                       href="/dashboard"
                       className="block rounded-xl px-4 py-3 text-on-surface-variant transition hover:bg-surface-container-low hover:text-primary-container"
@@ -245,6 +256,8 @@ export default function NavBar() {
           onClick={() => setOpen((prev) => !prev)}
           className="flex h-11 w-11 items-center justify-center rounded-full bg-surface-container-lowest text-primary-container shadow-[var(--shadow-floating-pane)] md:hidden"
           aria-label="Open menu"
+          aria-controls={mobileMenuId}
+          aria-expanded={open}
         >
           <span className="material-symbols-outlined">
             {open ? "close" : "menu"}
@@ -253,7 +266,12 @@ export default function NavBar() {
       </div>
 
       {open && (
-        <div className="border-t border-outline-variant/30 bg-surface-container-low px-6 py-5 md:hidden">
+        <div
+          id={mobileMenuId}
+          role="region"
+          aria-label="Mobile navigation"
+          className="border-t border-outline-variant/30 bg-surface-container-low px-6 py-5 md:hidden"
+        >
           <div className="mx-auto flex max-w-[1440px] flex-col gap-5">
             <div className="flex flex-col gap-3">
               {navLinks.map((link) => {
@@ -263,6 +281,7 @@ export default function NavBar() {
                   <Link
                     key={link.href}
                     href={link.href}
+                    aria-current={active ? "page" : undefined}
                     className={`rounded-2xl px-4 py-3 font-headline text-base font-bold transition ${
                       active
                         ? "bg-primary-container text-on-primary"
@@ -275,6 +294,7 @@ export default function NavBar() {
               })}
               <Link
                 href="/messages"
+                aria-current={pathname.startsWith("/messages") ? "page" : undefined}
                 className="rounded-2xl bg-surface-container-lowest px-4 py-3 font-headline text-base font-bold text-primary-container"
               >
                 Messages

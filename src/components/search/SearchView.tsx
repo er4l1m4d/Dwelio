@@ -96,6 +96,7 @@ export default function SearchView({
   const [pending, startTransition] = useTransition();
   const [view, setView] = useState(searchParams.get("view") ?? "list");
   const [filters, setFilters] = useState<SearchFilters>(defaultFilters);
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   useEffect(() => {
     setView(searchParams.get("view") ?? "list");
@@ -187,7 +188,7 @@ export default function SearchView({
 
   return (
     <div className="grid gap-8 lg:grid-cols-[320px_minmax(0,1fr)]">
-      <div className="order-2 lg:order-1">
+  <div className="order-2 lg:order-1 hidden lg:block">
         <SearchSidebar
           filters={filters}
           neighbourhoods={neighbourhoods}
@@ -215,6 +216,16 @@ export default function SearchView({
             </div>
 
             <div className="flex flex-wrap items-center gap-3">
+              {/* Mobile filters toggle - visible on small screens */}
+              <button
+                type="button"
+                onClick={() => setMobileFiltersOpen(true)}
+                className="sm:hidden rounded-full bg-surface-container-lowest px-4 py-2 text-sm font-medium text-primary-container shadow-[var(--shadow-floating-pane)]"
+                aria-label="Open filters"
+              >
+                Filters
+              </button>
+
               <div className="rounded-full bg-surface-container-lowest px-4 py-2 text-sm font-medium text-on-surface-variant shadow-[var(--shadow-floating-pane)]">
                 <span className="font-headline font-black text-primary-container">
                   {filteredListings.length}
@@ -292,6 +303,38 @@ export default function SearchView({
           />
         )}
       </div>
+
+      {/* Mobile filters drawer */}
+      {mobileFiltersOpen && (
+        <div className="fixed inset-0 z-50 flex items-end bg-black/40 sm:items-center" role="dialog" aria-modal="true">
+          <div className="w-full max-w-xl rounded-t-2xl bg-surface p-6 shadow-[var(--shadow-elevated-panel)] sm:rounded-2xl sm:mx-auto sm:my-8">
+            <div className="flex items-center justify-between">
+              <h3 className="font-headline text-lg font-black">Filters</h3>
+              <button
+                type="button"
+                onClick={() => setMobileFiltersOpen(false)}
+                aria-label="Close filters"
+                className="rounded-full bg-surface-container-lowest px-3 py-2 text-sm font-medium text-primary-container"
+              >
+                Close
+              </button>
+            </div>
+
+            <div className="mt-4">
+              <SearchSidebar
+                filters={filters}
+                neighbourhoods={neighbourhoods}
+                pending={pending}
+                onFieldChange={updateField}
+                onReset={() => {
+                  resetFilters();
+                  setMobileFiltersOpen(false);
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

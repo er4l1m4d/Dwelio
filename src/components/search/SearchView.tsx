@@ -121,6 +121,18 @@ export default function SearchView({
     });
   }, [searchParams]);
 
+  // Lock body scroll when mobile filters drawer is open
+  useEffect(() => {
+    if (mobileFiltersOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileFiltersOpen]);
+
   const updateQuery = (
     nextFilters: SearchFilters,
     nextView = view,
@@ -318,13 +330,13 @@ export default function SearchView({
       {/* Mobile filters drawer */}
       {mobileFiltersOpen && (
         <div
-          className="fixed inset-0 z-50 flex items-end bg-black/40 sm:items-center"
+          className="fixed inset-0 z-50 flex items-end bg-black/40 sm:items-center overflow-hidden"
           role="dialog"
           aria-modal="true"
           onClick={() => setMobileFiltersOpen(false)}
         >
           <div
-            className="w-full max-w-xl rounded-t-2xl bg-surface p-6 shadow-[var(--shadow-elevated-panel)] sm:rounded-2xl sm:mx-auto sm:my-8"
+            className="w-full max-w-xl rounded-t-2xl bg-surface p-6 shadow-[var(--shadow-elevated-panel)] sm:rounded-2xl sm:mx-auto sm:my-8 overflow-y-auto max-h-[85vh]"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between">

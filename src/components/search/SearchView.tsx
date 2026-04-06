@@ -5,6 +5,17 @@ import { useEffect, useMemo, useState, useTransition } from "react";
 import SearchResults from "@/components/search/SearchResults";
 import SearchSidebar from "@/components/search/SearchSidebar";
 import SearchMapView from "@/components/search/SearchMapView";
+// Dev-only overflow debugger
+let OverflowDebugger: any = null;
+if (process.env.NODE_ENV !== "production") {
+  try {
+    // dynamically require so build doesn't include it in prod bundles
+    // eslint-disable-next-line @typescript-eslint/no-var-requires, @typescript-eslint/no-require-imports
+    OverflowDebugger = require("@/components/dev/OverflowDebugger").default;
+  } catch (e) {
+    // noop
+  }
+}
 
 export type SearchListing = {
   id: string;
@@ -187,7 +198,7 @@ export default function SearchView({
   const activeFilterCount = Object.values(filters).filter(Boolean).length;
 
   return (
-    <div className="w-full max-w-full overflow-x-hidden grid gap-8 lg:grid-cols-[320px_minmax(0,1fr)] min-w-0">
+    <div className="w-full max-w-full grid gap-8 lg:grid-cols-[320px_minmax(0,1fr)] min-w-0">
   <div className="order-2 lg:order-1 hidden lg:block">
         <SearchSidebar
           filters={filters}
@@ -198,7 +209,7 @@ export default function SearchView({
         />
       </div>
 
-  <div className="w-full order-1 grid gap-6 lg:order-2 min-w-0">
+  <div className="w-full order-1 grid gap-6 lg:order-2 min-w-0 px-4 lg:px-0">
         <section className="w-full max-w-full box-border rounded-[2rem] bg-surface-container-low p-6 shadow-[var(--shadow-editorial-card)] md:p-8">
           <div className="flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between">
             <div className="w-full max-w-full">
@@ -281,7 +292,7 @@ export default function SearchView({
                   type="button"
                   onClick={() => applyQuickFilter(chip.nextFilters(filters))}
                   aria-pressed={active}
-                  className={`shrink-0 inline-block rounded-full px-5 py-2.5 text-sm font-semibold transition ${
+                  className={`shrink-0 inline-block rounded-full px-3 sm:px-5 py-2.5 text-sm font-semibold transition ${
                     active
                       ? "bg-primary-container text-on-primary"
                       : "bg-secondary-fixed text-primary-container hover:bg-secondary-container"
@@ -343,6 +354,7 @@ export default function SearchView({
           </div>
         </div>
       )}
+  {OverflowDebugger ? <OverflowDebugger /> : null}
     </div>
   );
 }

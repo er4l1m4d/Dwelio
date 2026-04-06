@@ -14,7 +14,7 @@ export default function SearchResults({
 }: SearchResultsProps) {
   if (!listings.length) {
     return (
-      <section className="rounded-[2rem] bg-surface-container-low p-10 shadow-[var(--shadow-editorial-card)]">
+      <section className="w-full max-w-full box-border rounded-[2rem] bg-surface-container-low p-10 shadow-[var(--shadow-editorial-card)]">
         <div className="flex h-14 w-14 items-center justify-center rounded-[1rem] bg-surface-container-lowest text-primary-container shadow-[var(--shadow-floating-pane)]">
           <span
             className="material-symbols-outlined text-[28px]"
@@ -23,10 +23,10 @@ export default function SearchResults({
             search_off
           </span>
         </div>
-        <h2 className="mt-6 font-headline text-3xl font-black tracking-[-0.04em] text-primary-container">
+        <h2 className="mt-6 w-full max-w-full font-headline text-3xl font-black tracking-[-0.04em] text-primary-container">
           No homes match this search yet.
         </h2>
-        <p className="mt-4 max-w-xl text-base leading-8 text-on-surface-variant">
+        <p className="mt-4 w-full max-w-full text-base leading-8 text-on-surface-variant">
           Try opening up the neighbourhood, budget, or bedroom filters. Ibadan
           inventory can change quickly as landlords list and unlist homes.
         </p>

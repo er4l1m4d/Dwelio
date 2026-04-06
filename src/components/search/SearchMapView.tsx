@@ -74,11 +74,11 @@ export default function SearchMapView({ listings }: SearchMapViewProps) {
 
   if (!listings.length) {
     return (
-      <section className="rounded-[2rem] bg-surface-container-low p-10 shadow-[var(--shadow-editorial-card)]">
-        <h2 className="font-headline text-3xl font-black tracking-[-0.04em] text-primary-container">
+      <section className="w-full max-w-full box-border rounded-[2rem] bg-surface-container-low p-10 shadow-[var(--shadow-editorial-card)]">
+        <h2 className="w-full max-w-full font-headline text-3xl font-black tracking-[-0.04em] text-primary-container">
           No map results yet.
         </h2>
-        <p className="mt-4 max-w-xl text-base leading-8 text-on-surface-variant">
+        <p className="mt-4 w-full max-w-full text-base leading-8 text-on-surface-variant">
           Adjust your filters to bring more homes into view across the Ibadan
           map.
         </p>
@@ -88,11 +88,11 @@ export default function SearchMapView({ listings }: SearchMapViewProps) {
 
   if (loadError || !process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY) {
     return (
-      <section className="rounded-[2rem] bg-surface-container-low p-10 shadow-[var(--shadow-editorial-card)]">
-        <h2 className="font-headline text-3xl font-black tracking-[-0.04em] text-primary-container">
+      <section className="w-full max-w-full box-border rounded-[2rem] bg-surface-container-low p-10 shadow-[var(--shadow-editorial-card)]">
+        <h2 className="w-full max-w-full font-headline text-3xl font-black tracking-[-0.04em] text-primary-container">
           Live map unavailable.
         </h2>
-        <p className="mt-4 max-w-xl text-base leading-8 text-on-surface-variant">
+        <p className="mt-4 w-full max-w-full text-base leading-8 text-on-surface-variant">
           Add a valid Google Maps key to enable the full discovery map. Your
           filtered homes are still available in list view.
         </p>
@@ -102,11 +102,11 @@ export default function SearchMapView({ listings }: SearchMapViewProps) {
 
   if (!isLoaded) {
     return (
-      <section className="rounded-[2rem] bg-surface-container-low p-10 shadow-[var(--shadow-editorial-card)]">
-        <h2 className="font-headline text-3xl font-black tracking-[-0.04em] text-primary-container">
+      <section className="w-full max-w-full box-border rounded-[2rem] bg-surface-container-low p-10 shadow-[var(--shadow-editorial-card)]">
+        <h2 className="w-full max-w-full font-headline text-3xl font-black tracking-[-0.04em] text-primary-container">
           Loading the Ibadan map...
         </h2>
-        <p className="mt-4 max-w-xl text-base leading-8 text-on-surface-variant">
+        <p className="mt-4 w-full max-w-full text-base leading-8 text-on-surface-variant">
           Pulling live map data and placing your filtered homes.
         </p>
       </section>
@@ -114,7 +114,7 @@ export default function SearchMapView({ listings }: SearchMapViewProps) {
   }
 
   return (
-    <section className="relative overflow-hidden rounded-[2rem] bg-surface-container-lowest shadow-[var(--shadow-elevated-panel)]">
+    <section className="relative overflow-hidden w-full max-w-full box-border rounded-[2rem] bg-surface-container-lowest shadow-[var(--shadow-elevated-panel)]">
       <div className="absolute left-4 top-4 z-10 rounded-full bg-surface-container-lowest/92 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-primary-container shadow-[var(--shadow-floating-pane)] backdrop-blur-md sm:left-6 sm:top-6">
         Ibadan Live Map
       </div>

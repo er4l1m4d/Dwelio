@@ -187,7 +187,7 @@ export default function SearchView({
   const activeFilterCount = Object.values(filters).filter(Boolean).length;
 
   return (
-    <div className="w-full grid gap-8 lg:grid-cols-[320px_minmax(0,1fr)] min-w-0">
+    <div className="w-full max-w-full overflow-x-hidden grid gap-8 lg:grid-cols-[320px_minmax(0,1fr)] min-w-0">
   <div className="order-2 lg:order-1 hidden lg:block">
         <SearchSidebar
           filters={filters}
@@ -201,21 +201,21 @@ export default function SearchView({
   <div className="w-full order-1 grid gap-6 lg:order-2 min-w-0">
         <section className="w-full max-w-full box-border rounded-[2rem] bg-surface-container-low p-6 shadow-[var(--shadow-editorial-card)] md:p-8">
           <div className="flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between">
-            <div className="max-w-3xl">
+            <div className="w-full max-w-full">
               <p className="font-headline text-sm font-bold uppercase tracking-[0.22em] text-on-tertiary-container">
                 Discovery
               </p>
-              <h1 className="mt-4 font-headline text-3xl sm:text-4xl font-black tracking-[-0.04em] text-primary-container md:text-5xl break-words">
+              <h1 className="mt-4 w-full max-w-full font-headline text-3xl sm:text-4xl font-black tracking-[-0.04em] text-primary-container md:text-5xl break-words">
                 Verified homes across Ibadan, without the old stress.
               </h1>
-              <p className="mt-4 max-w-2xl text-base leading-8 text-on-surface-variant break-words">
+              <p className="mt-4 w-full max-w-full text-base leading-8 text-on-surface-variant break-words">
                 Filter homes by neighbourhood, budget, and property type, then
                 switch between editorial cards and the live map without losing
                 your search context.
               </p>
             </div>
 
-            <div className="flex flex-wrap items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3 w-full">
               {/* Mobile filters toggle - visible on small screens */}
               <button
                 type="button"
@@ -238,7 +238,7 @@ export default function SearchView({
                 </span>{" "}
                 active filters
               </div>
-              <div className="inline-flex w-full rounded-full bg-surface-container-lowest p-1 shadow-[var(--shadow-floating-pane)] sm:w-auto">
+              <div className="inline-flex w-full flex-wrap rounded-full bg-surface-container-lowest p-1 shadow-[var(--shadow-floating-pane)] sm:w-auto">
                 <button
                   type="button"
                   onClick={() => updateView("list")}
@@ -271,7 +271,7 @@ export default function SearchView({
             </div>
           </div>
 
-          <div className="mt-8 flex gap-3 overflow-x-auto pb-2">
+          <div className="mt-8 flex gap-3 overflow-x-auto whitespace-nowrap pb-2">
             {quickFilterDefinitions.map((chip) => {
               const active = chip.isActive(filters);
 
@@ -281,7 +281,7 @@ export default function SearchView({
                   type="button"
                   onClick={() => applyQuickFilter(chip.nextFilters(filters))}
                   aria-pressed={active}
-                  className={`shrink-0 rounded-full px-5 py-2.5 text-sm font-semibold transition ${
+                  className={`shrink-0 inline-block rounded-full px-5 py-2.5 text-sm font-semibold transition ${
                     active
                       ? "bg-primary-container text-on-primary"
                       : "bg-secondary-fixed text-primary-container hover:bg-secondary-container"

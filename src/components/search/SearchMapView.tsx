@@ -154,8 +154,8 @@ export default function SearchMapView({ listings }: SearchMapViewProps) {
       </GoogleMap>
 
       {selectedListing && (
-        <div className="absolute bottom-6 left-6 right-6 z-10 md:right-auto md:w-[360px]">
-          <div className="rounded-[1.75rem] bg-surface-container-lowest/94 p-5 text-primary-container shadow-[var(--shadow-elevated-panel)] backdrop-blur-xl">
+        <div className="absolute bottom-6 left-4 right-4 z-10 md:left-6 md:right-auto md:w-[360px]">
+          <div className="rounded-[1.75rem] bg-surface-container-lowest/94 p-5 text-primary-container shadow-[var(--shadow-elevated-panel)] backdrop-blur-xl w-full">
             <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
               {selectedListing.neighbourhood ?? "Ibadan"}
             </p>

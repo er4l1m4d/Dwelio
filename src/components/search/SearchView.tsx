@@ -205,10 +205,10 @@ export default function SearchView({
               <p className="font-headline text-sm font-bold uppercase tracking-[0.22em] text-on-tertiary-container">
                 Discovery
               </p>
-              <h1 className="mt-4 font-headline text-4xl font-black tracking-[-0.04em] text-primary-container md:text-5xl">
+              <h1 className="mt-4 font-headline text-3xl sm:text-4xl font-black tracking-[-0.04em] text-primary-container md:text-5xl break-words">
                 Verified homes across Ibadan, without the old stress.
               </h1>
-              <p className="mt-4 max-w-2xl text-base leading-8 text-on-surface-variant">
+              <p className="mt-4 max-w-2xl text-base leading-8 text-on-surface-variant break-words">
                 Filter homes by neighbourhood, budget, and property type, then
                 switch between editorial cards and the live map without losing
                 your search context.
@@ -306,8 +306,16 @@ export default function SearchView({
 
       {/* Mobile filters drawer */}
       {mobileFiltersOpen && (
-        <div className="fixed inset-0 z-50 flex items-end bg-black/40 sm:items-center" role="dialog" aria-modal="true">
-          <div className="w-full max-w-xl rounded-t-2xl bg-surface p-6 shadow-[var(--shadow-elevated-panel)] sm:rounded-2xl sm:mx-auto sm:my-8">
+        <div
+          className="fixed inset-0 z-50 flex items-end bg-black/40 sm:items-center"
+          role="dialog"
+          aria-modal="true"
+          onClick={() => setMobileFiltersOpen(false)}
+        >
+          <div
+            className="w-full max-w-xl rounded-t-2xl bg-surface p-6 shadow-[var(--shadow-elevated-panel)] sm:rounded-2xl sm:mx-auto sm:my-8"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="flex items-center justify-between">
               <h3 className="font-headline text-lg font-black">Filters</h3>
               <button

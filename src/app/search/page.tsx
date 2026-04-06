@@ -51,8 +51,8 @@ export default async function SearchPage() {
   );
 
   return (
-    <div className="min-h-screen bg-surface px-4 py-10 md:px-8">
-      <div className="mx-auto w-full max-w-[1440px]">
+    <div className="min-h-screen bg-surface py-10">
+      <div className="mx-auto w-full max-w-[1440px] px-4 md:px-8">
         <SearchView
           listings={listings ?? []}
           verifiedMap={verifiedMap}

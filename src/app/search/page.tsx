@@ -51,7 +51,7 @@ export default async function SearchPage() {
   );
 
   return (
-    <div className="min-h-screen bg-surface py-10">
+    <div className="min-h-screen bg-surface py-10 overflow-x-hidden">
       <div className="mx-auto w-full max-w-[1440px] px-4 md:px-8">
         <SearchView
           listings={listings ?? []}

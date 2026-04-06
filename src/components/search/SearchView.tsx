@@ -209,8 +209,8 @@ export default function SearchView({
         />
       </div>
 
-  <div className="w-full order-1 grid gap-6 lg:order-2 min-w-0 px-4 lg:px-0">
-        <section className="w-full max-w-full box-border rounded-[2rem] bg-surface-container-low p-6 shadow-[var(--shadow-editorial-card)] md:p-8">
+  <div className="w-full order-1 grid gap-6 lg:order-2 min-w-0">
+        <section className="w-full max-w-full box-border rounded-[2rem] bg-surface-container-low p-4 shadow-[var(--shadow-editorial-card)] md:p-8 overflow-hidden">
           <div className="flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between">
             <div className="w-full max-w-full">
               <p className="font-headline text-sm font-bold uppercase tracking-[0.22em] text-on-tertiary-container">

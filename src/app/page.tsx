@@ -131,7 +131,10 @@ export default async function HomePage() {
   );
 
   const featuredListings = listings ?? [];
-  const featuredNeighbourhoods = ibadanNeighbourhoods.slice(0, 3);
+  // Remove Bodija and Samonda from featuredNeighbourhoods
+  const featuredNeighbourhoods = ibadanNeighbourhoods.filter(
+    (n) => n.name !== "Bodija" && n.name !== "Samonda"
+  );
 
   return (
     <div className="bg-surface text-on-surface">
@@ -140,12 +143,7 @@ export default async function HomePage() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,191,0,0.18),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(189,237,210,0.16),transparent_30%)]" />
           <div className="relative mx-auto grid w-full max-w-[1440px] gap-14 px-6 py-20 md:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:py-24">
             <div className="flex flex-col gap-8 text-on-primary">
-              <div className="inline-flex max-w-full flex-wrap items-center gap-3 rounded-full bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-primary-fixed backdrop-blur-md">
-                <span>Nigeria's full-stack property marketplace</span>
-                <span className="h-1.5 w-1.5 rounded-full bg-tertiary-fixed-dim" />
-                <span>Ibadan launch</span>
-              </div>
-
+              {/* Removed the Nigeria's full-stack property marketplace / Ibadan launch bar */}
               <div className="max-w-3xl space-y-5">
                 <h1 className="font-headline text-5xl font-black leading-[0.92] tracking-[-0.05em] text-on-primary sm:text-6xl lg:text-7xl">
                   Find it.
@@ -243,40 +241,7 @@ export default async function HomePage() {
 
             <div className="grid gap-5">
               <HeroSlideshow slides={heroSlides} />
-
-              <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
-                <div className="rounded-[1.75rem] bg-white/10 p-5 text-on-primary shadow-[var(--shadow-editorial-card)] backdrop-blur-md">
-                  <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-tertiary-fixed-dim">
-                    Trust Layer
-                  </p>
-                  <h3 className="mt-3 font-headline text-xl font-black tracking-[-0.03em]">
-                    Escrow-first move-ins
-                  </h3>
-                  <p className="mt-2 text-sm leading-6 text-primary-fixed">
-                    Better payment clarity, digital agreements, and a stronger
-                    record of what was promised before keys change hands.
-                  </p>
-                </div>
-                {featuredNeighbourhoods.slice(0, 2).map((neighbourhood) => (
-                  <div
-                    key={neighbourhood.name}
-                    className="rounded-[1.75rem] bg-surface-container-lowest p-5 text-primary-container shadow-[var(--shadow-editorial-card)]"
-                  >
-                    <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
-                      {neighbourhood.vibe}
-                    </p>
-                    <h3 className="mt-3 font-headline text-xl font-black tracking-[-0.03em]">
-                      {neighbourhood.name}
-                    </h3>
-                    <p className="mt-2 text-sm leading-6 text-on-surface-variant">
-                      {neighbourhood.description}
-                    </p>
-                    <p className="mt-4 text-sm font-bold text-on-tertiary-container">
-                      1 bed {neighbourhood.rent.oneBed}
-                    </p>
-                  </div>
-                ))}
-              </div>
+              {/* Removed neighbourhood cards for Bodija and Samonda as requested */}
             </div>
           </div>
         </section>

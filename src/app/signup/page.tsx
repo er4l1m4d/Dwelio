@@ -92,12 +92,7 @@ export default function SignUpPage() {
   return (
     <div className="min-h-screen bg-[radial-gradient(circle_at_top,_var(--color-surface-container-highest),_var(--color-surface)_45%,_var(--color-secondary-fixed))] px-6 py-16">
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-10 rounded-[2rem] bg-surface-container-lowest p-10 shadow-[var(--shadow-elevated-panel)]">
-        <header className="flex flex-col gap-4">
-          <div className="inline-flex w-fit items-center gap-2 rounded-full bg-primary-fixed px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-on-primary-container">
-            Dwelio
-            <span className="text-primary-container/20">•</span>
-            Create account
-          </div>
+  <header className="flex flex-col gap-4">
           <h1 className="font-headline text-4xl font-black tracking-[-0.04em] text-primary-container">
             Find homes in Ibadan without the hassle.
           </h1>
@@ -107,7 +102,7 @@ export default function SignUpPage() {
           </p>
         </header>
 
-        <form onSubmit={handleSubmit} className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+        <form onSubmit={handleSubmit} className="grid gap-8 lg:grid-cols-1">
           <div className="grid gap-6">
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="grid gap-2 text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
@@ -158,7 +153,7 @@ export default function SignUpPage() {
 
             <div className="grid gap-3">
               <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
-                I am looking to
+                I am a
               </span>
               <div className="grid gap-2 sm:grid-cols-3">
                 {roles.map((role) => (
@@ -201,26 +196,33 @@ export default function SignUpPage() {
             >
               {pending ? "Creating account..." : "Continue"}
             </button>
-          </div>
 
-          <div className="flex flex-col gap-6 rounded-[2rem] bg-surface-container p-8">
-            <h3 className="font-headline text-lg font-black tracking-[-0.02em] text-primary-container">
-              Prefer a faster start?
-            </h3>
-            <button
-              type="button"
-              onClick={handleGoogleSignIn}
-              className="h-12 w-full rounded-full border border-outline-variant/40 bg-surface-container-lowest px-6 font-headline text-sm font-bold text-primary-container transition hover:bg-surface-container-low focus:border-primary-container/20 focus:ring-4 focus:ring-surface-tint/10"
-            >
-              Continue with Google
-            </button>
-            <div className="mt-auto border-t border-outline-variant/30 pt-6">
-              <p className="text-sm font-medium text-on-surface-variant">
-                Already have an account?{" "}
-                <Link className="font-headline font-bold text-surface-tint transition hover:text-primary-container" href="/login">
-                  Log in
-                </Link>
-              </p>
+            {/* Divider with OR and the alternative sign-in block placed under the primary CTA */}
+            <div className="flex items-center gap-4">
+              <span className="flex-1 h-px bg-outline-variant/30" />
+              <span className="text-sm font-medium text-on-surface-variant">OR</span>
+              <span className="flex-1 h-px bg-outline-variant/30" />
+            </div>
+
+            <div className="rounded-[2rem] bg-surface-container p-6">
+              <h3 className="font-headline text-lg font-black tracking-[-0.02em] text-primary-container">
+                Prefer a faster start?
+              </h3>
+              <button
+                type="button"
+                onClick={handleGoogleSignIn}
+                className="mt-4 h-12 w-full rounded-full border border-outline-variant/40 bg-surface-container-lowest px-6 font-headline text-sm font-bold text-primary-container transition hover:bg-surface-container-low focus:border-primary-container/20 focus:ring-4 focus:ring-surface-tint/10"
+              >
+                Continue with Google
+              </button>
+              <div className="mt-4 border-t border-outline-variant/30 pt-4">
+                <p className="text-sm font-medium text-on-surface-variant">
+                  Already have an account?{' '}
+                  <Link className="font-headline font-bold text-surface-tint transition hover:text-primary-container" href="/login">
+                    Log in
+                  </Link>
+                </p>
+              </div>
             </div>
           </div>
         </form>

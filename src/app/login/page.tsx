@@ -69,16 +69,11 @@ export default function LoginPage() {
       <div className="mx-auto w-full max-w-4xl rounded-[2rem] bg-surface-container-lowest p-10 shadow-[var(--shadow-elevated-panel)]">
         <div className="grid gap-10 lg:grid-cols-[1fr_0.9fr]">
           <div className="grid gap-6">
-            <div className="inline-flex w-fit items-center gap-2 rounded-full bg-primary-fixed px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-on-primary-container">
-              Dwelio
-              <span className="text-surface-tint">•</span>
-              Welcome back
-            </div>
             <h1 className="font-headline text-4xl font-black tracking-[-0.04em] text-primary-container">
               Log in to your workspace.
             </h1>
             <p className="text-base text-on-surface-variant">
-              Manage listings, messages, and payments all in one place.
+              Track & manage listings, messages, and payments all in one place.
             </p>
             <div className="rounded-[1.5rem] bg-surface-container-low p-6 text-sm text-on-surface-variant">
               <p className="font-bold text-primary-container">New to Dwelio?</p>
@@ -89,7 +84,7 @@ export default function LoginPage() {
                 href="/signup"
                 className="mt-4 inline-flex items-center font-headline font-bold text-surface-tint transition hover:text-primary-container"
               >
-                Create an account →
+                Create an account
               </Link>
             </div>
           </div>
@@ -118,7 +113,6 @@ export default function LoginPage() {
               />
             </label>
             <div className="flex items-center justify-between text-sm text-on-surface-variant">
-              <span className="font-medium">Secure sign-in</span>
               <Link className="font-headline font-bold text-surface-tint transition hover:text-primary-container" href="/forgot-password">
                 Forgot password?
               </Link>

@@ -22,6 +22,8 @@
     "react-paystack": "^6.0.0"
   },
   "devDependencies": {
+    "@21st-extension/react": "^0.5.14",
+    "@21st-extension/toolbar-next": "^0.5.14",
     "@lhci/cli": "^0.15.1",
     "@playwright/test": "^1.59.1",
     "@tailwindcss/postcss": "^4",

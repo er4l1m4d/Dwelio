@@ -45,7 +45,7 @@ export default function NeighbourhoodsPage() {
                 )}`}
                 className="mt-5 inline-flex font-headline text-sm font-bold text-surface-tint transition hover:text-primary-container"
               >
-                Browse listings →
+                Browse listings
               </Link>
             </div>
           ))}

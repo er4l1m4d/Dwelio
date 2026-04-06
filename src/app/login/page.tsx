@@ -65,29 +65,29 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top,_#f5f0e4,_#ffffff_50%,_#eef8f2)] px-6 py-16">
-      <div className="mx-auto w-full max-w-4xl rounded-3xl border border-emerald-100 bg-white/90 p-10 shadow-[0_30px_70px_rgba(16,42,24,0.08)] backdrop-blur">
+    <div className="min-h-screen bg-surface px-6 py-16">
+      <div className="mx-auto w-full max-w-4xl rounded-[2rem] bg-surface-container-lowest p-10 shadow-[var(--shadow-elevated-panel)]">
         <div className="grid gap-10 lg:grid-cols-[1fr_0.9fr]">
           <div className="grid gap-6">
-            <div className="inline-flex w-fit items-center gap-2 rounded-full bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700">
+            <div className="inline-flex w-fit items-center gap-2 rounded-full bg-primary-fixed px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-on-primary-container">
               Dwelio
-              <span className="text-emerald-400">•</span>
+              <span className="text-surface-tint">•</span>
               Welcome back
             </div>
-            <h1 className="text-3xl font-semibold text-slate-900">
+            <h1 className="font-headline text-4xl font-black tracking-[-0.04em] text-primary-container">
               Log in to your workspace.
             </h1>
-            <p className="text-base text-slate-600">
+            <p className="text-base text-on-surface-variant">
               Manage listings, messages, and payments all in one place.
             </p>
-            <div className="rounded-2xl border border-emerald-100 bg-emerald-50/70 p-6 text-sm text-emerald-900">
-              <p className="font-semibold">New to Dwelio?</p>
-              <p className="mt-2 text-emerald-800">
+            <div className="rounded-[1.5rem] bg-surface-container-low p-6 text-sm text-on-surface-variant">
+              <p className="font-bold text-primary-container">New to Dwelio?</p>
+              <p className="mt-2 text-on-surface-variant">
                 Create a free account and start listing or browsing verified homes.
               </p>
               <Link
                 href="/signup"
-                className="mt-4 inline-flex items-center font-semibold text-emerald-800"
+                className="mt-4 inline-flex items-center font-headline font-bold text-surface-tint transition hover:text-primary-container"
               >
                 Create an account →
               </Link>
@@ -95,7 +95,7 @@ export default function LoginPage() {
           </div>
 
           <form onSubmit={handleSubmit} className="grid gap-5">
-            <label className="grid gap-2 text-sm font-medium text-slate-700">
+            <label className="grid gap-2 text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
               Email address
               <input
                 value={email}
@@ -103,10 +103,10 @@ export default function LoginPage() {
                 required
                 type="email"
                 placeholder="you@dwelio.ng"
-                className="h-12 rounded-xl border border-slate-200 bg-white px-4 text-base shadow-sm outline-none ring-emerald-300 transition focus:ring-2"
+                className="h-12 w-full rounded-[1rem] border border-outline-variant/40 bg-surface-container-lowest px-4 text-base font-medium text-primary-container outline-none transition focus:border-primary-container/20 focus:ring-4 focus:ring-surface-tint/10"
               />
             </label>
-            <label className="grid gap-2 text-sm font-medium text-slate-700">
+            <label className="grid gap-2 text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
               Password
               <input
                 value={password}
@@ -114,31 +114,31 @@ export default function LoginPage() {
                 required
                 type="password"
                 placeholder="Enter your password"
-                className="h-12 rounded-xl border border-slate-200 bg-white px-4 text-base shadow-sm outline-none ring-emerald-300 transition focus:ring-2"
+                className="h-12 w-full rounded-[1rem] border border-outline-variant/40 bg-surface-container-lowest px-4 text-base font-medium text-primary-container outline-none transition focus:border-primary-container/20 focus:ring-4 focus:ring-surface-tint/10"
               />
             </label>
-            <div className="flex items-center justify-between text-sm text-slate-500">
-              <span>Secure sign-in</span>
-              <Link className="font-semibold text-emerald-800" href="/forgot-password">
+            <div className="flex items-center justify-between text-sm text-on-surface-variant">
+              <span className="font-medium">Secure sign-in</span>
+              <Link className="font-headline font-bold text-surface-tint transition hover:text-primary-container" href="/forgot-password">
                 Forgot password?
               </Link>
             </div>
             {error && (
-              <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+              <p className="rounded-[1rem] bg-error-container px-4 py-3 text-sm font-medium text-error">
                 {error}
               </p>
             )}
             <button
               type="button"
               onClick={handleGoogleSignIn}
-              className="h-12 rounded-full border border-emerald-200 bg-white px-6 text-sm font-semibold text-emerald-800 transition hover:border-emerald-300"
+              className="h-12 rounded-full border border-outline-variant/40 bg-surface-container-lowest px-6 font-headline text-sm font-bold text-primary-container transition hover:bg-surface-container-low focus:border-primary-container/20 focus:ring-4 focus:ring-surface-tint/10"
             >
               Continue with Google
             </button>
             <button
               type="submit"
               disabled={pending}
-              className="h-12 rounded-full bg-emerald-700 px-6 text-sm font-semibold text-white transition hover:bg-emerald-800 disabled:cursor-not-allowed disabled:opacity-70"
+              className="h-12 rounded-full bg-primary-container px-6 font-headline text-sm font-bold text-on-primary transition hover:bg-primary disabled:cursor-not-allowed disabled:opacity-70 focus:ring-4 focus:ring-primary-container/20"
             >
               {pending ? "Signing in..." : "Log in"}
             </button>

@@ -78,7 +78,7 @@ export default function PropertyCard({
       </div>
 
       <div className="flex flex-1 flex-col gap-5 p-6">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+        <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
           <div className="min-w-0">
             <h3 className="font-headline text-2xl font-black tracking-[-0.03em] text-primary-container">
               {title}

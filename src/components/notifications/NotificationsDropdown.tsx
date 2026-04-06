@@ -82,7 +82,7 @@ export default function NotificationsDropdown() {
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
-        className="relative flex h-11 w-11 items-center justify-center rounded-full bg-surface-container-lowest text-primary-container shadow-[var(--shadow-floating-pane)] transition hover:bg-surface-container-low"
+        className="relative flex h-11 w-11 items-center justify-center rounded-full bg-surface-container-lowest text-primary-container shadow-[var(--shadow-floating-pane)] transition hover:bg-surface-container-low focus:outline-none focus:ring-4 focus:ring-surface-tint/10"
         aria-label="Notifications"
         aria-controls={panelId}
         aria-expanded={open}
@@ -96,7 +96,7 @@ export default function NotificationsDropdown() {
           id={panelId}
           role="region"
           aria-label="Notifications panel"
-          className="absolute right-0 mt-3 w-72 rounded-[1.5rem] bg-surface-container-lowest p-4 shadow-[var(--shadow-elevated-panel)]"
+          className="absolute right-0 mt-3 w-72 rounded-[1.5rem] bg-surface-container-lowest p-4 shadow-[var(--shadow-elevated-panel)] border border-outline-variant z-50"
         >
           <p className="font-headline text-sm font-bold text-primary-container">
             Notifications
@@ -107,7 +107,7 @@ export default function NotificationsDropdown() {
                 <Link
                   key={item.id}
                   href={item.link ?? "#"}
-                  className="rounded-xl bg-surface-container-low p-3 text-xs leading-relaxed text-on-surface-variant transition hover:bg-surface-container"
+                  className="rounded-xl bg-surface-container-low p-3 text-xs leading-relaxed text-on-surface-variant transition hover:bg-surface-container focus:outline-none focus:ring-2 focus:ring-primary-container/20"
                 >
                   {item.message}
                 </Link>

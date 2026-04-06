@@ -100,7 +100,7 @@ export default function SearchSidebar({
             </select>
           </label>
 
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-1">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-1">
             <label className="grid min-w-0 gap-2">
               <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
                 Min Price

@@ -186,8 +186,8 @@ export default function SearchView({
   const activeFilterCount = Object.values(filters).filter(Boolean).length;
 
   return (
-    <div className="grid gap-8 xl:grid-cols-[320px_minmax(0,1fr)]">
-      <div className="order-2 xl:order-1">
+    <div className="grid gap-8 lg:grid-cols-[320px_minmax(0,1fr)]">
+      <div className="order-2 lg:order-1">
         <SearchSidebar
           filters={filters}
           neighbourhoods={neighbourhoods}
@@ -197,7 +197,7 @@ export default function SearchView({
         />
       </div>
 
-      <div className="order-1 grid gap-6 xl:order-2">
+      <div className="order-1 grid gap-6 lg:order-2">
         <section className="rounded-[2rem] bg-surface-container-low p-6 shadow-[var(--shadow-editorial-card)] md:p-8">
           <div className="flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between">
             <div className="max-w-3xl">

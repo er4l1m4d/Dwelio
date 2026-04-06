@@ -8,6 +8,7 @@ const epilogue = Epilogue({
   variable: "--font-epilogue",
   subsets: ["latin"],
   display: "swap",
+  weight: ["700", "900"],
 });
 
 const geistMono = Geist_Mono({
@@ -20,6 +21,7 @@ const manrope = Manrope({
   variable: "--font-manrope",
   subsets: ["latin"],
   display: "swap",
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {

@@ -42,21 +42,21 @@ export default async function DashboardPage() {
   const isLandlord = profile?.role === "landlord";
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top,_#f5f0e4,_#ffffff_50%,_#eef8f2)] px-6 py-16">
+    <div className="min-h-screen bg-surface px-6 py-16">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-8">
         <header className="flex flex-wrap items-center justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-semibold text-slate-900">
+            <h1 className="font-headline text-4xl font-black tracking-[-0.04em] text-primary-container">
               Welcome back, {profile?.full_name ?? "Dwelio member"}
             </h1>
-            <p className="text-base text-slate-600">
+            <p className="text-base text-on-surface-variant">
               Manage your listings and stay on top of inquiries.
             </p>
           </div>
           {isLandlord && (
             <Link
               href="/listings/new"
-              className="inline-flex h-12 items-center justify-center rounded-full bg-emerald-700 px-6 text-sm font-semibold text-white transition hover:bg-emerald-800"
+              className="inline-flex h-12 items-center justify-center rounded-full bg-primary-container px-6 font-headline text-sm font-bold text-on-primary transition hover:bg-primary"
             >
               Add new listing
             </Link>
@@ -69,7 +69,7 @@ export default async function DashboardPage() {
 
         {isLandlord && (
           <section className="grid gap-6">
-            <h2 className="text-lg font-semibold text-slate-900">
+            <h2 className="font-headline text-lg font-black tracking-[-0.02em] text-primary-container">
               Your listings
             </h2>
             <div className="grid gap-4">
@@ -77,10 +77,10 @@ export default async function DashboardPage() {
                 listings.map((listing) => (
                   <div
                     key={listing.id}
-                    className="flex flex-col gap-4 rounded-3xl border border-emerald-100 bg-white/90 p-6 shadow-[0_20px_50px_rgba(16,42,24,0.08)] backdrop-blur md:flex-row md:items-center md:justify-between"
+                    className="flex flex-col gap-4 rounded-[2rem] bg-surface-container-lowest p-6 shadow-[var(--shadow-elevated-panel)] md:flex-row md:items-center md:justify-between"
                   >
                     <div className="flex items-center gap-4">
-                      <div className="h-16 w-20 overflow-hidden rounded-2xl border border-emerald-100 bg-emerald-50">
+                      <div className="h-16 w-20 overflow-hidden rounded-[1.5rem] bg-surface-container-low">
                         <Image
                           src={listing.images?.[0] ?? "/vercel.svg"}
                           alt={listing.title}
@@ -90,12 +90,11 @@ export default async function DashboardPage() {
                         />
                       </div>
                       <div>
-                        <p className="text-sm font-semibold text-slate-900">
+                        <p className="font-headline text-sm font-bold text-primary-container">
                           {listing.title}
                         </p>
-                        <p className="text-xs text-slate-500">
-                          ₦{listing.price?.toLocaleString()} /{" "}
-                          {listing.price_period}
+                        <p className="text-xs text-on-surface-variant">
+                          ₦{listing.price?.toLocaleString()} / {listing.price_period}
                         </p>
                         <p className="text-xs text-slate-500">
                           Views: {listing.views ?? 0}
@@ -128,21 +127,7 @@ export default async function DashboardPage() {
                   </div>
                 ))
               ) : (
-                <div className="rounded-3xl border border-emerald-100 bg-white/90 p-8 text-sm text-slate-600 shadow-[0_20px_50px_rgba(16,42,24,0.08)] backdrop-blur">
-                  <Home className="h-6 w-6 text-emerald-700" />
-                  <p className="mt-2 font-semibold text-slate-900">
-                    No listings yet
-                  </p>
-                  <p className="mt-1 text-sm text-slate-600">
-                    Create your first property to start receiving inquiries.
-                  </p>
-                  <Link
-                    href="/listings/new"
-                    className="mt-4 inline-flex h-10 items-center justify-center rounded-full border border-emerald-200 px-4 text-xs font-semibold text-emerald-800"
-                  >
-                    Add a listing
-                  </Link>
-                </div>
+                <p className="text-on-surface-variant">No listings yet.</p>
               )}
             </div>
           </section>

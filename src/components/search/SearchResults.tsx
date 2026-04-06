@@ -35,7 +35,7 @@ export default function SearchResults({
   }
 
   return (
-    <section className="grid gap-6 md:grid-cols-2 2xl:grid-cols-3">
+    <section className="grid gap-6 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3">
       {listings.map((listing) => (
         <PropertyCard
           key={listing.id}

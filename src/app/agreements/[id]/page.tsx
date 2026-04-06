@@ -148,56 +148,70 @@ export default function AgreementPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top,_#f5f0e4,_#ffffff_45%,_#eef8f2)] px-6 py-16">
-      <div className="mx-auto flex w-full max-w-4xl flex-col gap-6 rounded-3xl border border-emerald-100 bg-white/90 p-8 shadow-[0_30px_70px_rgba(16,42,24,0.08)] backdrop-blur">
-        <h1 className="text-2xl font-semibold text-slate-900">
+    <div className="min-h-screen bg-surface px-6 py-16">
+      <div className="mx-auto w-full max-w-2xl rounded-[2rem] bg-surface-container-lowest p-10 shadow-[var(--shadow-elevated-panel)]">
+        <h1 className="font-headline text-4xl font-black tracking-[-0.04em] text-primary-container mb-8">
           Tenancy Agreement
         </h1>
-
-        {fullySigned && (
-          <div className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800">
-            Fully executed. Both parties have signed.
-          </div>
+        {error && (
+          <p className="rounded-[1rem] bg-error-container px-4 py-3 text-sm font-medium text-error mb-6">
+            {error}
+          </p>
         )}
-
-        <pre className="whitespace-pre-wrap rounded-2xl border border-emerald-100 bg-emerald-50/60 p-4 text-sm text-emerald-900">
-          {agreement.terms}
-        </pre>
-
-        {!fullySigned && (
-          <div className="grid gap-4">
-            <label className="flex items-center gap-2 text-sm text-slate-700">
+        {agreement ? (
+          <div className="grid gap-6">
+            <div className="grid gap-2">
+              <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
+                Landlord
+              </span>
+              <span className="font-headline text-lg font-bold text-primary-container">
+                {landlordName}
+              </span>
+            </div>
+            <div className="grid gap-2">
+              <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
+                Tenant
+              </span>
+              <span className="font-headline text-lg font-bold text-primary-container">
+                {tenantName}
+              </span>
+            </div>
+            <div className="grid gap-2">
+              <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
+                Property Address
+              </span>
+              <span className="font-headline text-lg font-bold text-primary-container">
+                {propertyAddress}
+              </span>
+            </div>
+            <div className="grid gap-2">
+              <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">
+                Terms
+              </span>
+              <div className="rounded-[1.5rem] bg-surface-container-low p-4 text-on-surface-variant whitespace-pre-line">
+                {agreement.terms}
+              </div>
+            </div>
+            <label className="inline-flex items-center gap-2 text-sm font-medium text-on-surface-variant">
               <input
                 type="checkbox"
                 checked={checked}
-                onChange={(event) => setChecked(event.target.checked)}
+                onChange={(e) => setChecked(e.target.checked)}
+                className="h-5 w-5 rounded border border-outline-variant/40 bg-surface-container-lowest text-primary-container focus:ring-2 focus:ring-primary-container/20"
               />
-              I have read and agree to this tenancy agreement.
+              I agree to the terms above
             </label>
-            {error && (
-              <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-                {error}
-              </p>
-            )}
             <button
               type="button"
-              disabled={!checked || pending}
               onClick={handleSign}
-              className="h-12 rounded-full bg-emerald-700 px-6 text-sm font-semibold text-white transition hover:bg-emerald-800 disabled:cursor-not-allowed disabled:opacity-70"
+              disabled={pending || !checked}
+              className="h-12 rounded-full bg-primary-container px-6 font-headline text-sm font-bold text-on-primary transition hover:bg-primary disabled:cursor-not-allowed disabled:opacity-70 focus:ring-4 focus:ring-primary-container/20"
             >
               {pending ? "Signing..." : "Sign agreement"}
             </button>
           </div>
-        )}
-
-        {fullySigned && (
-          <button
-            type="button"
-            onClick={handleDownload}
-            className="h-12 w-fit rounded-full border border-emerald-200 px-6 text-sm font-semibold text-emerald-800"
-          >
-            Download PDF
-          </button>
+        ) : (
+          <p className="text-on-surface-variant">Loading agreement...</p>
         )}
       </div>
     </div>

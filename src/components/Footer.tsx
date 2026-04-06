@@ -31,7 +31,7 @@ export default function Footer() {
 
   return (
     <footer className="border-t border-outline-variant/30 bg-surface-container-low">
-      <div className="mx-auto grid w-full max-w-[1440px] gap-12 px-6 py-16 md:grid-cols-[1.4fr_1fr_1fr_1fr] md:px-8">
+      <div className="mx-auto grid w-full max-w-[1440px] gap-12 px-6 py-16 md:grid-cols-2 md:px-8 xl:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div className="max-w-md">
           <div className="flex items-center gap-3 text-primary-container">
             <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-container text-tertiary-fixed-dim shadow-[var(--shadow-editorial-card)]">
@@ -78,13 +78,13 @@ export default function Footer() {
           </p>
           <a
             href="mailto:hello@dwelio.com"
-            className="text-on-surface-variant transition hover:text-primary-container"
+            className="break-words text-on-surface-variant transition hover:text-primary-container"
           >
             hello@dwelio.com
           </a>
           <a
             href="mailto:support@dwelio.com"
-            className="text-on-surface-variant transition hover:text-primary-container"
+            className="break-words text-on-surface-variant transition hover:text-primary-container"
           >
             support@dwelio.com
           </a>

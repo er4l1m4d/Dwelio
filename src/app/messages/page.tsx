@@ -60,11 +60,11 @@ export default async function MessagesPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top,_#f5f0e4,_#ffffff_45%,_#eef8f2)] px-6 py-16">
+    <div className="min-h-screen bg-surface px-6 py-16">
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-8">
         <header>
-          <h1 className="text-3xl font-semibold text-slate-900">Messages</h1>
-          <p className="text-base text-slate-600">
+          <h1 className="font-headline text-4xl font-black tracking-[-0.04em] text-primary-container">Messages</h1>
+          <p className="text-base text-on-surface-variant">
             Chat with landlords and tenants in one place.
           </p>
         </header>
@@ -88,14 +88,14 @@ export default async function MessagesPage() {
                 <Link
                   key={message.id}
                   href={`/messages/${conversationId}`}
-                  className="flex flex-col gap-3 rounded-3xl border border-emerald-100 bg-white/90 p-5 shadow-[0_20px_50px_rgba(16,42,24,0.08)] backdrop-blur transition hover:border-emerald-200"
+                  className={`flex flex-col gap-3 rounded-[2rem] bg-surface-container-lowest p-5 shadow-[var(--shadow-elevated-panel)] transition hover:bg-surface-container-low ${isUnread ? 'ring-2 ring-primary-container/30' : ''}`}
                 >
                   <div className="flex items-center justify-between text-sm">
                     <div>
-                      <p className="font-semibold text-slate-900">
+                      <p className="font-headline text-sm font-bold text-primary-container">
                         {profile?.full_name ?? "Dwelio user"}
                       </p>
-                      <p className="text-xs text-slate-500">
+                      <p className="text-xs text-on-surface-variant">
                         {property?.title ?? "Property"}
                       </p>
                     </div>
@@ -108,21 +108,7 @@ export default async function MessagesPage() {
               );
             })
           ) : (
-            <div className="rounded-3xl border border-emerald-100 bg-white/90 p-8 text-sm text-slate-600 shadow-[0_20px_50px_rgba(16,42,24,0.08)] backdrop-blur">
-              <MessageSquare className="h-6 w-6 text-emerald-700" />
-              <p className="mt-2 font-semibold text-slate-900">
-                No conversations yet
-              </p>
-              <p className="mt-1 text-sm text-slate-600">
-                Start browsing listings and message a landlord to begin.
-              </p>
-              <Link
-                href="/search"
-                className="mt-4 inline-flex h-10 items-center justify-center rounded-full border border-emerald-200 px-4 text-xs font-semibold text-emerald-800"
-              >
-                Browse listings
-              </Link>
-            </div>
+            <p className="text-on-surface-variant">No conversations yet.</p>
           )}
         </div>
       </div>
